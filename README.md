@@ -67,6 +67,24 @@ Without any data in `data/raw/` the notebook runs on the synthetic sample in DEM
 python scripts/sync_artifacts.py     # data/processed/*.json → backend/app/data/
 ```
 
+## Streamlit command center (`streamlit_app.py`)
+A self-contained Streamlit product built on the final notebook's validated results: **Executive Overview**, **Review Analyzer**,
+**Provider Monitor**, **Model Performance** and **Responsible AI** pages, with a custom design system (animated metrics and risk gauge,
+insight carousel, page transitions). It reads only the anonymized tables in `artifacts/`.
+
+```bash
+pip install -r requirements.txt
+streamlit run streamlit_app.py        # http://localhost:8501
+pytest tests -q                       # 27 tests (risk logic + artifacts)
+```
+
+* **Models:** fine-tuned DistilBERT from Hugging Face when `HF_MODEL_ID` is set in `.streamlit/secrets.toml` (template:
+  `.streamlit/secrets.toml.example`, also needs `pip install -r requirements-bert.txt`); otherwise it falls back automatically to the
+  TF-IDF model in `artifacts/`. The sidebar shows which model is live.
+* **Artifacts:** `python scripts/build_artifacts.py` rebuilds `artifacts/` from `data/raw/HomeLens_Yelp_HomeServices.csv`.
+* **Deploy:** Streamlit Community Cloud, select repository → branch `main` → main file `streamlit_app.py`, Python 3.12, and paste secrets.
+* **Code:** `streamlit_app.py` (navigation), `app/` (risk logic, model loader, charts, UI components), `views/` (one module per page), `tests/`.
+
 ## Deploying to Vercel
 Two Vercel projects from this one repo (**root directory** `frontend/` and `backend/`). Step-by-step, environment variables and the data-licence note are in [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
@@ -81,6 +99,7 @@ Two Vercel projects from this one repo (**root directory** `frontend/` and `back
 | Notebook (all 3 layers, EDA, dashboard, export) | ✅ complete; verified end-to-end on the synthetic sample and on two package-version sets (pandas 2.2 / 3.0). **Needs one run on the real Yelp data** (see `docs/SUBMISSION.md`) |
 | Backend API | ✅ scaffold with 6 endpoints + tests; ready to extend |
 | Frontend | ✅ scaffold (dashboard, provider detail, live review analyzer); charts and polish are open tasks |
+| Streamlit app | ✅ five pages, TF-IDF fallback live; DistilBERT activates once the model is on Hugging Face |
 | CI | ✅ GitHub Actions: backend tests, frontend build, notebook smoke run |
 | Vercel | ⏳ **not connected yet** — the two projects must be imported once in the Vercel dashboard (≈5 min, steps in `docs/DEPLOYMENT.md`); the repo is already configured for it |
 

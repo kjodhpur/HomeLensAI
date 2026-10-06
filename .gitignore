@@ -34,3 +34,12 @@ backend/app/data/*.json
 # ---- scratch notebooks ----
 notebooks/_*.ipynb
 .DS_Store
+
+# ---- Streamlit app (streamlit_app.py) ----
+HomeLens_Yelp_HomeServices*.csv
+.streamlit/secrets.toml
+checkpoints/
+HomeLensAI_DistilBERT/
+*.safetensors
+desktop.ini
+Thumbs.db

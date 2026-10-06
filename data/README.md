@@ -39,3 +39,11 @@ column (`review_stars`, `stars`, or `stars_x`/`stars_y` after a merge), and opti
 | `data/processed/` | JSON artifacts from the **real** run (`provider_risk.json`, `summary.json`, `aspect_lexicon.json`) | no |
 | `data/cache/` | cached DistilBERT predictions + aspect extraction | no |
 | `data/annotation/` | the aspect-precision audit CSV the team labels | no |
+
+## Streamlit app artifacts
+The Streamlit app (`streamlit_app.py`) reads only the aggregated, anonymized tables in `artifacts/` and never the raw data.
+With `data/raw/HomeLens_Yelp_HomeServices.csv` in place, rebuild them with:
+
+```bash
+python scripts/build_artifacts.py --data data/raw/HomeLens_Yelp_HomeServices.csv
+```

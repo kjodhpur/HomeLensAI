@@ -1,0 +1,6615 @@
+{
+ "meta": {
+  "generated_at": "2026-10-06T06:07:34Z",
+  "data_mode": "sample",
+  "reference_date": "2022-01-17",
+  "recent_months": 24,
+  "min_reviews": 20,
+  "recurrence_min": 3,
+  "risk_threshold": 0.7276,
+  "scorer": "tfidf_logreg_oof",
+  "score_weights": {
+   "neg_rate_lb": 0.35,
+   "recent_neg_rate": 0.25,
+   "severity": 0.25,
+   "recurrence": 0.15
+  },
+  "n_reviews": 1166,
+  "n_providers_total": 40,
+  "n_providers_eligible": 26,
+  "disclaimer": "Complaint signals detected in customer reviews. Reviews are unverified customer allegations, not findings of wrongdoing."
+ },
+ "providers": [
+  {
+   "business_id": "sample_biz_005",
+   "name": "General Pros 005 (SAMPLE)",
+   "trade": "Contracting & Remodeling",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Contractors",
+    "Handyman"
+   ],
+   "eligible": true,
+   "n_reviews": 48,
+   "n_flagged": 32,
+   "avg_stars": 2.38,
+   "yelp_stars": 2.5,
+   "neg_rate": 0.6667,
+   "recent": {
+    "n": 28,
+    "neg_rate": 0.7857142857142857
+   },
+   "prior": {
+    "n": 16,
+    "neg_rate": 0.5625
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": 0.2232142857142857,
+    "p_value": 0.17216490877169885
+   },
+   "risk_score": 69.67,
+   "risk_tier": "High",
+   "rank": 1,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 28,
+     "share_of_flagged": 0.875,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00175",
+       "date": "2021-10-11",
+       "stars": 2,
+       "cue": "still leaking",
+       "sentence": "The work was sloppy and the pipe is still leaking again after they left."
+      },
+      {
+       "review_id": "sample_rev_00173",
+       "date": "2021-05-27",
+       "stars": 1,
+       "cue": "Shoddy",
+       "sentence": "Shoddy workmanship, I had to hire someone else to redo the whole job."
+      }
+     ]
+    },
+    {
+     "aspect": "timeliness",
+     "label": "Timeliness / delays",
+     "severity": 0.3,
+     "n_reviews": 27,
+     "share_of_flagged": 0.8438,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00175",
+       "date": "2021-10-11",
+       "stars": 2,
+       "cue": "hours late",
+       "sentence": "They showed up three hours late and then left early."
+      },
+      {
+       "review_id": "sample_rev_00174",
+       "date": "2021-06-22",
+       "stars": 2,
+       "cue": "Constant delays",
+       "sentence": "Constant delays, they rescheduled four times."
+      }
+     ]
+    },
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 11,
+     "share_of_flagged": 0.3438,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00134",
+       "date": "2018-01-27",
+       "stars": 2,
+       "cue": "Terrible attitude",
+       "sentence": "Terrible attitude and a dirty truck full of garbage."
+      },
+      {
+       "review_id": "sample_rev_00139",
+       "date": "2018-06-14",
+       "stars": 2,
+       "cue": "rude",
+       "sentence": "The technician was rude and dismissive when I asked questions."
+      }
+     ]
+    },
+    {
+     "aspect": "warranty",
+     "label": "Warranty / follow-through",
+     "severity": 0.7,
+     "n_reviews": 3,
+     "share_of_flagged": 0.0938,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00149",
+       "date": "2020-01-09",
+       "stars": 2,
+       "cue": "denied my claim",
+       "sentence": "No one would stand behind their work and they denied my claim."
+      },
+      {
+       "review_id": "sample_rev_00176",
+       "date": "2021-10-22",
+       "stars": 3,
+       "cue": "not cover",
+       "sentence": "The company will not cover the repair even though it is under warranty."
+      }
+     ]
+    },
+    {
+     "aspect": "pricing",
+     "label": "Pricing / billing",
+     "severity": 0.6,
+     "n_reviews": 2,
+     "share_of_flagged": 0.0625,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00168",
+       "date": "2021-03-02",
+       "stars": 3,
+       "cue": "Price gouging",
+       "sentence": "Price gouging after they said it was an emergency."
+      },
+      {
+       "review_id": "sample_rev_00151",
+       "date": "2020-04-03",
+       "stars": 3,
+       "cue": "Price gouging",
+       "sentence": "Price gouging after they said it was an emergency."
+      }
+     ]
+    },
+    {
+     "aspect": "safety",
+     "label": "Safety / licensing",
+     "severity": 1.0,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0312,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00150",
+       "date": "2020-03-27",
+       "stars": 1,
+       "cue": "dangerous",
+       "sentence": "I smelled a gas leak after they left and it was dangerous."
+      }
+     ]
+    },
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0312,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00141",
+       "date": "2018-09-13",
+       "stars": 1,
+       "cue": "missed appointments",
+       "sentence": "After two missed appointments I gave up on them."
+      }
+     ]
+    }
+   ],
+   "action_manager": "Audit recent jobs for rework; coach the crew, add a completion checklist and a quality call-back after each job.",
+   "action_homeowner": "Ask for recent references and photos of similar jobs; agree what 'done' means (and a re-inspection) in writing.",
+   "history": [
+    {
+     "year": 2015,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2017,
+     "n": 3,
+     "neg_rate": 0.3333,
+     "avg_stars": 1.33
+    },
+    {
+     "year": 2018,
+     "n": 10,
+     "neg_rate": 0.8,
+     "avg_stars": 2.2
+    },
+    {
+     "year": 2019,
+     "n": 5,
+     "neg_rate": 0.0,
+     "avg_stars": 4.6
+    },
+    {
+     "year": 2020,
+     "n": 17,
+     "neg_rate": 0.7647,
+     "avg_stars": 2.0
+    },
+    {
+     "year": 2021,
+     "n": 12,
+     "neg_rate": 0.8333,
+     "avg_stars": 2.17
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_024",
+   "name": "Plumbing Pros 024 (SAMPLE)",
+   "trade": "Plumbing",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Plumbing",
+    "Water Heater Installation/Repair"
+   ],
+   "eligible": true,
+   "n_reviews": 36,
+   "n_flagged": 21,
+   "avg_stars": 2.64,
+   "yelp_stars": 2.5,
+   "neg_rate": 0.5833,
+   "recent": {
+    "n": 23,
+    "neg_rate": 0.6086956521739131
+   },
+   "prior": {
+    "n": 9,
+    "neg_rate": 0.6666666666666666
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": -0.05797101449275355,
+    "p_value": 1.0
+   },
+   "risk_score": 57.01,
+   "risk_tier": "High",
+   "rank": 2,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 21,
+     "share_of_flagged": 1.0,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00695",
+       "date": "2021-12-11",
+       "stars": 2,
+       "cue": "Terrible attitude",
+       "sentence": "Terrible attitude and a dirty truck full of garbage."
+      },
+      {
+       "review_id": "sample_rev_00673",
+       "date": "2020-02-10",
+       "stars": 1,
+       "cue": "Terrible attitude",
+       "sentence": "Terrible attitude and a dirty truck full of garbage."
+      }
+     ]
+    },
+    {
+     "aspect": "timeliness",
+     "label": "Timeliness / delays",
+     "severity": 0.3,
+     "n_reviews": 21,
+     "share_of_flagged": 1.0,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00695",
+       "date": "2021-12-11",
+       "stars": 2,
+       "cue": "waited all day",
+       "sentence": "I waited all day and the technician arrived after dark."
+      },
+      {
+       "review_id": "sample_rev_00692",
+       "date": "2021-11-01",
+       "stars": 1,
+       "cue": "Constant delays",
+       "sentence": "Constant delays, they rescheduled four times."
+      }
+     ]
+    },
+    {
+     "aspect": "warranty",
+     "label": "Warranty / follow-through",
+     "severity": 0.7,
+     "n_reviews": 3,
+     "share_of_flagged": 0.1429,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00691",
+       "date": "2021-10-04",
+       "stars": 1,
+       "cue": "denied my claim",
+       "sentence": "No one would stand behind their work and they denied my claim."
+      },
+      {
+       "review_id": "sample_rev_00685",
+       "date": "2021-06-20",
+       "stars": 1,
+       "cue": "refused to honor",
+       "sentence": "They refused to honor the warranty when it broke a week later."
+      }
+     ]
+    },
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 2,
+     "share_of_flagged": 0.0952,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00692",
+       "date": "2021-11-01",
+       "stars": 1,
+       "cue": "Shoddy",
+       "sentence": "Shoddy workmanship, I had to hire someone else to redo the whole job."
+      },
+      {
+       "review_id": "sample_rev_00669",
+       "date": "2019-06-10",
+       "stars": 2,
+       "cue": "still leaking",
+       "sentence": "The work was sloppy and the pipe is still leaking again after they left."
+      }
+     ]
+    },
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0476,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00677",
+       "date": "2020-11-19",
+       "stars": 2,
+       "cue": "missed appointments",
+       "sentence": "After two missed appointments I gave up on them."
+      }
+     ]
+    },
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0476,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00673",
+       "date": "2020-02-10",
+       "stars": 1,
+       "cue": "never called",
+       "sentence": "They never called back despite five voicemails."
+      }
+     ]
+    }
+   ],
+   "action_manager": "Coach the team on customer conduct and site clean-up; follow up personally on the flagged reviews.",
+   "action_homeowner": "Ask for references and agree on site-clean-up expectations in the contract.",
+   "history": [
+    {
+     "year": 2016,
+     "n": 2,
+     "neg_rate": 0.0,
+     "avg_stars": 4.0
+    },
+    {
+     "year": 2017,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 4.0
+    },
+    {
+     "year": 2018,
+     "n": 3,
+     "neg_rate": 0.6667,
+     "avg_stars": 3.67
+    },
+    {
+     "year": 2019,
+     "n": 5,
+     "neg_rate": 0.8,
+     "avg_stars": 2.0
+    },
+    {
+     "year": 2020,
+     "n": 7,
+     "neg_rate": 0.4286,
+     "avg_stars": 2.57
+    },
+    {
+     "year": 2021,
+     "n": 18,
+     "neg_rate": 0.6667,
+     "avg_stars": 2.44
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_018",
+   "name": "HVAC Pros 018 (SAMPLE)",
+   "trade": "HVAC",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Heating & Air Conditioning/HVAC"
+   ],
+   "eligible": true,
+   "n_reviews": 24,
+   "n_flagged": 13,
+   "avg_stars": 2.54,
+   "yelp_stars": 2.5,
+   "neg_rate": 0.5417,
+   "recent": {
+    "n": 11,
+    "neg_rate": 0.5454545454545454
+   },
+   "prior": {
+    "n": 7,
+    "neg_rate": 0.42857142857142855
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": 0.11688311688311687,
+    "p_value": 1.0
+   },
+   "risk_score": 55.91,
+   "risk_tier": "High",
+   "rank": 3,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 12,
+     "share_of_flagged": 0.9231,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00508",
+       "date": "2021-10-04",
+       "stars": 1,
+       "cue": "no show",
+       "sentence": "The crew was a no show on the day of the appointment."
+      },
+      {
+       "review_id": "sample_rev_00505",
+       "date": "2020-10-11",
+       "stars": 2,
+       "cue": "missed appointments",
+       "sentence": "After two missed appointments I gave up on them."
+      }
+     ]
+    },
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 12,
+     "share_of_flagged": 0.9231,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00495",
+       "date": "2018-04-27",
+       "stars": 1,
+       "cue": "ignored my messages",
+       "sentence": "The office ignored my messages and nobody returned my calls."
+      },
+      {
+       "review_id": "sample_rev_00488",
+       "date": "2016-01-02",
+       "stars": 1,
+       "cue": "ignored my messages",
+       "sentence": "The office ignored my messages and nobody returned my calls."
+      }
+     ]
+    },
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 5,
+     "share_of_flagged": 0.3846,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00509",
+       "date": "2021-10-12",
+       "stars": 1,
+       "cue": "unfinished",
+       "sentence": "He left the job unfinished and never came back."
+      },
+      {
+       "review_id": "sample_rev_00503",
+       "date": "2020-04-26",
+       "stars": 1,
+       "cue": "unfinished",
+       "sentence": "He left the job unfinished and never came back."
+      }
+     ]
+    },
+    {
+     "aspect": "warranty",
+     "label": "Warranty / follow-through",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0769,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00501",
+       "date": "2020-01-20",
+       "stars": 3,
+       "cue": "not cover",
+       "sentence": "The company will not cover the repair even though it is under warranty."
+      }
+     ]
+    },
+    {
+     "aspect": "pricing",
+     "label": "Pricing / billing",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0769,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00491",
+       "date": "2017-09-21",
+       "stars": 1,
+       "cue": "overcharged",
+       "sentence": "They overcharged me and the final bill was $600 more than quoted."
+      }
+     ]
+    },
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0769,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00488",
+       "date": "2016-01-02",
+       "stars": 1,
+       "cue": "Terrible attitude",
+       "sentence": "Terrible attitude and a dirty truck full of garbage."
+      }
+     ]
+    }
+   ],
+   "action_manager": "Audit scheduling and dispatch for no-shows and abandoned jobs; add appointment confirmations and a backup-crew rule.",
+   "action_homeowner": "Ask about scheduling and cancellation policy; avoid large deposits up front.",
+   "history": [
+    {
+     "year": 2016,
+     "n": 2,
+     "neg_rate": 0.5,
+     "avg_stars": 2.5
+    },
+    {
+     "year": 2017,
+     "n": 2,
+     "neg_rate": 0.5,
+     "avg_stars": 2.5
+    },
+    {
+     "year": 2018,
+     "n": 5,
+     "neg_rate": 0.8,
+     "avg_stars": 2.0
+    },
+    {
+     "year": 2019,
+     "n": 4,
+     "neg_rate": 0.25,
+     "avg_stars": 3.25
+    },
+    {
+     "year": 2020,
+     "n": 6,
+     "neg_rate": 0.6667,
+     "avg_stars": 2.5
+    },
+    {
+     "year": 2021,
+     "n": 4,
+     "neg_rate": 0.5,
+     "avg_stars": 2.5
+    },
+    {
+     "year": 2022,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 3.0
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_030",
+   "name": "Home Pros 030 (SAMPLE)",
+   "trade": "Cleaning",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Home Cleaning",
+    "Carpet Cleaning"
+   ],
+   "eligible": true,
+   "n_reviews": 29,
+   "n_flagged": 17,
+   "avg_stars": 2.72,
+   "yelp_stars": 2.5,
+   "neg_rate": 0.5862,
+   "recent": {
+    "n": 17,
+    "neg_rate": 0.5294117647058824
+   },
+   "prior": {
+    "n": 10,
+    "neg_rate": 0.6
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": -0.07058823529411762,
+    "p_value": 1.0
+   },
+   "risk_score": 54.41,
+   "risk_tier": "High",
+   "rank": 4,
+   "safety_escalation": true,
+   "issues": [
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 16,
+     "share_of_flagged": 0.9412,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00851",
+       "date": "2022-01-14",
+       "stars": 1,
+       "cue": "Terrible attitude",
+       "sentence": "Terrible attitude and a dirty truck full of garbage."
+      },
+      {
+       "review_id": "sample_rev_00840",
+       "date": "2020-10-10",
+       "stars": 1,
+       "cue": "Terrible attitude",
+       "sentence": "Terrible attitude and a dirty truck full of garbage."
+      }
+     ]
+    },
+    {
+     "aspect": "safety",
+     "label": "Safety / licensing",
+     "severity": 1.0,
+     "n_reviews": 2,
+     "share_of_flagged": 0.1176,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00843",
+       "date": "2021-02-08",
+       "stars": 3,
+       "cue": "dangerous",
+       "sentence": "I smelled a gas leak after they left and it was dangerous."
+      },
+      {
+       "review_id": "sample_rev_00847",
+       "date": "2021-09-17",
+       "stars": 1,
+       "cue": "unlicensed",
+       "sentence": "The unlicensed crew left the roof unsafe and water came through."
+      }
+     ]
+    },
+    {
+     "aspect": "warranty",
+     "label": "Warranty / follow-through",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0588,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00833",
+       "date": "2019-11-04",
+       "stars": 5,
+       "cue": "denied my claim",
+       "sentence": "No one would stand behind their work and they denied my claim."
+      }
+     ]
+    },
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0588,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00851",
+       "date": "2022-01-14",
+       "stars": 1,
+       "cue": "missed appointments",
+       "sentence": "After two missed appointments I gave up on them."
+      }
+     ]
+    },
+    {
+     "aspect": "pricing",
+     "label": "Pricing / billing",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0588,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00832",
+       "date": "2019-05-30",
+       "stars": 4,
+       "cue": "overcharged",
+       "sentence": "They overcharged me and the final bill was $600 more than quoted."
+      }
+     ]
+    },
+    {
+     "aspect": "timeliness",
+     "label": "Timeliness / delays",
+     "severity": 0.3,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0588,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00822",
+       "date": "2016-05-01",
+       "stars": 1,
+       "cue": "hours late",
+       "sentence": "They showed up three hours late and then left early."
+      }
+     ]
+    }
+   ],
+   "action_manager": "ESCALATE: review the jobs behind the safety signals for permit, licence and hazard problems, contact the affected customers, and pause similar work until cleared.",
+   "action_homeowner": "Before hiring, verify the licence, insurance and permit history; ask for proof for any gas, electrical or structural work.",
+   "history": [
+    {
+     "year": 2016,
+     "n": 1,
+     "neg_rate": 1.0,
+     "avg_stars": 1.0
+    },
+    {
+     "year": 2017,
+     "n": 1,
+     "neg_rate": 1.0,
+     "avg_stars": 4.0
+    },
+    {
+     "year": 2018,
+     "n": 7,
+     "neg_rate": 0.5714,
+     "avg_stars": 2.43
+    },
+    {
+     "year": 2019,
+     "n": 3,
+     "neg_rate": 0.6667,
+     "avg_stars": 4.67
+    },
+    {
+     "year": 2020,
+     "n": 8,
+     "neg_rate": 0.5,
+     "avg_stars": 2.75
+    },
+    {
+     "year": 2021,
+     "n": 8,
+     "neg_rate": 0.5,
+     "avg_stars": 2.5
+    },
+    {
+     "year": 2022,
+     "n": 1,
+     "neg_rate": 1.0,
+     "avg_stars": 1.0
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_011",
+   "name": "Roofing Pros 011 (SAMPLE)",
+   "trade": "Roofing",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Roofing",
+    "Contractors"
+   ],
+   "eligible": true,
+   "n_reviews": 24,
+   "n_flagged": 12,
+   "avg_stars": 2.75,
+   "yelp_stars": 3.0,
+   "neg_rate": 0.5,
+   "recent": {
+    "n": 15,
+    "neg_rate": 0.5333333333333333
+   },
+   "prior": {
+    "n": 7,
+    "neg_rate": 0.2857142857142857
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": 0.24761904761904763,
+    "p_value": 0.38080495356037153
+   },
+   "risk_score": 53.5,
+   "risk_tier": "Medium",
+   "rank": 5,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 11,
+     "share_of_flagged": 0.9167,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00355",
+       "date": "2021-12-20",
+       "stars": 1,
+       "cue": "no show",
+       "sentence": "The crew was a no show on the day of the appointment."
+      },
+      {
+       "review_id": "sample_rev_00347",
+       "date": "2021-03-21",
+       "stars": 2,
+       "cue": "no show",
+       "sentence": "The crew was a no show on the day of the appointment."
+      }
+     ]
+    },
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 10,
+     "share_of_flagged": 0.8333,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00350",
+       "date": "2021-05-23",
+       "stars": 1,
+       "cue": "ignored my messages",
+       "sentence": "The office ignored my messages and nobody returned my calls."
+      },
+      {
+       "review_id": "sample_rev_00338",
+       "date": "2019-02-09",
+       "stars": 1,
+       "cue": "ignored my messages",
+       "sentence": "The office ignored my messages and nobody returned my calls."
+      }
+     ]
+    },
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 4,
+     "share_of_flagged": 0.3333,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00354",
+       "date": "2021-12-07",
+       "stars": 1,
+       "cue": "unfinished",
+       "sentence": "He left the job unfinished and never came back."
+      },
+      {
+       "review_id": "sample_rev_00350",
+       "date": "2021-05-23",
+       "stars": 1,
+       "cue": "unfinished",
+       "sentence": "He left the job unfinished and never came back."
+      }
+     ]
+    },
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0833,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00342",
+       "date": "2020-07-21",
+       "stars": 3,
+       "cue": "rude",
+       "sentence": "The technician was rude and dismissive when I asked questions."
+      }
+     ]
+    }
+   ],
+   "action_manager": "Audit scheduling and dispatch for no-shows and abandoned jobs; add appointment confirmations and a backup-crew rule.",
+   "action_homeowner": "Ask about scheduling and cancellation policy; avoid large deposits up front.",
+   "history": [
+    {
+     "year": 2017,
+     "n": 2,
+     "neg_rate": 1.0,
+     "avg_stars": 1.5
+    },
+    {
+     "year": 2018,
+     "n": 4,
+     "neg_rate": 0.25,
+     "avg_stars": 3.75
+    },
+    {
+     "year": 2019,
+     "n": 3,
+     "neg_rate": 0.3333,
+     "avg_stars": 3.67
+    },
+    {
+     "year": 2020,
+     "n": 4,
+     "neg_rate": 0.5,
+     "avg_stars": 2.25
+    },
+    {
+     "year": 2021,
+     "n": 11,
+     "neg_rate": 0.5455,
+     "avg_stars": 2.55
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_019",
+   "name": "Roofing Pros 019 (SAMPLE)",
+   "trade": "Roofing",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Roofing",
+    "Contractors"
+   ],
+   "eligible": true,
+   "n_reviews": 60,
+   "n_flagged": 25,
+   "avg_stars": 3.13,
+   "yelp_stars": 3.0,
+   "neg_rate": 0.4167,
+   "recent": {
+    "n": 33,
+    "neg_rate": 0.48484848484848486
+   },
+   "prior": {
+    "n": 18,
+    "neg_rate": 0.4444444444444444
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": 0.04040404040404044,
+    "p_value": 1.0
+   },
+   "risk_score": 51.64,
+   "risk_tier": "High",
+   "rank": 6,
+   "safety_escalation": true,
+   "issues": [
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 6,
+     "share_of_flagged": 0.24,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00563",
+       "date": "2021-08-03",
+       "stars": 2,
+       "cue": "unfinished",
+       "sentence": "He left the job unfinished and never came back."
+      },
+      {
+       "review_id": "sample_rev_00562",
+       "date": "2021-07-21",
+       "stars": 2,
+       "cue": "unfinished",
+       "sentence": "He left the job unfinished and never came back."
+      }
+     ]
+    },
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 4,
+     "share_of_flagged": 0.16,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00558",
+       "date": "2021-03-01",
+       "stars": 1,
+       "cue": "no show",
+       "sentence": "The crew was a no show on the day of the appointment."
+      },
+      {
+       "review_id": "sample_rev_00541",
+       "date": "2020-04-01",
+       "stars": 1,
+       "cue": "no show",
+       "sentence": "The crew was a no show on the day of the appointment."
+      }
+     ]
+    },
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 4,
+     "share_of_flagged": 0.16,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00550",
+       "date": "2020-11-11",
+       "stars": 2,
+       "cue": "yelling at",
+       "sentence": "Very unprofessional, he was yelling at his helper in my driveway."
+      },
+      {
+       "review_id": "sample_rev_00532",
+       "date": "2019-08-21",
+       "stars": 1,
+       "cue": "yelling at",
+       "sentence": "Very unprofessional, he was yelling at his helper in my driveway."
+      }
+     ]
+    },
+    {
+     "aspect": "safety",
+     "label": "Safety / licensing",
+     "severity": 1.0,
+     "n_reviews": 3,
+     "share_of_flagged": 0.12,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00535",
+       "date": "2019-11-06",
+       "stars": 3,
+       "cue": "dangerous",
+       "sentence": "I smelled a gas leak after they left and it was dangerous."
+      },
+      {
+       "review_id": "sample_rev_00547",
+       "date": "2020-10-24",
+       "stars": 2,
+       "cue": "unlicensed",
+       "sentence": "The unlicensed crew left the roof unsafe and water came through."
+      }
+     ]
+    },
+    {
+     "aspect": "pricing",
+     "label": "Pricing / billing",
+     "severity": 0.6,
+     "n_reviews": 3,
+     "share_of_flagged": 0.12,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00560",
+       "date": "2021-04-22",
+       "stars": 2,
+       "cue": "Price gouging",
+       "sentence": "Price gouging after they said it was an emergency."
+      },
+      {
+       "review_id": "sample_rev_00553",
+       "date": "2020-12-18",
+       "stars": 2,
+       "cue": "Price gouging",
+       "sentence": "Price gouging after they said it was an emergency."
+      }
+     ]
+    },
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 3,
+     "share_of_flagged": 0.12,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00525",
+       "date": "2019-01-14",
+       "stars": 3,
+       "cue": "ignored my messages",
+       "sentence": "The office ignored my messages and nobody returned my calls."
+      },
+      {
+       "review_id": "sample_rev_00542",
+       "date": "2020-04-20",
+       "stars": 2,
+       "cue": "Zero communication",
+       "sentence": "Zero communication and no response to my emails."
+      }
+     ]
+    },
+    {
+     "aspect": "timeliness",
+     "label": "Timeliness / delays",
+     "severity": 0.3,
+     "n_reviews": 3,
+     "share_of_flagged": 0.12,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00559",
+       "date": "2021-04-02",
+       "stars": 3,
+       "cue": "Constant delays",
+       "sentence": "Constant delays, they rescheduled four times."
+      },
+      {
+       "review_id": "sample_rev_00548",
+       "date": "2020-10-28",
+       "stars": 1,
+       "cue": "hours late",
+       "sentence": "They showed up three hours late and then left early."
+      }
+     ]
+    },
+    {
+     "aspect": "warranty",
+     "label": "Warranty / follow-through",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.04,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00533",
+       "date": "2019-08-22",
+       "stars": 2,
+       "cue": "not cover",
+       "sentence": "The company will not cover the repair even though it is under warranty."
+      }
+     ]
+    }
+   ],
+   "action_manager": "ESCALATE: review the jobs behind the safety signals for permit, licence and hazard problems, contact the affected customers, and pause similar work until cleared.",
+   "action_homeowner": "Before hiring, verify the licence, insurance and permit history; ask for proof for any gas, electrical or structural work.",
+   "history": [
+    {
+     "year": 2015,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2017,
+     "n": 8,
+     "neg_rate": 0.125,
+     "avg_stars": 4.12
+    },
+    {
+     "year": 2018,
+     "n": 3,
+     "neg_rate": 0.3333,
+     "avg_stars": 3.33
+    },
+    {
+     "year": 2019,
+     "n": 14,
+     "neg_rate": 0.5,
+     "avg_stars": 3.29
+    },
+    {
+     "year": 2020,
+     "n": 17,
+     "neg_rate": 0.5882,
+     "avg_stars": 2.29
+    },
+    {
+     "year": 2021,
+     "n": 16,
+     "neg_rate": 0.375,
+     "avg_stars": 3.31
+    },
+    {
+     "year": 2022,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 2.0
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_006",
+   "name": "Home Pros 006 (SAMPLE)",
+   "trade": "Cleaning",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Home Cleaning",
+    "Carpet Cleaning"
+   ],
+   "eligible": true,
+   "n_reviews": 24,
+   "n_flagged": 13,
+   "avg_stars": 2.71,
+   "yelp_stars": 2.5,
+   "neg_rate": 0.5417,
+   "recent": {
+    "n": 10,
+    "neg_rate": 0.5
+   },
+   "prior": {
+    "n": 9,
+    "neg_rate": 0.5555555555555556
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": -0.05555555555555558,
+    "p_value": 1.0
+   },
+   "risk_score": 50.74,
+   "risk_tier": "Medium",
+   "rank": 7,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 13,
+     "share_of_flagged": 1.0,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00200",
+       "date": "2021-07-23",
+       "stars": 1,
+       "cue": "ignored my messages",
+       "sentence": "The office ignored my messages and nobody returned my calls."
+      },
+      {
+       "review_id": "sample_rev_00193",
+       "date": "2020-04-16",
+       "stars": 1,
+       "cue": "ignored my messages",
+       "sentence": "The office ignored my messages and nobody returned my calls."
+      }
+     ]
+    },
+    {
+     "aspect": "warranty",
+     "label": "Warranty / follow-through",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0769,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00179",
+       "date": "2016-09-07",
+       "stars": 1,
+       "cue": "denied my claim",
+       "sentence": "No one would stand behind their work and they denied my claim."
+      }
+     ]
+    },
+    {
+     "aspect": "pricing",
+     "label": "Pricing / billing",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0769,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00191",
+       "date": "2019-08-23",
+       "stars": 1,
+       "cue": "rip off",
+       "sentence": "Hidden fees everywhere, it felt like a complete rip off."
+      }
+     ]
+    },
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0769,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00184",
+       "date": "2018-10-03",
+       "stars": 2,
+       "cue": "Terrible attitude",
+       "sentence": "Terrible attitude and a dirty truck full of garbage."
+      }
+     ]
+    }
+   ],
+   "action_manager": "Set a call-back standard (e.g. same business day) and assign an owner to every unanswered message.",
+   "action_homeowner": "Test responsiveness with a call before committing; agree on a single point of contact.",
+   "history": [
+    {
+     "year": 2015,
+     "n": 1,
+     "neg_rate": 1.0,
+     "avg_stars": 1.0
+    },
+    {
+     "year": 2016,
+     "n": 2,
+     "neg_rate": 0.5,
+     "avg_stars": 3.0
+    },
+    {
+     "year": 2017,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 4.0
+    },
+    {
+     "year": 2018,
+     "n": 6,
+     "neg_rate": 0.6667,
+     "avg_stars": 2.83
+    },
+    {
+     "year": 2019,
+     "n": 4,
+     "neg_rate": 0.5,
+     "avg_stars": 2.25
+    },
+    {
+     "year": 2020,
+     "n": 5,
+     "neg_rate": 0.4,
+     "avg_stars": 2.8
+    },
+    {
+     "year": 2021,
+     "n": 5,
+     "neg_rate": 0.6,
+     "avg_stars": 2.8
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_026",
+   "name": "HVAC Pros 026 (SAMPLE)",
+   "trade": "HVAC",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Heating & Air Conditioning/HVAC"
+   ],
+   "eligible": true,
+   "n_reviews": 59,
+   "n_flagged": 22,
+   "avg_stars": 3.03,
+   "yelp_stars": 3.0,
+   "neg_rate": 0.3729,
+   "recent": {
+    "n": 30,
+    "neg_rate": 0.43333333333333335
+   },
+   "prior": {
+    "n": 26,
+    "neg_rate": 0.3076923076923077
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": 0.12564102564102564,
+    "p_value": 0.4115156768738592
+   },
+   "risk_score": 49.96,
+   "risk_tier": "Medium",
+   "rank": 8,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 20,
+     "share_of_flagged": 0.9091,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00768",
+       "date": "2022-01-06",
+       "stars": 1,
+       "cue": "no show",
+       "sentence": "The crew was a no show on the day of the appointment."
+      },
+      {
+       "review_id": "sample_rev_00765",
+       "date": "2021-11-10",
+       "stars": 2,
+       "cue": "no show",
+       "sentence": "The crew was a no show on the day of the appointment."
+      }
+     ]
+    },
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 6,
+     "share_of_flagged": 0.2727,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00760",
+       "date": "2021-08-03",
+       "stars": 1,
+       "cue": "not even call",
+       "sentence": "They never showed up and did not even call to cancel."
+      },
+      {
+       "review_id": "sample_rev_00754",
+       "date": "2021-01-03",
+       "stars": 2,
+       "cue": "not even call",
+       "sentence": "They never showed up and did not even call to cancel."
+      }
+     ]
+    },
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 4,
+     "share_of_flagged": 0.1818,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00759",
+       "date": "2021-05-31",
+       "stars": 3,
+       "cue": "Shoddy",
+       "sentence": "Shoddy workmanship, I had to hire someone else to redo the whole job."
+      },
+      {
+       "review_id": "sample_rev_00745",
+       "date": "2020-06-04",
+       "stars": 2,
+       "cue": "unfinished",
+       "sentence": "He left the job unfinished and never came back."
+      }
+     ]
+    },
+    {
+     "aspect": "pricing",
+     "label": "Pricing / billing",
+     "severity": 0.6,
+     "n_reviews": 2,
+     "share_of_flagged": 0.0909,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00720",
+       "date": "2018-07-02",
+       "stars": 1,
+       "cue": "quote doubled",
+       "sentence": "The quote doubled once they started, classic bait and switch."
+      },
+      {
+       "review_id": "sample_rev_00750",
+       "date": "2020-10-16",
+       "stars": 2,
+       "cue": "rip off",
+       "sentence": "Hidden fees everywhere, it felt like a complete rip off."
+      }
+     ]
+    },
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 2,
+     "share_of_flagged": 0.0909,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00734",
+       "date": "2019-12-11",
+       "stars": 3,
+       "cue": "rude",
+       "sentence": "The technician was rude and dismissive when I asked questions."
+      },
+      {
+       "review_id": "sample_rev_00763",
+       "date": "2021-08-22",
+       "stars": 1,
+       "cue": "yelling at",
+       "sentence": "Very unprofessional, he was yelling at his helper in my driveway."
+      }
+     ]
+    },
+    {
+     "aspect": "safety",
+     "label": "Safety / licensing",
+     "severity": 1.0,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0455,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00710",
+       "date": "2015-10-24",
+       "stars": 1,
+       "cue": "no permit",
+       "sentence": "None of it was up to code and they did the work with no permit."
+      }
+     ]
+    },
+    {
+     "aspect": "timeliness",
+     "label": "Timeliness / delays",
+     "severity": 0.3,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0455,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00764",
+       "date": "2021-09-04",
+       "stars": 1,
+       "cue": "hours late",
+       "sentence": "They showed up three hours late and then left early."
+      }
+     ]
+    }
+   ],
+   "action_manager": "Audit scheduling and dispatch for no-shows and abandoned jobs; add appointment confirmations and a backup-crew rule.",
+   "action_homeowner": "Ask about scheduling and cancellation policy; avoid large deposits up front.",
+   "history": [
+    {
+     "year": 2015,
+     "n": 1,
+     "neg_rate": 1.0,
+     "avg_stars": 1.0
+    },
+    {
+     "year": 2017,
+     "n": 2,
+     "neg_rate": 0.0,
+     "avg_stars": 2.5
+    },
+    {
+     "year": 2018,
+     "n": 14,
+     "neg_rate": 0.3571,
+     "avg_stars": 2.21
+    },
+    {
+     "year": 2019,
+     "n": 9,
+     "neg_rate": 0.2222,
+     "avg_stars": 3.33
+    },
+    {
+     "year": 2020,
+     "n": 18,
+     "neg_rate": 0.3889,
+     "avg_stars": 3.72
+    },
+    {
+     "year": 2021,
+     "n": 13,
+     "neg_rate": 0.4615,
+     "avg_stars": 3.15
+    },
+    {
+     "year": 2022,
+     "n": 2,
+     "neg_rate": 0.5,
+     "avg_stars": 2.0
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_008",
+   "name": "Plumbing Pros 008 (SAMPLE)",
+   "trade": "Plumbing",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Plumbing",
+    "Water Heater Installation/Repair"
+   ],
+   "eligible": true,
+   "n_reviews": 60,
+   "n_flagged": 25,
+   "avg_stars": 3.03,
+   "yelp_stars": 3.0,
+   "neg_rate": 0.4167,
+   "recent": {
+    "n": 30,
+    "neg_rate": 0.5333333333333333
+   },
+   "prior": {
+    "n": 21,
+    "neg_rate": 0.3333333333333333
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": 0.2,
+    "p_value": 0.2527292163648775
+   },
+   "risk_score": 49.86,
+   "risk_tier": "Medium",
+   "rank": 9,
+   "safety_escalation": true,
+   "issues": [
+    {
+     "aspect": "timeliness",
+     "label": "Timeliness / delays",
+     "severity": 0.3,
+     "n_reviews": 23,
+     "share_of_flagged": 0.92,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00275",
+       "date": "2021-12-27",
+       "stars": 2,
+       "cue": "waited all day",
+       "sentence": "I waited all day and the technician arrived after dark."
+      },
+      {
+       "review_id": "sample_rev_00271",
+       "date": "2021-08-24",
+       "stars": 1,
+       "cue": "hours late",
+       "sentence": "They showed up three hours late and then left early."
+      }
+     ]
+    },
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 3,
+     "share_of_flagged": 0.12,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00227",
+       "date": "2018-07-27",
+       "stars": 1,
+       "cue": "Terrible attitude",
+       "sentence": "Terrible attitude and a dirty truck full of garbage."
+      },
+      {
+       "review_id": "sample_rev_00245",
+       "date": "2020-01-16",
+       "stars": 3,
+       "cue": "rude",
+       "sentence": "The technician was rude and dismissive when I asked questions."
+      }
+     ]
+    },
+    {
+     "aspect": "safety",
+     "label": "Safety / licensing",
+     "severity": 1.0,
+     "n_reviews": 2,
+     "share_of_flagged": 0.08,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00239",
+       "date": "2019-06-12",
+       "stars": 2,
+       "cue": "dangerous",
+       "sentence": "I smelled a gas leak after they left and it was dangerous."
+      },
+      {
+       "review_id": "sample_rev_00260",
+       "date": "2020-12-31",
+       "stars": 1,
+       "cue": "fire hazard",
+       "sentence": "Exposed wires and sparks from the panel, a real fire hazard."
+      }
+     ]
+    },
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 2,
+     "share_of_flagged": 0.08,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00275",
+       "date": "2021-12-27",
+       "stars": 2,
+       "cue": "no show",
+       "sentence": "The crew was a no show on the day of the appointment."
+      },
+      {
+       "review_id": "sample_rev_00237",
+       "date": "2019-02-19",
+       "stars": 2,
+       "cue": "never showed",
+       "sentence": "They never showed up and did not even call to cancel."
+      }
+     ]
+    },
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 2,
+     "share_of_flagged": 0.08,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00237",
+       "date": "2019-02-19",
+       "stars": 2,
+       "cue": "not even call",
+       "sentence": "They never showed up and did not even call to cancel."
+      },
+      {
+       "review_id": "sample_rev_00261",
+       "date": "2021-01-26",
+       "stars": 1,
+       "cue": "unresponsive",
+       "sentence": "Completely unresponsive once they had my deposit."
+      }
+     ]
+    },
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.04,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00246",
+       "date": "2020-01-23",
+       "stars": 1,
+       "cue": "still leaking",
+       "sentence": "The work was sloppy and the pipe is still leaking again after they left."
+      }
+     ]
+    },
+    {
+     "aspect": "warranty",
+     "label": "Warranty / follow-through",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.04,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00251",
+       "date": "2020-08-04",
+       "stars": 1,
+       "cue": "denied my claim",
+       "sentence": "No one would stand behind their work and they denied my claim."
+      }
+     ]
+    },
+    {
+     "aspect": "pricing",
+     "label": "Pricing / billing",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.04,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00244",
+       "date": "2019-12-10",
+       "stars": 1,
+       "cue": "overcharged",
+       "sentence": "They overcharged me and the final bill was $600 more than quoted."
+      }
+     ]
+    }
+   ],
+   "action_manager": "ESCALATE: review the jobs behind the safety signals for permit, licence and hazard problems, contact the affected customers, and pause similar work until cleared.",
+   "action_homeowner": "Before hiring, verify the licence, insurance and permit history; ask for proof for any gas, electrical or structural work.",
+   "history": [
+    {
+     "year": 2015,
+     "n": 2,
+     "neg_rate": 0.5,
+     "avg_stars": 2.5
+    },
+    {
+     "year": 2016,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2017,
+     "n": 6,
+     "neg_rate": 0.1667,
+     "avg_stars": 3.83
+    },
+    {
+     "year": 2018,
+     "n": 9,
+     "neg_rate": 0.2222,
+     "avg_stars": 3.33
+    },
+    {
+     "year": 2019,
+     "n": 11,
+     "neg_rate": 0.3636,
+     "avg_stars": 3.55
+    },
+    {
+     "year": 2020,
+     "n": 16,
+     "neg_rate": 0.5,
+     "avg_stars": 2.62
+    },
+    {
+     "year": 2021,
+     "n": 15,
+     "neg_rate": 0.6,
+     "avg_stars": 2.53
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_001",
+   "name": "Electricians Pros 001 (SAMPLE)",
+   "trade": "Electrical",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Electricians",
+    "Lighting Fixtures & Equipment"
+   ],
+   "eligible": true,
+   "n_reviews": 46,
+   "n_flagged": 18,
+   "avg_stars": 3.43,
+   "yelp_stars": 3.5,
+   "neg_rate": 0.3913,
+   "recent": {
+    "n": 30,
+    "neg_rate": 0.5
+   },
+   "prior": {
+    "n": 12,
+    "neg_rate": 0.25
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": 0.25,
+    "p_value": 0.18003690286186458
+   },
+   "risk_score": 49.65,
+   "risk_tier": "High",
+   "rank": 10,
+   "safety_escalation": true,
+   "issues": [
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 4,
+     "share_of_flagged": 0.2222,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00060",
+       "date": "2021-05-02",
+       "stars": 2,
+       "cue": "Shoddy",
+       "sentence": "Shoddy workmanship, I had to hire someone else to redo the whole job."
+      },
+      {
+       "review_id": "sample_rev_00047",
+       "date": "2020-06-01",
+       "stars": 1,
+       "cue": "unfinished",
+       "sentence": "He left the job unfinished and never came back."
+      }
+     ]
+    },
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 4,
+     "share_of_flagged": 0.2222,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00055",
+       "date": "2021-02-23",
+       "stars": 2,
+       "cue": "Zero communication",
+       "sentence": "Zero communication and no response to my emails."
+      },
+      {
+       "review_id": "sample_rev_00059",
+       "date": "2021-05-02",
+       "stars": 1,
+       "cue": "not even call",
+       "sentence": "They never showed up and did not even call to cancel."
+      }
+     ]
+    },
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 4,
+     "share_of_flagged": 0.2222,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00061",
+       "date": "2021-05-05",
+       "stars": 1,
+       "cue": "Terrible attitude",
+       "sentence": "Terrible attitude and a dirty truck full of garbage."
+      },
+      {
+       "review_id": "sample_rev_00048",
+       "date": "2020-06-02",
+       "stars": 1,
+       "cue": "Terrible attitude",
+       "sentence": "Terrible attitude and a dirty truck full of garbage."
+      }
+     ]
+    },
+    {
+     "aspect": "safety",
+     "label": "Safety / licensing",
+     "severity": 1.0,
+     "n_reviews": 3,
+     "share_of_flagged": 0.1667,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00071",
+       "date": "2021-11-26",
+       "stars": 1,
+       "cue": "dangerous",
+       "sentence": "I smelled a gas leak after they left and it was dangerous."
+      },
+      {
+       "review_id": "sample_rev_00051",
+       "date": "2020-09-13",
+       "stars": 1,
+       "cue": "dangerous",
+       "sentence": "I smelled a gas leak after they left and it was dangerous."
+      }
+     ]
+    },
+    {
+     "aspect": "timeliness",
+     "label": "Timeliness / delays",
+     "severity": 0.3,
+     "n_reviews": 3,
+     "share_of_flagged": 0.1667,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00057",
+       "date": "2021-03-01",
+       "stars": 1,
+       "cue": "weeks behind",
+       "sentence": "The project took forever and was weeks behind schedule."
+      },
+      {
+       "review_id": "sample_rev_00044",
+       "date": "2020-02-27",
+       "stars": 3,
+       "cue": "waited all day",
+       "sentence": "I waited all day and the technician arrived after dark."
+      }
+     ]
+    },
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 2,
+     "share_of_flagged": 0.1111,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00059",
+       "date": "2021-05-02",
+       "stars": 1,
+       "cue": "never showed",
+       "sentence": "They never showed up and did not even call to cancel."
+      },
+      {
+       "review_id": "sample_rev_00047",
+       "date": "2020-06-01",
+       "stars": 1,
+       "cue": "left the job unfinished",
+       "sentence": "He left the job unfinished and never came back."
+      }
+     ]
+    },
+    {
+     "aspect": "pricing",
+     "label": "Pricing / billing",
+     "severity": 0.6,
+     "n_reviews": 2,
+     "share_of_flagged": 0.1111,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00043",
+       "date": "2020-02-25",
+       "stars": 2,
+       "cue": "Price gouging",
+       "sentence": "Price gouging after they said it was an emergency."
+      },
+      {
+       "review_id": "sample_rev_00064",
+       "date": "2021-05-22",
+       "stars": 2,
+       "cue": "quote doubled",
+       "sentence": "The quote doubled once they started, classic bait and switch."
+      }
+     ]
+    }
+   ],
+   "action_manager": "ESCALATE: review the jobs behind the safety signals for permit, licence and hazard problems, contact the affected customers, and pause similar work until cleared.",
+   "action_homeowner": "Before hiring, verify the licence, insurance and permit history; ask for proof for any gas, electrical or structural work.",
+   "history": [
+    {
+     "year": 2017,
+     "n": 3,
+     "neg_rate": 0.0,
+     "avg_stars": 4.67
+    },
+    {
+     "year": 2018,
+     "n": 4,
+     "neg_rate": 0.25,
+     "avg_stars": 4.0
+    },
+    {
+     "year": 2019,
+     "n": 9,
+     "neg_rate": 0.2222,
+     "avg_stars": 4.22
+    },
+    {
+     "year": 2020,
+     "n": 12,
+     "neg_rate": 0.5,
+     "avg_stars": 3.25
+    },
+    {
+     "year": 2021,
+     "n": 18,
+     "neg_rate": 0.5,
+     "avg_stars": 2.83
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_000",
+   "name": "Plumbing Pros 000 (SAMPLE)",
+   "trade": "Plumbing",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Plumbing",
+    "Water Heater Installation/Repair"
+   ],
+   "eligible": true,
+   "n_reviews": 24,
+   "n_flagged": 9,
+   "avg_stars": 3.58,
+   "yelp_stars": 3.5,
+   "neg_rate": 0.375,
+   "recent": {
+    "n": 11,
+    "neg_rate": 0.5454545454545454
+   },
+   "prior": {
+    "n": 10,
+    "neg_rate": 0.2
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": 0.3454545454545454,
+    "p_value": 0.1826625386996904
+   },
+   "risk_score": 48.26,
+   "risk_tier": "Medium",
+   "rank": 11,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 4,
+     "share_of_flagged": 0.4444,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00022",
+       "date": "2021-10-14",
+       "stars": 1,
+       "cue": "missed appointments",
+       "sentence": "After two missed appointments I gave up on them."
+      },
+      {
+       "review_id": "sample_rev_00013",
+       "date": "2020-02-19",
+       "stars": 2,
+       "cue": "no show",
+       "sentence": "The crew was a no show on the day of the appointment."
+      }
+     ]
+    },
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 3,
+     "share_of_flagged": 0.3333,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00018",
+       "date": "2020-06-28",
+       "stars": 2,
+       "cue": "Shoddy",
+       "sentence": "Shoddy workmanship, I had to hire someone else to redo the whole job."
+      },
+      {
+       "review_id": "sample_rev_00017",
+       "date": "2020-06-01",
+       "stars": 1,
+       "cue": "unfinished",
+       "sentence": "He left the job unfinished and never came back."
+      }
+     ]
+    },
+    {
+     "aspect": "safety",
+     "label": "Safety / licensing",
+     "severity": 1.0,
+     "n_reviews": 1,
+     "share_of_flagged": 0.1111,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00015",
+       "date": "2020-04-02",
+       "stars": 2,
+       "cue": "unlicensed",
+       "sentence": "The unlicensed crew left the roof unsafe and water came through."
+      }
+     ]
+    },
+    {
+     "aspect": "warranty",
+     "label": "Warranty / follow-through",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.1111,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00000",
+       "date": "2017-07-27",
+       "stars": 1,
+       "cue": "denied my claim",
+       "sentence": "No one would stand behind their work and they denied my claim."
+      }
+     ]
+    },
+    {
+     "aspect": "pricing",
+     "label": "Pricing / billing",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.1111,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00021",
+       "date": "2021-07-05",
+       "stars": 1,
+       "cue": "quote doubled",
+       "sentence": "The quote doubled once they started, classic bait and switch."
+      }
+     ]
+    },
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 1,
+     "share_of_flagged": 0.1111,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00006",
+       "date": "2018-06-22",
+       "stars": 4,
+       "cue": "not even call",
+       "sentence": "They never showed up and did not even call to cancel."
+      }
+     ]
+    }
+   ],
+   "action_manager": "Audit scheduling and dispatch for no-shows and abandoned jobs; add appointment confirmations and a backup-crew rule.",
+   "action_homeowner": "Ask about scheduling and cancellation policy; avoid large deposits up front.",
+   "history": [
+    {
+     "year": 2017,
+     "n": 3,
+     "neg_rate": 0.3333,
+     "avg_stars": 3.67
+    },
+    {
+     "year": 2018,
+     "n": 4,
+     "neg_rate": 0.25,
+     "avg_stars": 4.5
+    },
+    {
+     "year": 2019,
+     "n": 6,
+     "neg_rate": 0.1667,
+     "avg_stars": 4.33
+    },
+    {
+     "year": 2020,
+     "n": 7,
+     "neg_rate": 0.5714,
+     "avg_stars": 3.0
+    },
+    {
+     "year": 2021,
+     "n": 4,
+     "neg_rate": 0.5,
+     "avg_stars": 2.5
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_015",
+   "name": "Landscaping Pros 015 (SAMPLE)",
+   "trade": "Landscaping & Outdoor",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Landscaping",
+    "Tree Services"
+   ],
+   "eligible": true,
+   "n_reviews": 24,
+   "n_flagged": 8,
+   "avg_stars": 3.79,
+   "yelp_stars": 4.0,
+   "neg_rate": 0.3333,
+   "recent": {
+    "n": 14,
+    "neg_rate": 0.5
+   },
+   "prior": {
+    "n": 6,
+    "neg_rate": 0.0
+   },
+   "trend": {
+    "direction": "worsening",
+    "delta": 0.5,
+    "p_value": 0.05149638802889577
+   },
+   "risk_score": 45.98,
+   "risk_tier": "Low",
+   "rank": 12,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 7,
+     "share_of_flagged": 0.875,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00422",
+       "date": "2021-06-23",
+       "stars": 2,
+       "cue": "Terrible attitude",
+       "sentence": "Terrible attitude and a dirty truck full of garbage."
+      },
+      {
+       "review_id": "sample_rev_00420",
+       "date": "2021-02-14",
+       "stars": 2,
+       "cue": "Terrible attitude",
+       "sentence": "Terrible attitude and a dirty truck full of garbage."
+      }
+     ]
+    },
+    {
+     "aspect": "safety",
+     "label": "Safety / licensing",
+     "severity": 1.0,
+     "n_reviews": 1,
+     "share_of_flagged": 0.125,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00404",
+       "date": "2017-09-16",
+       "stars": 5,
+       "cue": "no permit",
+       "sentence": "None of it was up to code and they did the work with no permit."
+      }
+     ]
+    },
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.125,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00416",
+       "date": "2020-08-03",
+       "stars": 5,
+       "cue": "still leaking",
+       "sentence": "The work was sloppy and the pipe is still leaking again after they left."
+      }
+     ]
+    },
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.125,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00415",
+       "date": "2020-07-11",
+       "stars": 2,
+       "cue": "no show",
+       "sentence": "The crew was a no show on the day of the appointment."
+      }
+     ]
+    },
+    {
+     "aspect": "pricing",
+     "label": "Pricing / billing",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.125,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00414",
+       "date": "2020-06-27",
+       "stars": 1,
+       "cue": "quote doubled",
+       "sentence": "The quote doubled once they started, classic bait and switch."
+      }
+     ]
+    },
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 1,
+     "share_of_flagged": 0.125,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00423",
+       "date": "2021-11-04",
+       "stars": 3,
+       "cue": "Zero communication",
+       "sentence": "Zero communication and no response to my emails."
+      }
+     ]
+    }
+   ],
+   "action_manager": "Coach the team on customer conduct and site clean-up; follow up personally on the flagged reviews.",
+   "action_homeowner": "Ask for references and agree on site-clean-up expectations in the contract.",
+   "history": [
+    {
+     "year": 2017,
+     "n": 4,
+     "neg_rate": 0.25,
+     "avg_stars": 4.5
+    },
+    {
+     "year": 2019,
+     "n": 6,
+     "neg_rate": 0.0,
+     "avg_stars": 4.33
+    },
+    {
+     "year": 2020,
+     "n": 7,
+     "neg_rate": 0.4286,
+     "avg_stars": 3.57
+    },
+    {
+     "year": 2021,
+     "n": 6,
+     "neg_rate": 0.6667,
+     "avg_stars": 2.83
+    },
+    {
+     "year": 2022,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_021",
+   "name": "General Pros 021 (SAMPLE)",
+   "trade": "Contracting & Remodeling",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Contractors",
+    "Handyman"
+   ],
+   "eligible": true,
+   "n_reviews": 36,
+   "n_flagged": 12,
+   "avg_stars": 3.25,
+   "yelp_stars": 3.0,
+   "neg_rate": 0.3333,
+   "recent": {
+    "n": 18,
+    "neg_rate": 0.5
+   },
+   "prior": {
+    "n": 14,
+    "neg_rate": 0.14285714285714285
+   },
+   "trend": {
+    "direction": "worsening",
+    "delta": 0.35714285714285715,
+    "p_value": 0.06079460269865068
+   },
+   "risk_score": 44.78,
+   "risk_tier": "Low",
+   "rank": 13,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "timeliness",
+     "label": "Timeliness / delays",
+     "severity": 0.3,
+     "n_reviews": 8,
+     "share_of_flagged": 0.6667,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00615",
+       "date": "2021-12-17",
+       "stars": 1,
+       "cue": "waited all day",
+       "sentence": "I waited all day and the technician arrived after dark."
+      },
+      {
+       "review_id": "sample_rev_00612",
+       "date": "2021-10-31",
+       "stars": 2,
+       "cue": "weeks behind",
+       "sentence": "The project took forever and was weeks behind schedule."
+      }
+     ]
+    },
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 3,
+     "share_of_flagged": 0.25,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00584",
+       "date": "2018-02-09",
+       "stars": 1,
+       "cue": "missed appointments",
+       "sentence": "After two missed appointments I gave up on them."
+      },
+      {
+       "review_id": "sample_rev_00580",
+       "date": "2015-09-07",
+       "stars": 3,
+       "cue": "never showed",
+       "sentence": "They never showed up and did not even call to cancel."
+      }
+     ]
+    },
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 3,
+     "share_of_flagged": 0.25,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00607",
+       "date": "2021-05-23",
+       "stars": 3,
+       "cue": "ignored my messages",
+       "sentence": "The office ignored my messages and nobody returned my calls."
+      },
+      {
+       "review_id": "sample_rev_00614",
+       "date": "2021-11-24",
+       "stars": 3,
+       "cue": "Zero communication",
+       "sentence": "Zero communication and no response to my emails."
+      }
+     ]
+    },
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0833,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00602",
+       "date": "2020-12-16",
+       "stars": 3,
+       "cue": "unfinished",
+       "sentence": "He left the job unfinished and never came back."
+      }
+     ]
+    },
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0833,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00612",
+       "date": "2021-10-31",
+       "stars": 2,
+       "cue": "Terrible attitude",
+       "sentence": "Terrible attitude and a dirty truck full of garbage."
+      }
+     ]
+    }
+   ],
+   "action_manager": "Review scheduling buffers and arrival windows; send arrival-time notifications to customers.",
+   "action_homeowner": "Agree a start and finish date in writing and ask what happens if it slips.",
+   "history": [
+    {
+     "year": 2015,
+     "n": 1,
+     "neg_rate": 1.0,
+     "avg_stars": 3.0
+    },
+    {
+     "year": 2016,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2017,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 4.0
+    },
+    {
+     "year": 2018,
+     "n": 7,
+     "neg_rate": 0.1429,
+     "avg_stars": 3.43
+    },
+    {
+     "year": 2019,
+     "n": 8,
+     "neg_rate": 0.125,
+     "avg_stars": 3.88
+    },
+    {
+     "year": 2020,
+     "n": 5,
+     "neg_rate": 0.2,
+     "avg_stars": 2.8
+    },
+    {
+     "year": 2021,
+     "n": 13,
+     "neg_rate": 0.6154,
+     "avg_stars": 2.77
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_039",
+   "name": "Landscaping Pros 039 (SAMPLE)",
+   "trade": "Landscaping & Outdoor",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Landscaping",
+    "Tree Services"
+   ],
+   "eligible": true,
+   "n_reviews": 30,
+   "n_flagged": 13,
+   "avg_stars": 3.33,
+   "yelp_stars": 3.5,
+   "neg_rate": 0.4333,
+   "recent": {
+    "n": 18,
+    "neg_rate": 0.4444444444444444
+   },
+   "prior": {
+    "n": 7,
+    "neg_rate": 0.42857142857142855
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": 0.015873015873015872,
+    "p_value": 1.0
+   },
+   "risk_score": 42.81,
+   "risk_tier": "Low",
+   "rank": 14,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 4,
+     "share_of_flagged": 0.3077,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_01162",
+       "date": "2021-01-10",
+       "stars": 1,
+       "cue": "Zero communication",
+       "sentence": "Zero communication and no response to my emails."
+      },
+      {
+       "review_id": "sample_rev_01149",
+       "date": "2018-04-10",
+       "stars": 1,
+       "cue": "Zero communication",
+       "sentence": "Zero communication and no response to my emails."
+      }
+     ]
+    },
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 3,
+     "share_of_flagged": 0.2308,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_01164",
+       "date": "2021-02-28",
+       "stars": 3,
+       "cue": "unfinished",
+       "sentence": "He left the job unfinished and never came back."
+      },
+      {
+       "review_id": "sample_rev_01155",
+       "date": "2019-12-19",
+       "stars": 1,
+       "cue": "unfinished",
+       "sentence": "He left the job unfinished and never came back."
+      }
+     ]
+    },
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 3,
+     "share_of_flagged": 0.2308,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_01154",
+       "date": "2019-10-18",
+       "stars": 4,
+       "cue": "missed appointments",
+       "sentence": "After two missed appointments I gave up on them."
+      },
+      {
+       "review_id": "sample_rev_01164",
+       "date": "2021-02-28",
+       "stars": 3,
+       "cue": "left the job unfinished",
+       "sentence": "He left the job unfinished and never came back."
+      }
+     ]
+    },
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 2,
+     "share_of_flagged": 0.1538,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_01170",
+       "date": "2021-09-20",
+       "stars": 1,
+       "cue": "yelling at",
+       "sentence": "Very unprofessional, he was yelling at his helper in my driveway."
+      },
+      {
+       "review_id": "sample_rev_01156",
+       "date": "2020-01-21",
+       "stars": 1,
+       "cue": "yelling at",
+       "sentence": "Very unprofessional, he was yelling at his helper in my driveway."
+      }
+     ]
+    },
+    {
+     "aspect": "warranty",
+     "label": "Warranty / follow-through",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0769,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_01157",
+       "date": "2020-07-05",
+       "stars": 1,
+       "cue": "denied my claim",
+       "sentence": "No one would stand behind their work and they denied my claim."
+      }
+     ]
+    },
+    {
+     "aspect": "pricing",
+     "label": "Pricing / billing",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0769,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_01165",
+       "date": "2021-04-10",
+       "stars": 2,
+       "cue": "Price gouging",
+       "sentence": "Price gouging after they said it was an emergency."
+      }
+     ]
+    },
+    {
+     "aspect": "timeliness",
+     "label": "Timeliness / delays",
+     "severity": 0.3,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0769,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_01167",
+       "date": "2021-06-01",
+       "stars": 1,
+       "cue": "weeks behind",
+       "sentence": "The project took forever and was weeks behind schedule."
+      }
+     ]
+    }
+   ],
+   "action_manager": "Set a call-back standard (e.g. same business day) and assign an owner to every unanswered message.",
+   "action_homeowner": "Test responsiveness with a call before committing; agree on a single point of contact.",
+   "history": [
+    {
+     "year": 2016,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2017,
+     "n": 3,
+     "neg_rate": 0.6667,
+     "avg_stars": 3.0
+    },
+    {
+     "year": 2018,
+     "n": 5,
+     "neg_rate": 0.2,
+     "avg_stars": 3.8
+    },
+    {
+     "year": 2019,
+     "n": 3,
+     "neg_rate": 0.6667,
+     "avg_stars": 3.33
+    },
+    {
+     "year": 2020,
+     "n": 6,
+     "neg_rate": 0.3333,
+     "avg_stars": 3.17
+    },
+    {
+     "year": 2021,
+     "n": 11,
+     "neg_rate": 0.5455,
+     "avg_stars": 3.09
+    },
+    {
+     "year": 2022,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 4.0
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_032",
+   "name": "Plumbing Pros 032 (SAMPLE)",
+   "trade": "Plumbing",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Plumbing",
+    "Water Heater Installation/Repair"
+   ],
+   "eligible": true,
+   "n_reviews": 60,
+   "n_flagged": 13,
+   "avg_stars": 3.75,
+   "yelp_stars": 4.0,
+   "neg_rate": 0.2167,
+   "recent": {
+    "n": 30,
+    "neg_rate": 0.26666666666666666
+   },
+   "prior": {
+    "n": 20,
+    "neg_rate": 0.15
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": 0.11666666666666667,
+    "p_value": 0.48949317491078037
+   },
+   "risk_score": 41.64,
+   "risk_tier": "Low",
+   "rank": 15,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "pricing",
+     "label": "Pricing / billing",
+     "severity": 0.6,
+     "n_reviews": 13,
+     "share_of_flagged": 1.0,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00957",
+       "date": "2021-12-03",
+       "stars": 2,
+       "cue": "Price gouging",
+       "sentence": "Price gouging after they said it was an emergency."
+      },
+      {
+       "review_id": "sample_rev_00929",
+       "date": "2020-01-01",
+       "stars": 1,
+       "cue": "Price gouging",
+       "sentence": "Price gouging after they said it was an emergency."
+      }
+     ]
+    },
+    {
+     "aspect": "timeliness",
+     "label": "Timeliness / delays",
+     "severity": 0.3,
+     "n_reviews": 13,
+     "share_of_flagged": 1.0,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00957",
+       "date": "2021-12-03",
+       "stars": 2,
+       "cue": "waited all day",
+       "sentence": "I waited all day and the technician arrived after dark."
+      },
+      {
+       "review_id": "sample_rev_00953",
+       "date": "2021-08-27",
+       "stars": 2,
+       "cue": "Constant delays",
+       "sentence": "Constant delays, they rescheduled four times."
+      }
+     ]
+    },
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 2,
+     "share_of_flagged": 0.1538,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00909",
+       "date": "2017-11-27",
+       "stars": 2,
+       "cue": "Shoddy",
+       "sentence": "Shoddy workmanship, I had to hire someone else to redo the whole job."
+      },
+      {
+       "review_id": "sample_rev_00950",
+       "date": "2021-05-12",
+       "stars": 2,
+       "cue": "not fix",
+       "sentence": "The repair did not fix the problem and they left a huge mess behind."
+      }
+     ]
+    },
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 2,
+     "share_of_flagged": 0.1538,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00911",
+       "date": "2018-04-05",
+       "stars": 1,
+       "cue": "Terrible attitude",
+       "sentence": "Terrible attitude and a dirty truck full of garbage."
+      },
+      {
+       "review_id": "sample_rev_00950",
+       "date": "2021-05-12",
+       "stars": 2,
+       "cue": "left a huge mess",
+       "sentence": "The repair did not fix the problem and they left a huge mess behind."
+      }
+     ]
+    },
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0769,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00942",
+       "date": "2020-12-10",
+       "stars": 1,
+       "cue": "never showed",
+       "sentence": "They never showed up and did not even call to cancel."
+      }
+     ]
+    },
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0769,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00942",
+       "date": "2020-12-10",
+       "stars": 1,
+       "cue": "not even call",
+       "sentence": "They never showed up and did not even call to cancel."
+      }
+     ]
+    }
+   ],
+   "action_manager": "Compare quotes with final invoices; require a written change order before any extra charge.",
+   "action_homeowner": "Get an itemised written quote and insist on written approval for any change in price.",
+   "history": [
+    {
+     "year": 2015,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2016,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2017,
+     "n": 8,
+     "neg_rate": 0.25,
+     "avg_stars": 2.75
+    },
+    {
+     "year": 2018,
+     "n": 6,
+     "neg_rate": 0.1667,
+     "avg_stars": 4.17
+    },
+    {
+     "year": 2019,
+     "n": 13,
+     "neg_rate": 0.0769,
+     "avg_stars": 4.31
+    },
+    {
+     "year": 2020,
+     "n": 16,
+     "neg_rate": 0.1875,
+     "avg_stars": 3.81
+    },
+    {
+     "year": 2021,
+     "n": 15,
+     "neg_rate": 0.4,
+     "avg_stars": 3.4
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_028",
+   "name": "Movers Pros 028 (SAMPLE)",
+   "trade": "Movers",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Movers",
+    "Packing Services"
+   ],
+   "eligible": true,
+   "n_reviews": 30,
+   "n_flagged": 8,
+   "avg_stars": 3.7,
+   "yelp_stars": 3.5,
+   "neg_rate": 0.2667,
+   "recent": {
+    "n": 21,
+    "neg_rate": 0.09523809523809523
+   },
+   "prior": {
+    "n": 6,
+    "neg_rate": 1.0
+   },
+   "trend": {
+    "direction": "improving",
+    "delta": -0.9047619047619048,
+    "p_value": 9.459139893922501e-05
+   },
+   "risk_score": 37.97,
+   "risk_tier": "Low",
+   "rank": 16,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 8,
+     "share_of_flagged": 1.0,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00791",
+       "date": "2019-04-03",
+       "stars": 2,
+       "cue": "no show",
+       "sentence": "The crew was a no show on the day of the appointment."
+      },
+      {
+       "review_id": "sample_rev_00788",
+       "date": "2018-06-30",
+       "stars": 1,
+       "cue": "missed appointments",
+       "sentence": "After two missed appointments I gave up on them."
+      }
+     ]
+    },
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 8,
+     "share_of_flagged": 1.0,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00788",
+       "date": "2018-06-30",
+       "stars": 1,
+       "cue": "ignored my messages",
+       "sentence": "The office ignored my messages and nobody returned my calls."
+      },
+      {
+       "review_id": "sample_rev_00787",
+       "date": "2018-05-11",
+       "stars": 2,
+       "cue": "ignored my messages",
+       "sentence": "The office ignored my messages and nobody returned my calls."
+      }
+     ]
+    },
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 2,
+     "share_of_flagged": 0.25,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00804",
+       "date": "2021-04-06",
+       "stars": 1,
+       "cue": "unfinished",
+       "sentence": "He left the job unfinished and never came back."
+      },
+      {
+       "review_id": "sample_rev_00792",
+       "date": "2019-10-26",
+       "stars": 1,
+       "cue": "unfinished",
+       "sentence": "He left the job unfinished and never came back."
+      }
+     ]
+    }
+   ],
+   "action_manager": "Audit scheduling and dispatch for no-shows and abandoned jobs; add appointment confirmations and a backup-crew rule.",
+   "action_homeowner": "Ask about scheduling and cancellation policy; avoid large deposits up front.",
+   "history": [
+    {
+     "year": 2016,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2017,
+     "n": 2,
+     "neg_rate": 0.0,
+     "avg_stars": 3.5
+    },
+    {
+     "year": 2018,
+     "n": 4,
+     "neg_rate": 1.0,
+     "avg_stars": 1.25
+    },
+    {
+     "year": 2019,
+     "n": 2,
+     "neg_rate": 1.0,
+     "avg_stars": 1.5
+    },
+    {
+     "year": 2020,
+     "n": 8,
+     "neg_rate": 0.0,
+     "avg_stars": 4.5
+    },
+    {
+     "year": 2021,
+     "n": 13,
+     "neg_rate": 0.1538,
+     "avg_stars": 4.23
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_016",
+   "name": "Plumbing Pros 016 (SAMPLE)",
+   "trade": "Plumbing",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Plumbing",
+    "Water Heater Installation/Repair"
+   ],
+   "eligible": true,
+   "n_reviews": 48,
+   "n_flagged": 11,
+   "avg_stars": 4.0,
+   "yelp_stars": 4.0,
+   "neg_rate": 0.2292,
+   "recent": {
+    "n": 27,
+    "neg_rate": 0.2962962962962963
+   },
+   "prior": {
+    "n": 11,
+    "neg_rate": 0.18181818181818182
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": 0.11447811447811446,
+    "p_value": 0.6900476258775985
+   },
+   "risk_score": 37.29,
+   "risk_tier": "Medium",
+   "rank": 17,
+   "safety_escalation": true,
+   "issues": [
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 4,
+     "share_of_flagged": 0.3636,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00463",
+       "date": "2021-05-04",
+       "stars": 2,
+       "cue": "unfinished",
+       "sentence": "He left the job unfinished and never came back."
+      },
+      {
+       "review_id": "sample_rev_00449",
+       "date": "2020-04-04",
+       "stars": 5,
+       "cue": "botched",
+       "sentence": "They botched the install and the finish is crooked and cracked."
+      }
+     ]
+    },
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 3,
+     "share_of_flagged": 0.2727,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00466",
+       "date": "2021-07-23",
+       "stars": 3,
+       "cue": "no show",
+       "sentence": "The crew was a no show on the day of the appointment."
+      },
+      {
+       "review_id": "sample_rev_00454",
+       "date": "2020-10-12",
+       "stars": 1,
+       "cue": "no show",
+       "sentence": "The crew was a no show on the day of the appointment."
+      }
+     ]
+    },
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 3,
+     "share_of_flagged": 0.2727,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00470",
+       "date": "2021-09-27",
+       "stars": 1,
+       "cue": "rude",
+       "sentence": "The technician was rude and dismissive when I asked questions."
+      },
+      {
+       "review_id": "sample_rev_00452",
+       "date": "2020-07-29",
+       "stars": 1,
+       "cue": "left a huge mess",
+       "sentence": "The repair did not fix the problem and they left a huge mess behind."
+      }
+     ]
+    },
+    {
+     "aspect": "pricing",
+     "label": "Pricing / billing",
+     "severity": 0.6,
+     "n_reviews": 2,
+     "share_of_flagged": 0.1818,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00453",
+       "date": "2020-09-24",
+       "stars": 2,
+       "cue": "Price gouging",
+       "sentence": "Price gouging after they said it was an emergency."
+      },
+      {
+       "review_id": "sample_rev_00444",
+       "date": "2019-09-06",
+       "stars": 1,
+       "cue": "Price gouging",
+       "sentence": "Price gouging after they said it was an emergency."
+      }
+     ]
+    },
+    {
+     "aspect": "safety",
+     "label": "Safety / licensing",
+     "severity": 1.0,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0909,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00469",
+       "date": "2021-09-14",
+       "stars": 2,
+       "cue": "fire hazard",
+       "sentence": "Exposed wires and sparks from the panel, a real fire hazard."
+      },
+      {
+       "review_id": "sample_rev_00448",
+       "date": "2020-02-02",
+       "stars": 5,
+       "cue": "fire hazard",
+       "sentence": "Exposed wires and sparks from the panel, a real fire hazard."
+      }
+     ]
+    },
+    {
+     "aspect": "timeliness",
+     "label": "Timeliness / delays",
+     "severity": 0.3,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0909,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00440",
+       "date": "2019-01-09",
+       "stars": 3,
+       "cue": "waited all day",
+       "sentence": "I waited all day and the technician arrived after dark."
+      }
+     ]
+    }
+   ],
+   "action_manager": "ESCALATE: review the jobs behind the safety signals for permit, licence and hazard problems, contact the affected customers, and pause similar work until cleared.",
+   "action_homeowner": "Before hiring, verify the licence, insurance and permit history; ask for proof for any gas, electrical or structural work.",
+   "history": [
+    {
+     "year": 2016,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2017,
+     "n": 9,
+     "neg_rate": 0.1111,
+     "avg_stars": 4.22
+    },
+    {
+     "year": 2018,
+     "n": 4,
+     "neg_rate": 0.0,
+     "avg_stars": 4.25
+    },
+    {
+     "year": 2019,
+     "n": 6,
+     "neg_rate": 0.3333,
+     "avg_stars": 4.0
+    },
+    {
+     "year": 2020,
+     "n": 11,
+     "neg_rate": 0.4545,
+     "avg_stars": 3.45
+    },
+    {
+     "year": 2021,
+     "n": 17,
+     "neg_rate": 0.1765,
+     "avg_stars": 4.12
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_010",
+   "name": "HVAC Pros 010 (SAMPLE)",
+   "trade": "HVAC",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Heating & Air Conditioning/HVAC"
+   ],
+   "eligible": true,
+   "n_reviews": 47,
+   "n_flagged": 10,
+   "avg_stars": 3.98,
+   "yelp_stars": 4.0,
+   "neg_rate": 0.2128,
+   "recent": {
+    "n": 30,
+    "neg_rate": 0.23333333333333334
+   },
+   "prior": {
+    "n": 10,
+    "neg_rate": 0.1
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": 0.13333333333333333,
+    "p_value": 0.6525585534873461
+   },
+   "risk_score": 34.78,
+   "risk_tier": "Low",
+   "rank": 18,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "timeliness",
+     "label": "Timeliness / delays",
+     "severity": 0.3,
+     "n_reviews": 9,
+     "share_of_flagged": 0.9,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00330",
+       "date": "2021-12-16",
+       "stars": 2,
+       "cue": "waited all day",
+       "sentence": "I waited all day and the technician arrived after dark."
+      },
+      {
+       "review_id": "sample_rev_00326",
+       "date": "2021-09-23",
+       "stars": 1,
+       "cue": "Constant delays",
+       "sentence": "Constant delays, they rescheduled four times."
+      }
+     ]
+    },
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 2,
+     "share_of_flagged": 0.2,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00316",
+       "date": "2021-05-08",
+       "stars": 2,
+       "cue": "still leaking",
+       "sentence": "The work was sloppy and the pipe is still leaking again after they left."
+      },
+      {
+       "review_id": "sample_rev_00313",
+       "date": "2021-02-15",
+       "stars": 2,
+       "cue": "Shoddy",
+       "sentence": "Shoddy workmanship, I had to hire someone else to redo the whole job."
+      }
+     ]
+    },
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.1,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00312",
+       "date": "2021-02-15",
+       "stars": 2,
+       "cue": "missed appointments",
+       "sentence": "After two missed appointments I gave up on them."
+      }
+     ]
+    },
+    {
+     "aspect": "pricing",
+     "label": "Pricing / billing",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.1,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00293",
+       "date": "2018-03-20",
+       "stars": 3,
+       "cue": "rip off",
+       "sentence": "Hidden fees everywhere, it felt like a complete rip off."
+      }
+     ]
+    },
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 1,
+     "share_of_flagged": 0.1,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00288",
+       "date": "2017-07-21",
+       "stars": 1,
+       "cue": "unresponsive",
+       "sentence": "Completely unresponsive once they had my deposit."
+      }
+     ]
+    }
+   ],
+   "action_manager": "Review scheduling buffers and arrival windows; send arrival-time notifications to customers.",
+   "action_homeowner": "Agree a start and finish date in writing and ask what happens if it slips.",
+   "history": [
+    {
+     "year": 2016,
+     "n": 3,
+     "neg_rate": 0.0,
+     "avg_stars": 4.67
+    },
+    {
+     "year": 2017,
+     "n": 3,
+     "neg_rate": 0.6667,
+     "avg_stars": 2.33
+    },
+    {
+     "year": 2018,
+     "n": 6,
+     "neg_rate": 0.1667,
+     "avg_stars": 4.33
+    },
+    {
+     "year": 2019,
+     "n": 5,
+     "neg_rate": 0.0,
+     "avg_stars": 4.6
+    },
+    {
+     "year": 2020,
+     "n": 9,
+     "neg_rate": 0.0,
+     "avg_stars": 4.67
+    },
+    {
+     "year": 2021,
+     "n": 21,
+     "neg_rate": 0.3333,
+     "avg_stars": 3.57
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_022",
+   "name": "Home Pros 022 (SAMPLE)",
+   "trade": "Cleaning",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Home Cleaning",
+    "Carpet Cleaning"
+   ],
+   "eligible": true,
+   "n_reviews": 30,
+   "n_flagged": 11,
+   "avg_stars": 3.43,
+   "yelp_stars": 3.5,
+   "neg_rate": 0.3667,
+   "recent": {
+    "n": 18,
+    "neg_rate": 0.2222222222222222
+   },
+   "prior": {
+    "n": 10,
+    "neg_rate": 0.7
+   },
+   "trend": {
+    "direction": "improving",
+    "delta": -0.47777777777777775,
+    "p_value": 0.020363618075288557
+   },
+   "risk_score": 33.44,
+   "risk_tier": "High",
+   "rank": 19,
+   "safety_escalation": true,
+   "issues": [
+    {
+     "aspect": "safety",
+     "label": "Safety / licensing",
+     "severity": 1.0,
+     "n_reviews": 3,
+     "share_of_flagged": 0.2727,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00622",
+       "date": "2019-03-29",
+       "stars": 1,
+       "cue": "dangerous",
+       "sentence": "I smelled a gas leak after they left and it was dangerous."
+      },
+      {
+       "review_id": "sample_rev_00635",
+       "date": "2021-01-16",
+       "stars": 1,
+       "cue": "fire hazard",
+       "sentence": "Exposed wires and sparks from the panel, a real fire hazard."
+      }
+     ]
+    },
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 2,
+     "share_of_flagged": 0.1818,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00639",
+       "date": "2021-04-23",
+       "stars": 1,
+       "cue": "unresponsive",
+       "sentence": "Completely unresponsive once they had my deposit."
+      },
+      {
+       "review_id": "sample_rev_00625",
+       "date": "2019-10-14",
+       "stars": 2,
+       "cue": "never called",
+       "sentence": "They never called back despite five voicemails."
+      }
+     ]
+    },
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0909,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00618",
+       "date": "2018-02-26",
+       "stars": 1,
+       "cue": "still leaking",
+       "sentence": "The work was sloppy and the pipe is still leaking again after they left."
+      }
+     ]
+    },
+    {
+     "aspect": "warranty",
+     "label": "Warranty / follow-through",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0909,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00620",
+       "date": "2018-05-09",
+       "stars": 1,
+       "cue": "denied my claim",
+       "sentence": "No one would stand behind their work and they denied my claim."
+      }
+     ]
+    },
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0909,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00624",
+       "date": "2019-07-23",
+       "stars": 2,
+       "cue": "no show",
+       "sentence": "The crew was a no show on the day of the appointment."
+      }
+     ]
+    },
+    {
+     "aspect": "pricing",
+     "label": "Pricing / billing",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0909,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00619",
+       "date": "2018-04-07",
+       "stars": 4,
+       "cue": "quote doubled",
+       "sentence": "The quote doubled once they started, classic bait and switch."
+      }
+     ]
+    },
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0909,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00643",
+       "date": "2021-10-16",
+       "stars": 5,
+       "cue": "rude",
+       "sentence": "The technician was rude and dismissive when I asked questions."
+      }
+     ]
+    },
+    {
+     "aspect": "timeliness",
+     "label": "Timeliness / delays",
+     "severity": 0.3,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0909,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00642",
+       "date": "2021-10-10",
+       "stars": 2,
+       "cue": "hours late",
+       "sentence": "They showed up three hours late and then left early."
+      }
+     ]
+    }
+   ],
+   "action_manager": "ESCALATE: review the jobs behind the safety signals for permit, licence and hazard problems, contact the affected customers, and pause similar work until cleared.",
+   "action_homeowner": "Before hiring, verify the licence, insurance and permit history; ask for proof for any gas, electrical or structural work.",
+   "history": [
+    {
+     "year": 2017,
+     "n": 2,
+     "neg_rate": 0.0,
+     "avg_stars": 4.5
+    },
+    {
+     "year": 2018,
+     "n": 3,
+     "neg_rate": 1.0,
+     "avg_stars": 2.0
+    },
+    {
+     "year": 2019,
+     "n": 7,
+     "neg_rate": 0.5714,
+     "avg_stars": 2.43
+    },
+    {
+     "year": 2020,
+     "n": 7,
+     "neg_rate": 0.0,
+     "avg_stars": 4.14
+    },
+    {
+     "year": 2021,
+     "n": 10,
+     "neg_rate": 0.4,
+     "avg_stars": 3.7
+    },
+    {
+     "year": 2022,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_031",
+   "name": "Landscaping Pros 031 (SAMPLE)",
+   "trade": "Landscaping & Outdoor",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Landscaping",
+    "Tree Services"
+   ],
+   "eligible": true,
+   "n_reviews": 48,
+   "n_flagged": 13,
+   "avg_stars": 3.88,
+   "yelp_stars": 4.0,
+   "neg_rate": 0.2708,
+   "recent": {
+    "n": 28,
+    "neg_rate": 0.32142857142857145
+   },
+   "prior": {
+    "n": 12,
+    "neg_rate": 0.08333333333333333
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": 0.23809523809523814,
+    "p_value": 0.23069435409643135
+   },
+   "risk_score": 29.22,
+   "risk_tier": "Medium",
+   "rank": 20,
+   "safety_escalation": true,
+   "issues": [
+    {
+     "aspect": "safety",
+     "label": "Safety / licensing",
+     "severity": 1.0,
+     "n_reviews": 2,
+     "share_of_flagged": 0.1538,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00852",
+       "date": "2016-02-13",
+       "stars": 1,
+       "cue": "dangerous",
+       "sentence": "I smelled a gas leak after they left and it was dangerous."
+      },
+      {
+       "review_id": "sample_rev_00858",
+       "date": "2017-09-22",
+       "stars": 3,
+       "cue": "fire hazard",
+       "sentence": "Exposed wires and sparks from the panel, a real fire hazard."
+      }
+     ]
+    },
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 2,
+     "share_of_flagged": 0.1538,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00887",
+       "date": "2021-02-09",
+       "stars": 5,
+       "cue": "still leaking",
+       "sentence": "The work was sloppy and the pipe is still leaking again after they left."
+      },
+      {
+       "review_id": "sample_rev_00876",
+       "date": "2020-05-12",
+       "stars": 1,
+       "cue": "Shoddy",
+       "sentence": "Shoddy workmanship, I had to hire someone else to redo the whole job."
+      }
+     ]
+    },
+    {
+     "aspect": "warranty",
+     "label": "Warranty / follow-through",
+     "severity": 0.7,
+     "n_reviews": 2,
+     "share_of_flagged": 0.1538,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00881",
+       "date": "2020-11-02",
+       "stars": 2,
+       "cue": "denied my claim",
+       "sentence": "No one would stand behind their work and they denied my claim."
+      },
+      {
+       "review_id": "sample_rev_00853",
+       "date": "2016-03-26",
+       "stars": 5,
+       "cue": "refused to honor",
+       "sentence": "They refused to honor the warranty when it broke a week later."
+      }
+     ]
+    },
+    {
+     "aspect": "pricing",
+     "label": "Pricing / billing",
+     "severity": 0.6,
+     "n_reviews": 2,
+     "share_of_flagged": 0.1538,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00869",
+       "date": "2019-08-22",
+       "stars": 1,
+       "cue": "Price gouging",
+       "sentence": "Price gouging after they said it was an emergency."
+      },
+      {
+       "review_id": "sample_rev_00872",
+       "date": "2020-03-09",
+       "stars": 2,
+       "cue": "rip off",
+       "sentence": "Hidden fees everywhere, it felt like a complete rip off."
+      }
+     ]
+    },
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 2,
+     "share_of_flagged": 0.1538,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00874",
+       "date": "2020-03-23",
+       "stars": 5,
+       "cue": "yelling at",
+       "sentence": "Very unprofessional, he was yelling at his helper in my driveway."
+      },
+      {
+       "review_id": "sample_rev_00889",
+       "date": "2021-02-14",
+       "stars": 1,
+       "cue": "left trash",
+       "sentence": "They left trash all over my yard and were disrespectful."
+      }
+     ]
+    },
+    {
+     "aspect": "timeliness",
+     "label": "Timeliness / delays",
+     "severity": 0.3,
+     "n_reviews": 2,
+     "share_of_flagged": 0.1538,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00892",
+       "date": "2021-04-09",
+       "stars": 3,
+       "cue": "hours late",
+       "sentence": "They showed up three hours late and then left early."
+      },
+      {
+       "review_id": "sample_rev_00886",
+       "date": "2021-01-18",
+       "stars": 5,
+       "cue": "Constant delays",
+       "sentence": "Constant delays, they rescheduled four times."
+      }
+     ]
+    },
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0769,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00898",
+       "date": "2021-10-24",
+       "stars": 3,
+       "cue": "never showed",
+       "sentence": "They never showed up and did not even call to cancel."
+      }
+     ]
+    },
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 1,
+     "share_of_flagged": 0.0769,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00898",
+       "date": "2021-10-24",
+       "stars": 3,
+       "cue": "not even call",
+       "sentence": "They never showed up and did not even call to cancel."
+      }
+     ]
+    }
+   ],
+   "action_manager": "ESCALATE: review the jobs behind the safety signals for permit, licence and hazard problems, contact the affected customers, and pause similar work until cleared.",
+   "action_homeowner": "Before hiring, verify the licence, insurance and permit history; ask for proof for any gas, electrical or structural work.",
+   "history": [
+    {
+     "year": 2016,
+     "n": 5,
+     "neg_rate": 0.4,
+     "avg_stars": 3.0
+    },
+    {
+     "year": 2017,
+     "n": 2,
+     "neg_rate": 0.5,
+     "avg_stars": 3.5
+    },
+    {
+     "year": 2018,
+     "n": 5,
+     "neg_rate": 0.0,
+     "avg_stars": 4.6
+    },
+    {
+     "year": 2019,
+     "n": 8,
+     "neg_rate": 0.125,
+     "avg_stars": 4.38
+    },
+    {
+     "year": 2020,
+     "n": 12,
+     "neg_rate": 0.3333,
+     "avg_stars": 3.75
+    },
+    {
+     "year": 2021,
+     "n": 16,
+     "neg_rate": 0.3125,
+     "avg_stars": 3.81
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_036",
+   "name": "Movers Pros 036 (SAMPLE)",
+   "trade": "Movers",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Movers",
+    "Packing Services"
+   ],
+   "eligible": true,
+   "n_reviews": 36,
+   "n_flagged": 7,
+   "avg_stars": 3.75,
+   "yelp_stars": 4.0,
+   "neg_rate": 0.1944,
+   "recent": {
+    "n": 14,
+    "neg_rate": 0.2857142857142857
+   },
+   "prior": {
+    "n": 11,
+    "neg_rate": 0.09090909090909091
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": 0.1948051948051948,
+    "p_value": 0.3405797101449275
+   },
+   "risk_score": 26.63,
+   "risk_tier": "Low",
+   "rank": 21,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "pricing",
+     "label": "Pricing / billing",
+     "severity": 0.6,
+     "n_reviews": 2,
+     "share_of_flagged": 0.2857,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_01077",
+       "date": "2022-01-16",
+       "stars": 1,
+       "cue": "rip off",
+       "sentence": "Hidden fees everywhere, it felt like a complete rip off."
+      },
+      {
+       "review_id": "sample_rev_01064",
+       "date": "2020-01-22",
+       "stars": 2,
+       "cue": "rip off",
+       "sentence": "Hidden fees everywhere, it felt like a complete rip off."
+      }
+     ]
+    },
+    {
+     "aspect": "safety",
+     "label": "Safety / licensing",
+     "severity": 1.0,
+     "n_reviews": 1,
+     "share_of_flagged": 0.1429,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_01042",
+       "date": "2015-05-29",
+       "stars": 3,
+       "cue": "unlicensed",
+       "sentence": "The unlicensed crew left the roof unsafe and water came through."
+      }
+     ]
+    },
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.1429,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_01066",
+       "date": "2020-06-18",
+       "stars": 2,
+       "cue": "not fix",
+       "sentence": "The repair did not fix the problem and they left a huge mess behind."
+      }
+     ]
+    },
+    {
+     "aspect": "warranty",
+     "label": "Warranty / follow-through",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.1429,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_01048",
+       "date": "2017-10-10",
+       "stars": 4,
+       "cue": "refused to honor",
+       "sentence": "They refused to honor the warranty when it broke a week later."
+      }
+     ]
+    },
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.1429,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_01060",
+       "date": "2019-11-04",
+       "stars": 2,
+       "cue": "missed appointments",
+       "sentence": "After two missed appointments I gave up on them."
+      }
+     ]
+    },
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 1,
+     "share_of_flagged": 0.1429,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_01066",
+       "date": "2020-06-18",
+       "stars": 2,
+       "cue": "left a huge mess",
+       "sentence": "The repair did not fix the problem and they left a huge mess behind."
+      }
+     ]
+    },
+    {
+     "aspect": "timeliness",
+     "label": "Timeliness / delays",
+     "severity": 0.3,
+     "n_reviews": 1,
+     "share_of_flagged": 0.1429,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_01071",
+       "date": "2021-02-21",
+       "stars": 1,
+       "cue": "Constant delays",
+       "sentence": "Constant delays, they rescheduled four times."
+      }
+     ]
+    }
+   ],
+   "action_manager": "No recurring issue detected — keep routine monitoring.",
+   "action_homeowner": "No recurring issue detected in reviews.",
+   "history": [
+    {
+     "year": 2015,
+     "n": 1,
+     "neg_rate": 1.0,
+     "avg_stars": 3.0
+    },
+    {
+     "year": 2017,
+     "n": 9,
+     "neg_rate": 0.1111,
+     "avg_stars": 4.67
+    },
+    {
+     "year": 2018,
+     "n": 4,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2019,
+     "n": 7,
+     "neg_rate": 0.1429,
+     "avg_stars": 3.57
+    },
+    {
+     "year": 2020,
+     "n": 7,
+     "neg_rate": 0.2857,
+     "avg_stars": 3.29
+    },
+    {
+     "year": 2021,
+     "n": 7,
+     "neg_rate": 0.1429,
+     "avg_stars": 3.0
+    },
+    {
+     "year": 2022,
+     "n": 1,
+     "neg_rate": 1.0,
+     "avg_stars": 1.0
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_038",
+   "name": "Home Pros 038 (SAMPLE)",
+   "trade": "Cleaning",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Home Cleaning",
+    "Carpet Cleaning"
+   ],
+   "eligible": true,
+   "n_reviews": 35,
+   "n_flagged": 6,
+   "avg_stars": 4.17,
+   "yelp_stars": 4.0,
+   "neg_rate": 0.1714,
+   "recent": {
+    "n": 22,
+    "neg_rate": 0.18181818181818182
+   },
+   "prior": {
+    "n": 10,
+    "neg_rate": 0.0
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": 0.18181818181818182,
+    "p_value": 0.2826751946607341
+   },
+   "risk_score": 26.13,
+   "risk_tier": "Low",
+   "rank": 22,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "timeliness",
+     "label": "Timeliness / delays",
+     "severity": 0.3,
+     "n_reviews": 3,
+     "share_of_flagged": 0.5,
+     "recurring": true,
+     "evidence": [
+      {
+       "review_id": "sample_rev_01143",
+       "date": "2022-01-15",
+       "stars": 1,
+       "cue": "waited all day",
+       "sentence": "I waited all day and the technician arrived after dark."
+      },
+      {
+       "review_id": "sample_rev_01135",
+       "date": "2021-04-13",
+       "stars": 2,
+       "cue": "waited all day",
+       "sentence": "I waited all day and the technician arrived after dark."
+      }
+     ]
+    },
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 2,
+     "share_of_flagged": 0.3333,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_01140",
+       "date": "2021-12-09",
+       "stars": 3,
+       "cue": "Terrible attitude",
+       "sentence": "Terrible attitude and a dirty truck full of garbage."
+      },
+      {
+       "review_id": "sample_rev_01109",
+       "date": "2017-08-05",
+       "stars": 1,
+       "cue": "rude",
+       "sentence": "The technician was rude and dismissive when I asked questions."
+      }
+     ]
+    },
+    {
+     "aspect": "safety",
+     "label": "Safety / licensing",
+     "severity": 1.0,
+     "n_reviews": 1,
+     "share_of_flagged": 0.1667,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_01123",
+       "date": "2020-03-01",
+       "stars": 3,
+       "cue": "dangerous",
+       "sentence": "I smelled a gas leak after they left and it was dangerous."
+      }
+     ]
+    }
+   ],
+   "action_manager": "Review scheduling buffers and arrival windows; send arrival-time notifications to customers.",
+   "action_homeowner": "Agree a start and finish date in writing and ask what happens if it slips.",
+   "history": [
+    {
+     "year": 2016,
+     "n": 1,
+     "neg_rate": 1.0,
+     "avg_stars": 2.0
+    },
+    {
+     "year": 2017,
+     "n": 2,
+     "neg_rate": 0.5,
+     "avg_stars": 3.0
+    },
+    {
+     "year": 2018,
+     "n": 2,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2019,
+     "n": 8,
+     "neg_rate": 0.0,
+     "avg_stars": 4.5
+    },
+    {
+     "year": 2020,
+     "n": 10,
+     "neg_rate": 0.1,
+     "avg_stars": 4.6
+    },
+    {
+     "year": 2021,
+     "n": 10,
+     "neg_rate": 0.2,
+     "avg_stars": 4.0
+    },
+    {
+     "year": 2022,
+     "n": 2,
+     "neg_rate": 0.5,
+     "avg_stars": 3.0
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_037",
+   "name": "General Pros 037 (SAMPLE)",
+   "trade": "Contracting & Remodeling",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Contractors",
+    "Handyman"
+   ],
+   "eligible": true,
+   "n_reviews": 30,
+   "n_flagged": 5,
+   "avg_stars": 3.8,
+   "yelp_stars": 4.0,
+   "neg_rate": 0.1667,
+   "recent": {
+    "n": 16,
+    "neg_rate": 0.25
+   },
+   "prior": {
+    "n": 10,
+    "neg_rate": 0.1
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": 0.15,
+    "p_value": 0.6169048342961385
+   },
+   "risk_score": 20.32,
+   "risk_tier": "Low",
+   "rank": 23,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "timeliness",
+     "label": "Timeliness / delays",
+     "severity": 0.3,
+     "n_reviews": 2,
+     "share_of_flagged": 0.4,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_01099",
+       "date": "2021-04-14",
+       "stars": 2,
+       "cue": "Constant delays",
+       "sentence": "Constant delays, they rescheduled four times."
+      },
+      {
+       "review_id": "sample_rev_01087",
+       "date": "2019-02-15",
+       "stars": 1,
+       "cue": "waited all day",
+       "sentence": "I waited all day and the technician arrived after dark."
+      }
+     ]
+    },
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.2,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_01102",
+       "date": "2021-06-26",
+       "stars": 5,
+       "cue": "Shoddy",
+       "sentence": "Shoddy workmanship, I had to hire someone else to redo the whole job."
+      }
+     ]
+    },
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.2,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_01098",
+       "date": "2021-04-07",
+       "stars": 2,
+       "cue": "no show",
+       "sentence": "The crew was a no show on the day of the appointment."
+      }
+     ]
+    },
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 1,
+     "share_of_flagged": 0.2,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_01095",
+       "date": "2020-09-25",
+       "stars": 1,
+       "cue": "unresponsive",
+       "sentence": "Completely unresponsive once they had my deposit."
+      }
+     ]
+    }
+   ],
+   "action_manager": "No recurring issue detected — keep routine monitoring.",
+   "action_homeowner": "No recurring issue detected in reviews.",
+   "history": [
+    {
+     "year": 2016,
+     "n": 2,
+     "neg_rate": 0.0,
+     "avg_stars": 4.5
+    },
+    {
+     "year": 2017,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2018,
+     "n": 5,
+     "neg_rate": 0.0,
+     "avg_stars": 4.6
+    },
+    {
+     "year": 2019,
+     "n": 6,
+     "neg_rate": 0.1667,
+     "avg_stars": 3.33
+    },
+    {
+     "year": 2020,
+     "n": 5,
+     "neg_rate": 0.2,
+     "avg_stars": 3.4
+    },
+    {
+     "year": 2021,
+     "n": 11,
+     "neg_rate": 0.2727,
+     "avg_stars": 3.64
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_035",
+   "name": "Roofing Pros 035 (SAMPLE)",
+   "trade": "Roofing",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Roofing",
+    "Contractors"
+   ],
+   "eligible": true,
+   "n_reviews": 60,
+   "n_flagged": 7,
+   "avg_stars": 4.42,
+   "yelp_stars": 4.5,
+   "neg_rate": 0.1167,
+   "recent": {
+    "n": 31,
+    "neg_rate": 0.0967741935483871
+   },
+   "prior": {
+    "n": 16,
+    "neg_rate": 0.0625
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": 0.034274193548387094,
+    "p_value": 1.0
+   },
+   "risk_score": 20.15,
+   "risk_tier": "Low",
+   "rank": 24,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 2,
+     "share_of_flagged": 0.2857,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00986",
+       "date": "2016-09-01",
+       "stars": 3,
+       "cue": "still leaking",
+       "sentence": "The work was sloppy and the pipe is still leaking again after they left."
+      },
+      {
+       "review_id": "sample_rev_00993",
+       "date": "2017-08-17",
+       "stars": 1,
+       "cue": "not fix",
+       "sentence": "The repair did not fix the problem and they left a huge mess behind."
+      }
+     ]
+    },
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 2,
+     "share_of_flagged": 0.2857,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_01021",
+       "date": "2020-12-30",
+       "stars": 3,
+       "cue": "Terrible attitude",
+       "sentence": "Terrible attitude and a dirty truck full of garbage."
+      },
+      {
+       "review_id": "sample_rev_00993",
+       "date": "2017-08-17",
+       "stars": 1,
+       "cue": "left a huge mess",
+       "sentence": "The repair did not fix the problem and they left a huge mess behind."
+      }
+     ]
+    },
+    {
+     "aspect": "safety",
+     "label": "Safety / licensing",
+     "severity": 1.0,
+     "n_reviews": 1,
+     "share_of_flagged": 0.1429,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_01006",
+       "date": "2019-05-27",
+       "stars": 2,
+       "cue": "fire hazard",
+       "sentence": "Exposed wires and sparks from the panel, a real fire hazard."
+      }
+     ]
+    },
+    {
+     "aspect": "warranty",
+     "label": "Warranty / follow-through",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.1429,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00982",
+       "date": "2015-05-30",
+       "stars": 2,
+       "cue": "denied my claim",
+       "sentence": "No one would stand behind their work and they denied my claim."
+      }
+     ]
+    },
+    {
+     "aspect": "pricing",
+     "label": "Pricing / billing",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.1429,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_01032",
+       "date": "2021-07-20",
+       "stars": 5,
+       "cue": "rip off",
+       "sentence": "Hidden fees everywhere, it felt like a complete rip off."
+      }
+     ]
+    },
+    {
+     "aspect": "timeliness",
+     "label": "Timeliness / delays",
+     "severity": 0.3,
+     "n_reviews": 1,
+     "share_of_flagged": 0.1429,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_01025",
+       "date": "2021-02-28",
+       "stars": 1,
+       "cue": "weeks behind",
+       "sentence": "The project took forever and was weeks behind schedule."
+      }
+     ]
+    }
+   ],
+   "action_manager": "No recurring issue detected — keep routine monitoring.",
+   "action_homeowner": "No recurring issue detected in reviews.",
+   "history": [
+    {
+     "year": 2015,
+     "n": 2,
+     "neg_rate": 0.5,
+     "avg_stars": 3.5
+    },
+    {
+     "year": 2016,
+     "n": 5,
+     "neg_rate": 0.2,
+     "avg_stars": 4.6
+    },
+    {
+     "year": 2017,
+     "n": 6,
+     "neg_rate": 0.1667,
+     "avg_stars": 4.17
+    },
+    {
+     "year": 2018,
+     "n": 6,
+     "neg_rate": 0.0,
+     "avg_stars": 4.67
+    },
+    {
+     "year": 2019,
+     "n": 10,
+     "neg_rate": 0.1,
+     "avg_stars": 4.4
+    },
+    {
+     "year": 2020,
+     "n": 11,
+     "neg_rate": 0.0909,
+     "avg_stars": 4.27
+    },
+    {
+     "year": 2021,
+     "n": 19,
+     "neg_rate": 0.1053,
+     "avg_stars": 4.58
+    },
+    {
+     "year": 2022,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 4.0
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_014",
+   "name": "Home Pros 014 (SAMPLE)",
+   "trade": "Cleaning",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Home Cleaning",
+    "Carpet Cleaning"
+   ],
+   "eligible": true,
+   "n_reviews": 30,
+   "n_flagged": 3,
+   "avg_stars": 4.3,
+   "yelp_stars": 4.5,
+   "neg_rate": 0.1,
+   "recent": {
+    "n": 17,
+    "neg_rate": 0.058823529411764705
+   },
+   "prior": {
+    "n": 9,
+    "neg_rate": 0.1111111111111111
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": -0.0522875816993464,
+    "p_value": 1.0
+   },
+   "risk_score": 19.35,
+   "risk_tier": "Low",
+   "rank": 25,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 2,
+     "share_of_flagged": 0.6667,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00394",
+       "date": "2021-04-05",
+       "stars": 5,
+       "cue": "ignored my messages",
+       "sentence": "The office ignored my messages and nobody returned my calls."
+      },
+      {
+       "review_id": "sample_rev_00374",
+       "date": "2017-09-27",
+       "stars": 5,
+       "cue": "not even call",
+       "sentence": "They never showed up and did not even call to cancel."
+      }
+     ]
+    },
+    {
+     "aspect": "safety",
+     "label": "Safety / licensing",
+     "severity": 1.0,
+     "n_reviews": 1,
+     "share_of_flagged": 0.3333,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00376",
+       "date": "2018-03-05",
+       "stars": 3,
+       "cue": "unlicensed",
+       "sentence": "The unlicensed crew left the roof unsafe and water came through."
+      }
+     ]
+    },
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.3333,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00374",
+       "date": "2017-09-27",
+       "stars": 5,
+       "cue": "never showed",
+       "sentence": "They never showed up and did not even call to cancel."
+      }
+     ]
+    }
+   ],
+   "action_manager": "No recurring issue detected — keep routine monitoring.",
+   "action_homeowner": "No recurring issue detected in reviews.",
+   "history": [
+    {
+     "year": 2016,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 4.0
+    },
+    {
+     "year": 2017,
+     "n": 3,
+     "neg_rate": 0.3333,
+     "avg_stars": 4.33
+    },
+    {
+     "year": 2018,
+     "n": 4,
+     "neg_rate": 0.25,
+     "avg_stars": 4.25
+    },
+    {
+     "year": 2019,
+     "n": 5,
+     "neg_rate": 0.0,
+     "avg_stars": 4.2
+    },
+    {
+     "year": 2020,
+     "n": 4,
+     "neg_rate": 0.0,
+     "avg_stars": 4.5
+    },
+    {
+     "year": 2021,
+     "n": 11,
+     "neg_rate": 0.0909,
+     "avg_stars": 4.27
+    },
+    {
+     "year": 2022,
+     "n": 2,
+     "neg_rate": 0.0,
+     "avg_stars": 4.5
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_002",
+   "name": "HVAC Pros 002 (SAMPLE)",
+   "trade": "HVAC",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Heating & Air Conditioning/HVAC"
+   ],
+   "eligible": true,
+   "n_reviews": 34,
+   "n_flagged": 3,
+   "avg_stars": 4.32,
+   "yelp_stars": 4.5,
+   "neg_rate": 0.0882,
+   "recent": {
+    "n": 16,
+    "neg_rate": 0.125
+   },
+   "prior": {
+    "n": 9,
+    "neg_rate": 0.0
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": 0.125,
+    "p_value": 0.5200000000000001
+   },
+   "risk_score": 16.69,
+   "risk_tier": "Low",
+   "rank": 26,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.3333,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00096",
+       "date": "2020-10-18",
+       "stars": 4,
+       "cue": "unfinished",
+       "sentence": "He left the job unfinished and never came back."
+      }
+     ]
+    },
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.3333,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00096",
+       "date": "2020-10-18",
+       "stars": 4,
+       "cue": "left the job unfinished",
+       "sentence": "He left the job unfinished and never came back."
+      }
+     ]
+    },
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 1,
+     "share_of_flagged": 0.3333,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00101",
+       "date": "2021-09-01",
+       "stars": 2,
+       "cue": "Zero communication",
+       "sentence": "Zero communication and no response to my emails."
+      }
+     ]
+    },
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 1,
+     "share_of_flagged": 0.3333,
+     "recurring": false,
+     "evidence": [
+      {
+       "review_id": "sample_rev_00078",
+       "date": "2017-05-22",
+       "stars": 3,
+       "cue": "left trash",
+       "sentence": "They left trash all over my yard and were disrespectful."
+      }
+     ]
+    }
+   ],
+   "action_manager": "No recurring issue detected — keep routine monitoring.",
+   "action_homeowner": "No recurring issue detected in reviews.",
+   "history": [
+    {
+     "year": 2016,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 4.0
+    },
+    {
+     "year": 2017,
+     "n": 7,
+     "neg_rate": 0.1429,
+     "avg_stars": 4.14
+    },
+    {
+     "year": 2018,
+     "n": 5,
+     "neg_rate": 0.0,
+     "avg_stars": 4.6
+    },
+    {
+     "year": 2019,
+     "n": 4,
+     "neg_rate": 0.0,
+     "avg_stars": 4.75
+    },
+    {
+     "year": 2020,
+     "n": 8,
+     "neg_rate": 0.125,
+     "avg_stars": 4.12
+    },
+    {
+     "year": 2021,
+     "n": 8,
+     "neg_rate": 0.125,
+     "avg_stars": 4.25
+    },
+    {
+     "year": 2022,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_003",
+   "name": "Roofing Pros 003 (SAMPLE)",
+   "trade": "Roofing",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Roofing",
+    "Contractors"
+   ],
+   "eligible": false,
+   "n_reviews": 8,
+   "n_flagged": 1,
+   "avg_stars": 4.5,
+   "yelp_stars": 4.5,
+   "neg_rate": 0.125,
+   "recent": {
+    "n": 3,
+    "neg_rate": null
+   },
+   "prior": {
+    "n": 3,
+    "neg_rate": null
+   },
+   "trend": {
+    "direction": "insufficient data",
+    "delta": null,
+    "p_value": null
+   },
+   "risk_score": null,
+   "risk_tier": "Insufficient data",
+   "rank": null,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "timeliness",
+     "label": "Timeliness / delays",
+     "severity": 0.3,
+     "n_reviews": 1,
+     "share_of_flagged": 1.0,
+     "recurring": false,
+     "evidence": []
+    }
+   ],
+   "action_manager": "Not enough reviews to rate — collect more feedback before acting.",
+   "action_homeowner": "Not enough reviews to compare this provider reliably.",
+   "history": [
+    {
+     "year": 2016,
+     "n": 1,
+     "neg_rate": 1.0,
+     "avg_stars": 2.0
+    },
+    {
+     "year": 2017,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2018,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2019,
+     "n": 2,
+     "neg_rate": 0.0,
+     "avg_stars": 4.5
+    },
+    {
+     "year": 2020,
+     "n": 2,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2021,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_004",
+   "name": "Movers Pros 004 (SAMPLE)",
+   "trade": "Movers",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Movers",
+    "Packing Services"
+   ],
+   "eligible": false,
+   "n_reviews": 14,
+   "n_flagged": 8,
+   "avg_stars": 2.57,
+   "yelp_stars": 2.5,
+   "neg_rate": 0.5714,
+   "recent": {
+    "n": 7,
+    "neg_rate": 0.5714285714285714
+   },
+   "prior": {
+    "n": 4,
+    "neg_rate": null
+   },
+   "trend": {
+    "direction": "insufficient data",
+    "delta": null,
+    "p_value": null
+   },
+   "risk_score": null,
+   "risk_tier": "Insufficient data",
+   "rank": null,
+   "safety_escalation": true,
+   "issues": [
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 3,
+     "share_of_flagged": 0.375,
+     "recurring": true,
+     "evidence": []
+    },
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 2,
+     "share_of_flagged": 0.25,
+     "recurring": false,
+     "evidence": []
+    },
+    {
+     "aspect": "safety",
+     "label": "Safety / licensing",
+     "severity": 1.0,
+     "n_reviews": 1,
+     "share_of_flagged": 0.125,
+     "recurring": false,
+     "evidence": []
+    },
+    {
+     "aspect": "warranty",
+     "label": "Warranty / follow-through",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.125,
+     "recurring": false,
+     "evidence": []
+    },
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.125,
+     "recurring": false,
+     "evidence": []
+    },
+    {
+     "aspect": "pricing",
+     "label": "Pricing / billing",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.125,
+     "recurring": false,
+     "evidence": []
+    }
+   ],
+   "action_manager": "Not enough reviews to rate — collect more feedback before acting.",
+   "action_homeowner": "Not enough reviews to compare this provider reliably.",
+   "history": [
+    {
+     "year": 2016,
+     "n": 2,
+     "neg_rate": 0.5,
+     "avg_stars": 3.0
+    },
+    {
+     "year": 2017,
+     "n": 1,
+     "neg_rate": 1.0,
+     "avg_stars": 1.0
+    },
+    {
+     "year": 2018,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2019,
+     "n": 2,
+     "neg_rate": 0.5,
+     "avg_stars": 2.5
+    },
+    {
+     "year": 2020,
+     "n": 3,
+     "neg_rate": 1.0,
+     "avg_stars": 2.0
+    },
+    {
+     "year": 2021,
+     "n": 5,
+     "neg_rate": 0.4,
+     "avg_stars": 2.6
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_007",
+   "name": "Landscaping Pros 007 (SAMPLE)",
+   "trade": "Landscaping & Outdoor",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Landscaping",
+    "Tree Services"
+   ],
+   "eligible": false,
+   "n_reviews": 14,
+   "n_flagged": 1,
+   "avg_stars": 4.57,
+   "yelp_stars": 4.5,
+   "neg_rate": 0.0714,
+   "recent": {
+    "n": 5,
+    "neg_rate": 0.0
+   },
+   "prior": {
+    "n": 5,
+    "neg_rate": 0.2
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": -0.2,
+    "p_value": 1.0
+   },
+   "risk_score": null,
+   "risk_tier": "Insufficient data",
+   "rank": null,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "timeliness",
+     "label": "Timeliness / delays",
+     "severity": 0.3,
+     "n_reviews": 1,
+     "share_of_flagged": 1.0,
+     "recurring": false,
+     "evidence": []
+    }
+   ],
+   "action_manager": "Not enough reviews to rate — collect more feedback before acting.",
+   "action_homeowner": "Not enough reviews to compare this provider reliably.",
+   "history": [
+    {
+     "year": 2016,
+     "n": 3,
+     "neg_rate": 0.0,
+     "avg_stars": 4.67
+    },
+    {
+     "year": 2017,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2018,
+     "n": 2,
+     "neg_rate": 0.5,
+     "avg_stars": 3.0
+    },
+    {
+     "year": 2019,
+     "n": 3,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2020,
+     "n": 2,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2021,
+     "n": 3,
+     "neg_rate": 0.0,
+     "avg_stars": 4.67
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_009",
+   "name": "Electricians Pros 009 (SAMPLE)",
+   "trade": "Electrical",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Electricians",
+    "Lighting Fixtures & Equipment"
+   ],
+   "eligible": false,
+   "n_reviews": 8,
+   "n_flagged": 4,
+   "avg_stars": 3.12,
+   "yelp_stars": 3.0,
+   "neg_rate": 0.5,
+   "recent": {
+    "n": 6,
+    "neg_rate": 0.5
+   },
+   "prior": {
+    "n": 1,
+    "neg_rate": null
+   },
+   "trend": {
+    "direction": "insufficient data",
+    "delta": null,
+    "p_value": null
+   },
+   "risk_score": null,
+   "risk_tier": "Insufficient data",
+   "rank": null,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "safety",
+     "label": "Safety / licensing",
+     "severity": 1.0,
+     "n_reviews": 1,
+     "share_of_flagged": 0.25,
+     "recurring": false,
+     "evidence": []
+    },
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.25,
+     "recurring": false,
+     "evidence": []
+    },
+    {
+     "aspect": "warranty",
+     "label": "Warranty / follow-through",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.25,
+     "recurring": false,
+     "evidence": []
+    },
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.25,
+     "recurring": false,
+     "evidence": []
+    },
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 1,
+     "share_of_flagged": 0.25,
+     "recurring": false,
+     "evidence": []
+    }
+   ],
+   "action_manager": "Not enough reviews to rate — collect more feedback before acting.",
+   "action_homeowner": "Not enough reviews to compare this provider reliably.",
+   "history": [
+    {
+     "year": 2017,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2018,
+     "n": 1,
+     "neg_rate": 1.0,
+     "avg_stars": 2.0
+    },
+    {
+     "year": 2020,
+     "n": 2,
+     "neg_rate": 0.5,
+     "avg_stars": 3.0
+    },
+    {
+     "year": 2021,
+     "n": 4,
+     "neg_rate": 0.5,
+     "avg_stars": 3.0
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_012",
+   "name": "Movers Pros 012 (SAMPLE)",
+   "trade": "Movers",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Movers",
+    "Packing Services"
+   ],
+   "eligible": false,
+   "n_reviews": 8,
+   "n_flagged": 4,
+   "avg_stars": 3.25,
+   "yelp_stars": 3.0,
+   "neg_rate": 0.5,
+   "recent": {
+    "n": 6,
+    "neg_rate": 0.5
+   },
+   "prior": {
+    "n": 2,
+    "neg_rate": null
+   },
+   "trend": {
+    "direction": "insufficient data",
+    "delta": null,
+    "p_value": null
+   },
+   "risk_score": null,
+   "risk_tier": "Insufficient data",
+   "rank": null,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 4,
+     "share_of_flagged": 1.0,
+     "recurring": true,
+     "evidence": []
+    },
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.25,
+     "recurring": false,
+     "evidence": []
+    }
+   ],
+   "action_manager": "Not enough reviews to rate — collect more feedback before acting.",
+   "action_homeowner": "Not enough reviews to compare this provider reliably.",
+   "history": [
+    {
+     "year": 2018,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2019,
+     "n": 1,
+     "neg_rate": 1.0,
+     "avg_stars": 2.0
+    },
+    {
+     "year": 2020,
+     "n": 1,
+     "neg_rate": 1.0,
+     "avg_stars": 1.0
+    },
+    {
+     "year": 2021,
+     "n": 4,
+     "neg_rate": 0.5,
+     "avg_stars": 3.25
+    },
+    {
+     "year": 2022,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_013",
+   "name": "General Pros 013 (SAMPLE)",
+   "trade": "Contracting & Remodeling",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Contractors",
+    "Handyman"
+   ],
+   "eligible": false,
+   "n_reviews": 8,
+   "n_flagged": 4,
+   "avg_stars": 4.0,
+   "yelp_stars": 4.0,
+   "neg_rate": 0.5,
+   "recent": {
+    "n": 4,
+    "neg_rate": null
+   },
+   "prior": {
+    "n": 3,
+    "neg_rate": null
+   },
+   "trend": {
+    "direction": "insufficient data",
+    "delta": null,
+    "p_value": null
+   },
+   "risk_score": null,
+   "risk_tier": "Insufficient data",
+   "rank": null,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 2,
+     "share_of_flagged": 0.5,
+     "recurring": false,
+     "evidence": []
+    },
+    {
+     "aspect": "warranty",
+     "label": "Warranty / follow-through",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.25,
+     "recurring": false,
+     "evidence": []
+    },
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.25,
+     "recurring": false,
+     "evidence": []
+    },
+    {
+     "aspect": "pricing",
+     "label": "Pricing / billing",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.25,
+     "recurring": false,
+     "evidence": []
+    }
+   ],
+   "action_manager": "Not enough reviews to rate — collect more feedback before acting.",
+   "action_homeowner": "Not enough reviews to compare this provider reliably.",
+   "history": [
+    {
+     "year": 2017,
+     "n": 1,
+     "neg_rate": 1.0,
+     "avg_stars": 2.0
+    },
+    {
+     "year": 2018,
+     "n": 1,
+     "neg_rate": 1.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2019,
+     "n": 2,
+     "neg_rate": 0.5,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2020,
+     "n": 2,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2021,
+     "n": 2,
+     "neg_rate": 0.5,
+     "avg_stars": 2.5
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_017",
+   "name": "Electricians Pros 017 (SAMPLE)",
+   "trade": "Electrical",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Electricians",
+    "Lighting Fixtures & Equipment"
+   ],
+   "eligible": false,
+   "n_reviews": 14,
+   "n_flagged": 1,
+   "avg_stars": 4.43,
+   "yelp_stars": 4.5,
+   "neg_rate": 0.0714,
+   "recent": {
+    "n": 8,
+    "neg_rate": 0.0
+   },
+   "prior": {
+    "n": 5,
+    "neg_rate": 0.2
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": -0.2,
+    "p_value": 0.38461538461538464
+   },
+   "risk_score": null,
+   "risk_tier": "Insufficient data",
+   "rank": null,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 1.0,
+     "recurring": false,
+     "evidence": []
+    },
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 1.0,
+     "recurring": false,
+     "evidence": []
+    }
+   ],
+   "action_manager": "Not enough reviews to rate — collect more feedback before acting.",
+   "action_homeowner": "Not enough reviews to compare this provider reliably.",
+   "history": [
+    {
+     "year": 2016,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2018,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 4.0
+    },
+    {
+     "year": 2019,
+     "n": 3,
+     "neg_rate": 0.3333,
+     "avg_stars": 3.33
+    },
+    {
+     "year": 2020,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2021,
+     "n": 7,
+     "neg_rate": 0.0,
+     "avg_stars": 4.71
+    },
+    {
+     "year": 2022,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_020",
+   "name": "Movers Pros 020 (SAMPLE)",
+   "trade": "Movers",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Movers",
+    "Packing Services"
+   ],
+   "eligible": false,
+   "n_reviews": 8,
+   "n_flagged": 2,
+   "avg_stars": 3.12,
+   "yelp_stars": 3.0,
+   "neg_rate": 0.25,
+   "recent": {
+    "n": 5,
+    "neg_rate": 0.2
+   },
+   "prior": {
+    "n": 3,
+    "neg_rate": null
+   },
+   "trend": {
+    "direction": "insufficient data",
+    "delta": null,
+    "p_value": null
+   },
+   "risk_score": null,
+   "risk_tier": "Insufficient data",
+   "rank": null,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 2,
+     "share_of_flagged": 1.0,
+     "recurring": false,
+     "evidence": []
+    }
+   ],
+   "action_manager": "Not enough reviews to rate — collect more feedback before acting.",
+   "action_homeowner": "Not enough reviews to compare this provider reliably.",
+   "history": [
+    {
+     "year": 2018,
+     "n": 1,
+     "neg_rate": 1.0,
+     "avg_stars": 1.0
+    },
+    {
+     "year": 2019,
+     "n": 2,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2020,
+     "n": 1,
+     "neg_rate": 1.0,
+     "avg_stars": 1.0
+    },
+    {
+     "year": 2021,
+     "n": 4,
+     "neg_rate": 0.0,
+     "avg_stars": 3.25
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_023",
+   "name": "Landscaping Pros 023 (SAMPLE)",
+   "trade": "Landscaping & Outdoor",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Landscaping",
+    "Tree Services"
+   ],
+   "eligible": false,
+   "n_reviews": 14,
+   "n_flagged": 7,
+   "avg_stars": 2.64,
+   "yelp_stars": 2.5,
+   "neg_rate": 0.5,
+   "recent": {
+    "n": 7,
+    "neg_rate": 0.42857142857142855
+   },
+   "prior": {
+    "n": 4,
+    "neg_rate": null
+   },
+   "trend": {
+    "direction": "insufficient data",
+    "delta": null,
+    "p_value": null
+   },
+   "risk_score": null,
+   "risk_tier": "Insufficient data",
+   "rank": null,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 2,
+     "share_of_flagged": 0.2857,
+     "recurring": false,
+     "evidence": []
+    },
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 2,
+     "share_of_flagged": 0.2857,
+     "recurring": false,
+     "evidence": []
+    },
+    {
+     "aspect": "safety",
+     "label": "Safety / licensing",
+     "severity": 1.0,
+     "n_reviews": 1,
+     "share_of_flagged": 0.1429,
+     "recurring": false,
+     "evidence": []
+    },
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.1429,
+     "recurring": false,
+     "evidence": []
+    },
+    {
+     "aspect": "warranty",
+     "label": "Warranty / follow-through",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.1429,
+     "recurring": false,
+     "evidence": []
+    },
+    {
+     "aspect": "pricing",
+     "label": "Pricing / billing",
+     "severity": 0.6,
+     "n_reviews": 1,
+     "share_of_flagged": 0.1429,
+     "recurring": false,
+     "evidence": []
+    },
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 1,
+     "share_of_flagged": 0.1429,
+     "recurring": false,
+     "evidence": []
+    }
+   ],
+   "action_manager": "Not enough reviews to rate — collect more feedback before acting.",
+   "action_homeowner": "Not enough reviews to compare this provider reliably.",
+   "history": [
+    {
+     "year": 2015,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2016,
+     "n": 1,
+     "neg_rate": 1.0,
+     "avg_stars": 1.0
+    },
+    {
+     "year": 2017,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 3.0
+    },
+    {
+     "year": 2018,
+     "n": 3,
+     "neg_rate": 0.6667,
+     "avg_stars": 2.0
+    },
+    {
+     "year": 2019,
+     "n": 1,
+     "neg_rate": 1.0,
+     "avg_stars": 1.0
+    },
+    {
+     "year": 2020,
+     "n": 2,
+     "neg_rate": 0.5,
+     "avg_stars": 3.0
+    },
+    {
+     "year": 2021,
+     "n": 5,
+     "neg_rate": 0.4,
+     "avg_stars": 3.0
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_025",
+   "name": "Electricians Pros 025 (SAMPLE)",
+   "trade": "Electrical",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Electricians",
+    "Lighting Fixtures & Equipment"
+   ],
+   "eligible": false,
+   "n_reviews": 14,
+   "n_flagged": 6,
+   "avg_stars": 3.57,
+   "yelp_stars": 3.5,
+   "neg_rate": 0.4286,
+   "recent": {
+    "n": 6,
+    "neg_rate": 0.5
+   },
+   "prior": {
+    "n": 8,
+    "neg_rate": 0.375
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": 0.125,
+    "p_value": 1.0
+   },
+   "risk_score": null,
+   "risk_tier": "Insufficient data",
+   "rank": null,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 6,
+     "share_of_flagged": 1.0,
+     "recurring": true,
+     "evidence": []
+    },
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 1,
+     "share_of_flagged": 0.1667,
+     "recurring": false,
+     "evidence": []
+    },
+    {
+     "aspect": "timeliness",
+     "label": "Timeliness / delays",
+     "severity": 0.3,
+     "n_reviews": 1,
+     "share_of_flagged": 0.1667,
+     "recurring": false,
+     "evidence": []
+    }
+   ],
+   "action_manager": "Not enough reviews to rate — collect more feedback before acting.",
+   "action_homeowner": "Not enough reviews to compare this provider reliably.",
+   "history": [
+    {
+     "year": 2018,
+     "n": 3,
+     "neg_rate": 0.0,
+     "avg_stars": 4.67
+    },
+    {
+     "year": 2019,
+     "n": 4,
+     "neg_rate": 0.5,
+     "avg_stars": 2.5
+    },
+    {
+     "year": 2020,
+     "n": 3,
+     "neg_rate": 1.0,
+     "avg_stars": 2.33
+    },
+    {
+     "year": 2021,
+     "n": 3,
+     "neg_rate": 0.3333,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2022,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 4.0
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_027",
+   "name": "Roofing Pros 027 (SAMPLE)",
+   "trade": "Roofing",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Roofing",
+    "Contractors"
+   ],
+   "eligible": false,
+   "n_reviews": 14,
+   "n_flagged": 5,
+   "avg_stars": 3.43,
+   "yelp_stars": 3.5,
+   "neg_rate": 0.3571,
+   "recent": {
+    "n": 7,
+    "neg_rate": 0.5714285714285714
+   },
+   "prior": {
+    "n": 4,
+    "neg_rate": null
+   },
+   "trend": {
+    "direction": "insufficient data",
+    "delta": null,
+    "p_value": null
+   },
+   "risk_score": null,
+   "risk_tier": "Insufficient data",
+   "rank": null,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "timeliness",
+     "label": "Timeliness / delays",
+     "severity": 0.3,
+     "n_reviews": 2,
+     "share_of_flagged": 0.4,
+     "recurring": false,
+     "evidence": []
+    },
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.2,
+     "recurring": false,
+     "evidence": []
+    },
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 1,
+     "share_of_flagged": 0.2,
+     "recurring": false,
+     "evidence": []
+    },
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 1,
+     "share_of_flagged": 0.2,
+     "recurring": false,
+     "evidence": []
+    }
+   ],
+   "action_manager": "Not enough reviews to rate — collect more feedback before acting.",
+   "action_homeowner": "Not enough reviews to compare this provider reliably.",
+   "history": [
+    {
+     "year": 2017,
+     "n": 3,
+     "neg_rate": 0.3333,
+     "avg_stars": 2.67
+    },
+    {
+     "year": 2018,
+     "n": 3,
+     "neg_rate": 0.0,
+     "avg_stars": 4.67
+    },
+    {
+     "year": 2019,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2020,
+     "n": 2,
+     "neg_rate": 0.5,
+     "avg_stars": 3.0
+    },
+    {
+     "year": 2021,
+     "n": 4,
+     "neg_rate": 0.5,
+     "avg_stars": 3.5
+    },
+    {
+     "year": 2022,
+     "n": 1,
+     "neg_rate": 1.0,
+     "avg_stars": 1.0
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_029",
+   "name": "General Pros 029 (SAMPLE)",
+   "trade": "Contracting & Remodeling",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Contractors",
+    "Handyman"
+   ],
+   "eligible": false,
+   "n_reviews": 8,
+   "n_flagged": 5,
+   "avg_stars": 2.62,
+   "yelp_stars": 2.5,
+   "neg_rate": 0.625,
+   "recent": {
+    "n": 5,
+    "neg_rate": 0.4
+   },
+   "prior": {
+    "n": 3,
+    "neg_rate": null
+   },
+   "trend": {
+    "direction": "insufficient data",
+    "delta": null,
+    "p_value": null
+   },
+   "risk_score": null,
+   "risk_tier": "Insufficient data",
+   "rank": null,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 5,
+     "share_of_flagged": 1.0,
+     "recurring": true,
+     "evidence": []
+    },
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 2,
+     "share_of_flagged": 0.4,
+     "recurring": false,
+     "evidence": []
+    },
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 1,
+     "share_of_flagged": 0.2,
+     "recurring": false,
+     "evidence": []
+    }
+   ],
+   "action_manager": "Not enough reviews to rate — collect more feedback before acting.",
+   "action_homeowner": "Not enough reviews to compare this provider reliably.",
+   "history": [
+    {
+     "year": 2018,
+     "n": 1,
+     "neg_rate": 1.0,
+     "avg_stars": 1.0
+    },
+    {
+     "year": 2019,
+     "n": 2,
+     "neg_rate": 1.0,
+     "avg_stars": 1.5
+    },
+    {
+     "year": 2020,
+     "n": 3,
+     "neg_rate": 0.3333,
+     "avg_stars": 3.67
+    },
+    {
+     "year": 2021,
+     "n": 2,
+     "neg_rate": 0.5,
+     "avg_stars": 3.0
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_033",
+   "name": "Electricians Pros 033 (SAMPLE)",
+   "trade": "Electrical",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Electricians",
+    "Lighting Fixtures & Equipment"
+   ],
+   "eligible": false,
+   "n_reviews": 14,
+   "n_flagged": 5,
+   "avg_stars": 3.29,
+   "yelp_stars": 3.5,
+   "neg_rate": 0.3571,
+   "recent": {
+    "n": 5,
+    "neg_rate": 0.6
+   },
+   "prior": {
+    "n": 8,
+    "neg_rate": 0.25
+   },
+   "trend": {
+    "direction": "stable",
+    "delta": 0.35,
+    "p_value": 0.29292929292929293
+   },
+   "risk_score": null,
+   "risk_tier": "Insufficient data",
+   "rank": null,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "reliability",
+     "label": "Reliability / no-shows",
+     "severity": 0.6,
+     "n_reviews": 4,
+     "share_of_flagged": 0.8,
+     "recurring": true,
+     "evidence": []
+    },
+    {
+     "aspect": "communication",
+     "label": "Communication",
+     "severity": 0.4,
+     "n_reviews": 4,
+     "share_of_flagged": 0.8,
+     "recurring": true,
+     "evidence": []
+    },
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 1,
+     "share_of_flagged": 0.2,
+     "recurring": false,
+     "evidence": []
+    }
+   ],
+   "action_manager": "Not enough reviews to rate — collect more feedback before acting.",
+   "action_homeowner": "Not enough reviews to compare this provider reliably.",
+   "history": [
+    {
+     "year": 2016,
+     "n": 1,
+     "neg_rate": 0.0,
+     "avg_stars": 5.0
+    },
+    {
+     "year": 2018,
+     "n": 2,
+     "neg_rate": 0.5,
+     "avg_stars": 4.0
+    },
+    {
+     "year": 2019,
+     "n": 5,
+     "neg_rate": 0.2,
+     "avg_stars": 3.0
+    },
+    {
+     "year": 2020,
+     "n": 3,
+     "neg_rate": 0.6667,
+     "avg_stars": 2.33
+    },
+    {
+     "year": 2021,
+     "n": 3,
+     "neg_rate": 0.3333,
+     "avg_stars": 3.67
+    }
+   ]
+  },
+  {
+   "business_id": "sample_biz_034",
+   "name": "HVAC Pros 034 (SAMPLE)",
+   "trade": "HVAC",
+   "city": "Tucson",
+   "state": "AZ",
+   "categories": [
+    "Home Services",
+    "Heating & Air Conditioning/HVAC"
+   ],
+   "eligible": false,
+   "n_reviews": 8,
+   "n_flagged": 7,
+   "avg_stars": 1.75,
+   "yelp_stars": 2.0,
+   "neg_rate": 0.875,
+   "recent": {
+    "n": 6,
+    "neg_rate": 0.8333333333333334
+   },
+   "prior": {
+    "n": 2,
+    "neg_rate": null
+   },
+   "trend": {
+    "direction": "insufficient data",
+    "delta": null,
+    "p_value": null
+   },
+   "risk_score": null,
+   "risk_tier": "Insufficient data",
+   "rank": null,
+   "safety_escalation": false,
+   "issues": [
+    {
+     "aspect": "workmanship",
+     "label": "Workmanship / quality",
+     "severity": 0.7,
+     "n_reviews": 7,
+     "share_of_flagged": 1.0,
+     "recurring": true,
+     "evidence": []
+    },
+    {
+     "aspect": "timeliness",
+     "label": "Timeliness / delays",
+     "severity": 0.3,
+     "n_reviews": 7,
+     "share_of_flagged": 1.0,
+     "recurring": true,
+     "evidence": []
+    },
+    {
+     "aspect": "professionalism",
+     "label": "Professionalism / conduct",
+     "severity": 0.4,
+     "n_reviews": 3,
+     "share_of_flagged": 0.4286,
+     "recurring": true,
+     "evidence": []
+    }
+   ],
+   "action_manager": "Not enough reviews to rate — collect more feedback before acting.",
+   "action_homeowner": "Not enough reviews to compare this provider reliably.",
+   "history": [
+    {
+     "year": 2018,
+     "n": 1,
+     "neg_rate": 1.0,
+     "avg_stars": 1.0
+    },
+    {
+     "year": 2019,
+     "n": 1,
+     "neg_rate": 1.0,
+     "avg_stars": 1.0
+    },
+    {
+     "year": 2020,
+     "n": 6,
+     "neg_rate": 0.8333,
+     "avg_stars": 2.0
+    }
+   ]
+  }
+ ]
+}

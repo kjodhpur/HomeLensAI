@@ -1,0 +1,36 @@
+# ---- Yelp data: never commit (Yelp Open Dataset terms prohibit redistribution) ----
+data/raw/
+data/processed/
+data/cache/
+data/annotation/
+*.parquet
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+*.egg-info/
+
+# ---- Node / Next.js ----
+node_modules/
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+
+# ---- Secrets / local config / Vercel ----
+.env
+.env.*
+!.env.example
+.vercel/
+
+# ---- Real (non-sample) artifacts copied into the backend by scripts/sync_artifacts.py ----
+backend/app/data/*.json
+
+# ---- scratch notebooks ----
+notebooks/_*.ipynb
+.DS_Store

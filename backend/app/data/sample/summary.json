@@ -1,0 +1,225 @@
+{
+ "meta": {
+  "generated_at": "2026-10-06T06:07:34Z",
+  "data_mode": "sample",
+  "reference_date": "2022-01-17",
+  "recent_months": 24,
+  "min_reviews": 20,
+  "recurrence_min": 3,
+  "risk_threshold": 0.7276,
+  "scorer": "tfidf_logreg_oof",
+  "score_weights": {
+   "neg_rate_lb": 0.35,
+   "recent_neg_rate": 0.25,
+   "severity": 0.25,
+   "recurrence": 0.15
+  },
+  "n_reviews": 1166,
+  "n_providers_total": 40,
+  "n_providers_eligible": 26,
+  "disclaimer": "Complaint signals detected in customer reviews. Reviews are unverified customer allegations, not findings of wrongdoing."
+ },
+ "dataset": {
+  "n_reviews": 1166,
+  "n_providers": 40,
+  "date_min": "2015-05-16",
+  "date_max": "2022-01-17",
+  "star_distribution": {
+   "1": 238,
+   "2": 136,
+   "3": 111,
+   "4": 205,
+   "5": 476
+  },
+  "median_words": 29.0
+ },
+ "tiers": {
+  "Low": 12,
+  "High": 7,
+  "Medium": 7
+ },
+ "trend_counts": {
+  "stable": 22,
+  "worsening": 2,
+  "improving": 2
+ },
+ "models": [
+  {
+   "model": "VADER",
+   "operating point": "default",
+   "macro F1": 0.7948387096774194,
+   "weighted F1": 0.8200121728545343,
+   "risk precision": 0.8918918918918919,
+   "risk recall": 0.5892857142857143,
+   "risk F1": 0.7096774193548387,
+   "no-risk precision": 0.8114754098360656,
+   "no-risk recall": 0.9611650485436893,
+   "ROC AUC": 0.9426144244105409,
+   "PR AUC": 0.8768233493605628
+  },
+  {
+   "model": "VADER",
+   "operating point": "recall target ≥0.90",
+   "macro F1": 0.8599236481100809,
+   "weighted F1": 0.8698194736104724,
+   "risk precision": 0.7692307692307693,
+   "risk recall": 0.8928571428571429,
+   "risk F1": 0.8264462809917356,
+   "no-risk precision": 0.9361702127659575,
+   "no-risk recall": 0.8543689320388349,
+   "ROC AUC": 0.9426144244105409,
+   "PR AUC": 0.8768233493605628
+  },
+  {
+   "model": "TF-IDF + LogReg",
+   "operating point": "default",
+   "macro F1": 0.9250803169843649,
+   "weighted F1": 0.931208789136429,
+   "risk precision": 0.8813559322033898,
+   "risk recall": 0.9285714285714286,
+   "risk F1": 0.9043478260869565,
+   "no-risk precision": 0.96,
+   "no-risk recall": 0.9320388349514563,
+   "ROC AUC": 0.9577843273231623,
+   "PR AUC": 0.9143234572532043
+  },
+  {
+   "model": "TF-IDF + LogReg",
+   "operating point": "recall target ≥0.90",
+   "macro F1": 0.8802763874739779,
+   "weighted F1": 0.8918504750897208,
+   "risk precision": 0.8823529411764706,
+   "risk recall": 0.8035714285714286,
+   "risk F1": 0.8411214953271028,
+   "no-risk precision": 0.8981481481481481,
+   "no-risk recall": 0.941747572815534,
+   "ROC AUC": 0.9577843273231623,
+   "PR AUC": 0.9143234572532043
+  }
+ ],
+ "aspects": [
+  {
+   "key": "workmanship",
+   "label": "Workmanship / quality",
+   "severity": 0.7,
+   "description": "The work itself was poor, incomplete, damaged something, or did not fix the problem.",
+   "share_in_risk_reviews": 0.238,
+   "share_in_satisfied_reviews": 0.0117,
+   "flagged_reviews": 100
+  },
+  {
+   "key": "reliability",
+   "label": "Reliability / no-shows",
+   "severity": 0.6,
+   "description": "Did not show up, abandoned the job, cancelled, or the problem kept coming back.",
+   "share_in_risk_reviews": 0.2353,
+   "share_in_satisfied_reviews": 0.0162,
+   "flagged_reviews": 94
+  },
+  {
+   "key": "pricing",
+   "label": "Pricing / billing",
+   "severity": 0.6,
+   "description": "Overcharging, hidden fees, price changes after the quote, upselling or billing disputes.",
+   "share_in_risk_reviews": 0.107,
+   "share_in_satisfied_reviews": 0.0059,
+   "flagged_reviews": 41
+  },
+  {
+   "key": "communication",
+   "label": "Communication",
+   "severity": 0.4,
+   "description": "Calls, messages and emails go unanswered; the customer is left uninformed.",
+   "share_in_risk_reviews": 0.2246,
+   "share_in_satisfied_reviews": 0.0103,
+   "flagged_reviews": 100
+  },
+  {
+   "key": "timeliness",
+   "label": "Timeliness / delays",
+   "severity": 0.3,
+   "description": "Late arrival, missed deadlines, long waits, repeated rescheduling.",
+   "share_in_risk_reviews": 0.3235,
+   "share_in_satisfied_reviews": 0.0117,
+   "flagged_reviews": 133
+  },
+  {
+   "key": "professionalism",
+   "label": "Professionalism / conduct",
+   "severity": 0.4,
+   "description": "Rude or dishonest behaviour, poor attitude, leaving the site dirty.",
+   "share_in_risk_reviews": 0.2166,
+   "share_in_satisfied_reviews": 0.0162,
+   "flagged_reviews": 99
+  },
+  {
+   "key": "warranty",
+   "label": "Warranty / follow-through",
+   "severity": 0.7,
+   "description": "Refused to honour a warranty or refund, or did not stand behind the work.",
+   "share_in_risk_reviews": 0.0481,
+   "share_in_satisfied_reviews": 0.0059,
+   "flagged_reviews": 22
+  },
+  {
+   "key": "safety",
+   "label": "Safety / licensing",
+   "severity": 1.0,
+   "description": "Hazards, code or permit violations, unlicensed or uninsured work, injury or property endangerment.",
+   "share_in_risk_reviews": 0.0588,
+   "share_in_satisfied_reviews": 0.0029,
+   "flagged_reviews": 27
+  }
+ ],
+ "trades": [
+  {
+   "trade": "Plumbing",
+   "providers": 5,
+   "reviews": 228,
+   "risk_rate": 0.3377
+  },
+  {
+   "trade": "HVAC",
+   "providers": 5,
+   "reviews": 172,
+   "risk_rate": 0.3314
+  },
+  {
+   "trade": "Roofing",
+   "providers": 5,
+   "reviews": 166,
+   "risk_rate": 0.2892
+  },
+  {
+   "trade": "Cleaning",
+   "providers": 5,
+   "reviews": 148,
+   "risk_rate": 0.3041
+  },
+  {
+   "trade": "Landscaping & Outdoor",
+   "providers": 5,
+   "reviews": 130,
+   "risk_rate": 0.2385
+  },
+  {
+   "trade": "Contracting & Remodeling",
+   "providers": 5,
+   "reviews": 130,
+   "risk_rate": 0.4231
+  },
+  {
+   "trade": "Electrical",
+   "providers": 5,
+   "reviews": 96,
+   "risk_rate": 0.3021
+  },
+  {
+   "trade": "Movers",
+   "providers": 5,
+   "reviews": 96,
+   "risk_rate": 0.3333
+  }
+ ],
+ "disclaimer": "Complaint signals detected in customer reviews. Reviews are unverified customer allegations, not findings of wrongdoing."
+}

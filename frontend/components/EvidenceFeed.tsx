@@ -94,7 +94,7 @@ export function EvidenceFeed({ examples, initialText, initialResult, flagged, on
   const att = result?.management_attention;
 
   return (
-    <Glass as="section" id="evidence" className="card deck" aria-label="Explainable NLP evidence feed">
+    <Glass as="section" id="evidence" className="panel deck" aria-label="Explainable NLP evidence feed">
       <header className="card-head">
         <div>
           <div className="kicker">Explainable NLP ground truth</div>
@@ -116,7 +116,7 @@ export function EvidenceFeed({ examples, initialText, initialResult, flagged, on
             <span className="kicker">Input</span>
             <b>Raw customer review</b>
           </div>
-          <div className="examples" role="group" aria-label="Example reviews">
+          <div className="dm-examples" role="group" aria-label="Example reviews">
             {examples.map((ex) => (
               <button key={ex.id} className="pill" onClick={() => pick(ex)} data-kind={ex.kind} title={ex.kind === "complaint" ? "Complaint example (synthetic)" : "Positive example (synthetic)"}>
                 <span className="dot" style={{ ["--c" as string]: ex.kind === "complaint" ? "var(--t-high)" : "var(--t-stable)" }} />
@@ -126,9 +126,9 @@ export function EvidenceFeed({ examples, initialText, initialResult, flagged, on
           </div>
 
           {editing || !annotated ? (
-            <textarea className="review-input" value={text} onChange={(e) => setText(e.target.value)} placeholder="e.g. The crew showed up two days late and left the job unfinished…" maxLength={5000} aria-label="Customer review text" />
+            <textarea className="dm-input" value={text} onChange={(e) => setText(e.target.value)} placeholder="e.g. The crew showed up two days late and left the job unfinished…" maxLength={5000} aria-label="Customer review text" />
           ) : (
-            <div className="review-view" aria-live="polite">
+            <div className="dm-view" aria-live="polite">
               {annotated}
             </div>
           )}
@@ -147,7 +147,7 @@ export function EvidenceFeed({ examples, initialText, initialResult, flagged, on
               <i className="phrase-swatch" /> dictionary phrase
             </span>
           </div>
-          {error && <p className="err">{error}</p>}
+          {error && <p className="dm-err">{error}</p>}
           {result?.masking_applied && <p className="tiny">Phone numbers, emails, links, dollar amounts and star phrases are masked before scoring.</p>}
         </div>
 
@@ -190,7 +190,7 @@ export function EvidenceFeed({ examples, initialText, initialResult, flagged, on
               {evidence ? (
                 <div className="viscous">
                   <div className="viscous-fill" aria-hidden="true" />
-                  <blockquote className="evidence">
+                  <blockquote className="dm-evidence">
                     <span className="evidence-text">{withPhrases(evidence.sentence, { matched_phrases: evidence.phrases })}</span>
                     <footer>
                       {evidence.match ? <b>{shortAspect(evidence.aspect)}</b> : att ? <b>no dictionary match — manual review</b> : <b>no complaint signal — highest-scoring sentence shown</b>}
@@ -218,7 +218,7 @@ export function EvidenceFeed({ examples, initialText, initialResult, flagged, on
                   {att === false ? "No risk flag to triage" : flagged ? "Flag selected · see triage ↘" : "Select risk flag → triage"}
                 </button>
               </div>
-              <p className="rec">
+              <p className="dm-rec">
                 <b>Recommended action.</b> {result.recommended_action}
               </p>
             </div>

@@ -45,7 +45,7 @@ export function TriageDock({ context, onClose }: { context: TriageContext | null
   };
 
   return (
-    <Glass as="aside" className="dock" data-open={open} aria-hidden={!open} aria-label="Action triage dock" hoverable={false} ripple>
+    <Glass as="aside" className="dock" data-open={open} aria-hidden={!open} aria-label="Action triage dock" ripple>
       {meta && email && audit && (
         <div className="dock-in" key={meta.subject}>
           <header className="dock-head">

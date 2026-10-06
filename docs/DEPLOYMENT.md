@@ -16,6 +16,8 @@ There is no API project, no backend and **no environment variables**.
 Every push to `main` builds a Production deployment; other branches and PRs get a Preview URL.
 
 ## 2. Check it works
+Open `/` (website), `/demo` (command center), `/sitemap.xml`. Optionally set `NEXT_PUBLIC_CONTACT_EMAIL`, `NEXT_PUBLIC_REPO_URL`, `NEXT_PUBLIC_SITE_URL` in Vercel → Settings → Environment Variables to show a contact address and repo link.
+
 A correct build log shows `Installing dependencies…` and `Running "npm run build"` (~20 s) with a route table containing `○ /` and `ƒ /api/analyze`.
 ```bash
 open https://<project>.vercel.app

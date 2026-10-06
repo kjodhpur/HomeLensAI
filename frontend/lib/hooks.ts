@@ -29,29 +29,4 @@ export function useCountUp(target: number, duration = 1400, decimals = 0) {
   return Math.round(value * f) / f;
 }
 
-/** Writes the pointer position, normalised to [-1, 1], to --mx / --my on <html> (once per frame). */
-export function usePointerVars() {
-  useEffect(() => {
-    let raf = 0;
-    let x = 0;
-    let y = 0;
-    const apply = () => {
-      raf = 0;
-      const s = document.documentElement.style;
-      s.setProperty("--mx", x.toFixed(3));
-      s.setProperty("--my", y.toFixed(3));
-    };
-    const onMove = (e: PointerEvent) => {
-      x = (e.clientX / window.innerWidth) * 2 - 1;
-      y = (e.clientY / window.innerHeight) * 2 - 1;
-      if (!raf) raf = requestAnimationFrame(apply);
-    };
-    window.addEventListener("pointermove", onMove, { passive: true });
-    return () => {
-      window.removeEventListener("pointermove", onMove);
-      cancelAnimationFrame(raf);
-    };
-  }, []);
-}
-
 export const prefersReducedMotion = () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;

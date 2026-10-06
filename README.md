@@ -18,7 +18,7 @@ Reviews are customer allegations, so every output is a **"complaint signal detec
 ```
 artifacts/                                 ← Rithik's anonymized results from the real Yelp run (CSV tables, metadata, TF-IDF model files)
 app/ · views/ · streamlit_app.py           ← Rithik's risk logic (app/risk_logic.py) + the Streamlit command center
-frontend/                                  ← the Next.js "liquid glass" dashboard — ONE self-contained app, no separate backend    → Vercel
+frontend/                                  ← the Next.js product website + live demo — ONE self-contained app, no separate backend    → Vercel
 notebooks/                                 ← analysis notebooks (final project notebook, EDA)
 data/                                      ← how to get the Yelp data (not committed) + a synthetic sample for the notebook
 scripts/                                   ← build_artifacts.py, export_frontend_data.py, make_sample_data.py
@@ -44,7 +44,7 @@ A parity test (`npm test`) checks that the TypeScript port reproduces his Python
 
 > Requires Node 20+ (Python only if you re-export the data). `make help` lists shortcuts.
 
-**1. Run the liquid-glass web app (no Yelp data, no backend, no env vars):**
+**1. Run the website and live demo (no Yelp data, no backend, no env vars):**
 ```bash
 cd frontend && npm install && npm run dev      # http://localhost:3000
 npm test                                       # parity tests vs Rithik's Python model
@@ -105,7 +105,7 @@ One Vercel project, **Root Directory = `frontend`**, framework Next.js, no envir
 |---|---|
 | Notebook (all 3 layers, EDA, dashboard, export) | ✅ complete; verified end-to-end on the synthetic sample and on two package-version sets (pandas 2.2 / 3.0). **Needs one run on the real Yelp data** (see `docs/SUBMISSION.md`) |
 | Web app engine | ✅ Rithik's masking, phrase dictionary and TF-IDF model ported to TypeScript inside the Next.js app; 14 parity tests against his Python outputs |
-| Frontend | ✅ liquid-glass dashboard: KPI pods, risk leaderboard, aspect radar blob, evidence feed, action-triage dock |
+| Frontend | ✅ product website (home, product, methodology, pricing, Responsible AI, docs, about, FAQ, contact, changelog, legal) plus the live demo at `/demo`: KPI cards, risk leaderboard, aspect radar, evidence feed, triage dock |
 | Streamlit app | ✅ five pages, TF-IDF fallback live; DistilBERT activates once the model is on Hugging Face |
 | CI | ✅ GitHub Actions: frontend typecheck + parity tests + build, data-export freshness check, notebook smoke run |
 | Vercel | one project (root `frontend`) — see `docs/DEPLOYMENT.md` |

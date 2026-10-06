@@ -34,5 +34,5 @@ No data download, no env vars, no second service. The app shows the **real anony
 | change how risk is scored / a complaint phrase | `app/risk_logic.py`, `scripts/build_artifacts.py`, then `export_frontend_data.py` + `npm test` |
 | change the review analysis behaviour | `frontend/lib/engine/*.ts` (keep parity with Python; add a golden sample in `scripts/export_frontend_data.py`) |
 | add a page / component | `frontend/app/`, `frontend/components/` |
-| change colours, glass, easings | `frontend/app/liquid.css` (tokens at the top), `frontend/app/dashboard.css` |
+| change colours, glass, easings | `frontend/app/base.css` (tokens at the top), `frontend/app/site.css` (website), `frontend/app/demo/demo.css` (demo) |
 | change a data field | `scripts/export_frontend_data.py` → `frontend/lib/types.ts` → components |

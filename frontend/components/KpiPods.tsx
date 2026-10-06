@@ -24,7 +24,7 @@ function Pod({ index, label, value, caption, series, format, sparkTone, detail, 
   return (
     // The tooltip is a SIBLING of the glass pod (not a child): a nested backdrop-filter could not blur what lies outside its parent.
     <div className="pod-cell" style={{ ["--i" as string]: index }}>
-      <Glass className={`pod${alert ? " pod-alert" : ""}`} ripple tabIndex={0} aria-label={`${label}: ${caption}`}>
+      <Glass className={`pod${alert ? " pod-alert" : ""}`} lit ripple tabIndex={0} aria-label={`${label}: ${caption}`}>
         <div className="kicker">{label}</div>
         <div className="pod-value">{value}</div>
         <div className="pod-caption">{caption}</div>

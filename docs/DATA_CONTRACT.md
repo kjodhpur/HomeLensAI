@@ -9,6 +9,7 @@ The dashboard is one Next.js app with **no separate backend**. Everything it sho
 | `artifacts/aspect_summary.csv` + `app/risk_logic.py` (phrases, recommendations) | `frontend/data/aspects.json` | aspect radar blob and bubble |
 | `app/risk_logic.py` (masking rules, compiled phrase regexes, thresholds) + `metadata.json` (`tfidf_threshold`) | `frontend/data/risk_config.json` | review analysis |
 | `artifacts/homelens_tfidf_*.joblib` | `frontend/data/tfidf_model.json` (vocabulary, idf, coefficients, stop words) | review analysis |
+| `app/config.py` `NOTEBOOK_FACTS` | `frontend/data/facts.json` | corpus size, splits and thresholds shown on the website |
 | the above, run through his Python code on sample reviews | `frontend/data/golden.json` | `npm test` |
 
 `python scripts/export_frontend_data.py` regenerates all of it; `--check` (used by CI) fails if the committed files are stale.

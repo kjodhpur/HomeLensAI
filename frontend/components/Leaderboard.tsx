@@ -19,11 +19,28 @@ function RowSpark({ p }: { p: Provider }) {
   if (h.length < 2) return <span className="rowspark-empty">—</span>;
   const x0 = h[0].year;
   const x1 = h[h.length - 1].year;
-  const pts = h.map((q) => [2 + ((q.year - x0) / (x1 - x0 || 1)) * 60, 20 - q.risk * 18] as const);
+  const pts = h.map(
+    (q) =>
+      [2 + ((q.year - x0) / (x1 - x0 || 1)) * 60, 20 - q.risk * 18] as const,
+  );
   const last = pts[pts.length - 1];
   return (
-    <svg className="rowspark" viewBox="0 0 64 22" width="64" height="22" aria-hidden="true">
-      <polyline points={pts.map(([x, y]) => `${x},${y}`).join(" ")} fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" opacity="0.9" />
+    <svg
+      className="rowspark"
+      viewBox="0 0 64 22"
+      width="64"
+      height="22"
+      aria-hidden="true"
+    >
+      <polyline
+        points={pts.map(([x, y]) => `${x},${y}`).join(" ")}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        opacity="0.9"
+      />
       <circle cx={last[0]} cy={last[1]} r="2.4" fill="currentColor" />
     </svg>
   );
@@ -31,9 +48,13 @@ function RowSpark({ p }: { p: Provider }) {
 
 function TrendCell({ p }: { p: Provider }) {
   if (p.trend_delta == null) return <span className="trend na">n/a</span>;
-  const arrow = p.trend === "Rising" ? "▲" : p.trend === "Improving" ? "▼" : "●";
+  const arrow =
+    p.trend === "Rising" ? "▲" : p.trend === "Improving" ? "▼" : "●";
   return (
-    <span className={`trend ${p.trend.toLowerCase()}`} title={`Mean model risk, 2021+ vs 2020: ${p.trend_delta >= 0 ? "+" : ""}${p.trend_delta.toFixed(2)}`}>
+    <span
+      className={`trend ${p.trend.toLowerCase()}`}
+      title={`Mean model risk, 2021+ vs 2020: ${p.trend_delta >= 0 ? "+" : ""}${p.trend_delta.toFixed(2)}`}
+    >
       {arrow} {p.trend_delta >= 0 ? "+" : "−"}
       {Math.abs(p.trend_delta).toFixed(2)}
     </span>
@@ -52,14 +73,31 @@ interface RowProps {
 function Row({ p, rank, open, onToggle, groupMedian, groupScore }: RowProps) {
   const host = useRef<HTMLLIElement>(null);
   const fx = useRef<HTMLDivElement>(null);
-  const spike = p.trend_delta != null ? Math.min(1, Math.max(0, p.trend_delta / 0.3)) : 0;
+  const spike =
+    p.trend_delta != null ? Math.min(1, Math.max(0, p.trend_delta / 0.3)) : 0;
 
+  // Build a row's detail panel (chart + facts) only after it is first opened; keep it mounted so closing still animates.
+  const [seen, setSeen] = useState(false);
   useEffect(() => {
-    if (open) host.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    if (open) {
+      setSeen(true);
+      host.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    }
   }, [open]);
 
   return (
-    <li ref={host} className="lb-row" data-open={open} data-tier={p.risk_tier} data-spike={spike > 0.2 ? "1" : "0"} style={{ ["--score" as string]: p.risk_score, ["--spike" as string]: spike, ["--c" as string]: TIER_VAR[p.risk_tier] }}>
+    <li
+      ref={host}
+      className="lb-row"
+      data-open={open}
+      data-tier={p.risk_tier}
+      data-spike={spike > 0.2 ? "1" : "0"}
+      style={{
+        ["--score" as string]: p.risk_score,
+        ["--spike" as string]: spike,
+        ["--c" as string]: TIER_VAR[p.risk_tier],
+      }}
+    >
       <div className="row-fx" ref={fx} aria-hidden="true" />
       <div
         className="lb-head"
@@ -83,7 +121,10 @@ function Row({ p, rank, open, onToggle, groupMedian, groupScore }: RowProps) {
         <span className="tier" data-tier={p.risk_tier}>
           {p.risk_tier}
         </span>
-        <span className="lb-score" title={`Relative risk score ${p.risk_score.toFixed(1)} / 100`}>
+        <span
+          className="lb-score"
+          title={`Relative risk score ${p.risk_score.toFixed(1)} / 100`}
+        >
           <span className="lb-bar">
             <span className="lb-fill" style={{ width: `${p.risk_score}%` }} />
           </span>
@@ -100,41 +141,56 @@ function Row({ p, rank, open, onToggle, groupMedian, groupScore }: RowProps) {
 
       <div className="lb-body" aria-hidden={!open}>
         <div className="lb-body-in">
-          <div className="lb-detail">
-            <div className="lb-chart">
-              <div className="kicker">Provider trajectory · yearly mean model risk</div>
-              <TrajectoryChart history={p.history} color={TIER_VAR[p.risk_tier]} groupMedian={groupMedian} />
-            </div>
-            <div className="lb-facts">
-              <div className="kicker">Signals</div>
-              <dl>
-                <dt>1–2★ share</dt>
-                <dd>{fmtPct(p.observed_negative_rate)}</dd>
-                <dt>Mean model risk</dt>
-                <dd>{p.mean_risk.toFixed(2)}</dd>
-                <dt>High-severity rate</dt>
-                <dd>{fmtPct(p.high_severity_rate)}</dd>
-                <dt>Recent risk (2021+)</dt>
-                <dd>{p.recent_risk == null ? "—" : p.recent_risk.toFixed(2)}</dd>
-                <dt>Reviews recent / prior</dt>
-                <dd>
-                  {p.recent_reviews} / {p.previous_reviews}
-                </dd>
-                <dt>Latest review</dt>
-                <dd>{p.latest_review ?? "—"}</dd>
-              </dl>
-              {groupScore != null && (
+          {(seen || open) && (
+            <div className="lb-detail">
+              <div className="lb-chart">
+                <div className="kicker">
+                  Provider trajectory · yearly mean model risk
+                </div>
+                <TrajectoryChart
+                  history={p.history}
+                  color={TIER_VAR[p.risk_tier]}
+                  groupMedian={groupMedian}
+                />
+              </div>
+              <div className="lb-facts">
+                <div className="kicker">Signals</div>
+                <dl>
+                  <dt>1–2★ share</dt>
+                  <dd>{fmtPct(p.observed_negative_rate)}</dd>
+                  <dt>Mean model risk</dt>
+                  <dd>{p.mean_risk.toFixed(2)}</dd>
+                  <dt>High-severity rate</dt>
+                  <dd>{fmtPct(p.high_severity_rate)}</dd>
+                  <dt>Recent risk (2021+)</dt>
+                  <dd>
+                    {p.recent_risk == null ? "—" : p.recent_risk.toFixed(2)}
+                  </dd>
+                  <dt>Reviews recent / prior</dt>
+                  <dd>
+                    {p.recent_reviews} / {p.previous_reviews}
+                  </dd>
+                  <dt>Latest review</dt>
+                  <dd>{p.latest_review ?? "—"}</dd>
+                </dl>
+                {groupScore != null && (
+                  <p className="tiny">
+                    {p.service_group}: median score {groupScore.toFixed(0)} ·
+                    this provider {p.risk_score.toFixed(0)}
+                  </p>
+                )}
+              </div>
+              <div className="lb-act">
+                <div className="kicker">Operational recommendation</div>
+                <p>{p.recommended_action}</p>
                 <p className="tiny">
-                  {p.service_group}: median score {groupScore.toFixed(0)} · this provider {p.risk_score.toFixed(0)}
+                  Leading complaint signal: {p.top_aspect}. A review-based
+                  signal for human investigation — not a finding about the
+                  provider.
                 </p>
-              )}
+              </div>
             </div>
-            <div className="lb-act">
-              <div className="kicker">Operational recommendation</div>
-              <p>{p.recommended_action}</p>
-              <p className="tiny">Leading complaint signal: {p.top_aspect}. A review-based signal for human investigation — not a finding about the provider.</p>
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </li>
@@ -150,19 +206,44 @@ interface Props {
   onClearAspect: () => void;
 }
 
-export function Leaderboard({ providers, overview, selected, onSelect, aspectFilter, onClearAspect }: Props) {
+export function Leaderboard({
+  providers,
+  overview,
+  selected,
+  onSelect,
+  aspectFilter,
+  onClearAspect,
+}: Props) {
   const [tiers, setTiers] = useState<Set<Tier>>(new Set(TIERS));
   const [q, setQ] = useState("");
   const [sort, setSort] = useState<SortKey>("risk_score");
-  const [limit, setLimit] = useState(40);
+  const [limit, setLimit] = useState(15);
 
-  const rankOf = useMemo(() => new Map(providers.map((p, i) => [p.code, i + 1])), [providers]);
-  const groupOf = useMemo(() => new Map(overview.services.map((s) => [s.service_group, s])), [overview.services]);
+  const rankOf = useMemo(
+    () => new Map(providers.map((p, i) => [p.code, i + 1])),
+    [providers],
+  );
+  const groupOf = useMemo(
+    () => new Map(overview.services.map((s) => [s.service_group, s])),
+    [overview.services],
+  );
 
   const rows = useMemo(() => {
-    const list = providers.filter((p) => tiers.has(p.risk_tier) && (!aspectFilter || p.top_aspect === aspectFilter) && (!q || p.code.toLowerCase().includes(q.toLowerCase())));
-    const val = (p: Provider) => (sort === "recent_risk" ? p.recent_risk : sort === "trend_delta" ? p.trend_delta : p.risk_score);
-    return [...list].sort((a, b) => (val(b) ?? -Infinity) - (val(a) ?? -Infinity));
+    const list = providers.filter(
+      (p) =>
+        tiers.has(p.risk_tier) &&
+        (!aspectFilter || p.top_aspect === aspectFilter) &&
+        (!q || p.code.toLowerCase().includes(q.toLowerCase())),
+    );
+    const val = (p: Provider) =>
+      sort === "recent_risk"
+        ? p.recent_risk
+        : sort === "trend_delta"
+          ? p.trend_delta
+          : p.risk_score;
+    return [...list].sort(
+      (a, b) => (val(b) ?? -Infinity) - (val(a) ?? -Infinity),
+    );
   }, [providers, tiers, q, sort, aspectFilter]);
 
   // If a provider is selected from elsewhere (KPI chip), make sure it is not hidden by the current filters.
@@ -185,18 +266,29 @@ export function Leaderboard({ providers, overview, selected, onSelect, aspectFil
     });
 
   return (
-    <Glass as="section" id="providers" className="card lb" aria-label="Risk leaderboard">
+    <Glass
+      as="section"
+      id="providers"
+      className="panel lb"
+      aria-label="Risk leaderboard"
+    >
       <header className="card-head">
         <div>
           <div className="kicker">Provider watchlist</div>
           <h2>Interactive Risk Leaderboard</h2>
           <p className="sub">
-            {providers.length} providers with ≥ {overview.meta.min_reviews} reviews · anonymized · select a row to open its trajectory
+            {providers.length} providers with ≥ {overview.meta.min_reviews}{" "}
+            reviews · anonymized · select a row to open its trajectory
           </p>
         </div>
         <div className="seg" role="group" aria-label="Sort by">
           {SORTS.map((s) => (
-            <button key={s.key} className="pill" aria-pressed={sort === s.key} onClick={() => setSort(s.key)}>
+            <button
+              key={s.key}
+              className="pill"
+              aria-pressed={sort === s.key}
+              onClick={() => setSort(s.key)}
+            >
               {s.label}
             </button>
           ))}
@@ -206,7 +298,13 @@ export function Leaderboard({ providers, overview, selected, onSelect, aspectFil
       <div className="lb-controls">
         <div className="tier-filters" role="group" aria-label="Filter by tier">
           {TIERS.map((t) => (
-            <button key={t} className="pill" aria-pressed={tiers.has(t)} onClick={() => toggleTier(t)} style={{ ["--c" as string]: TIER_VAR[t] }}>
+            <button
+              key={t}
+              className="pill"
+              aria-pressed={tiers.has(t)}
+              onClick={() => toggleTier(t)}
+              style={{ ["--c" as string]: TIER_VAR[t] }}
+            >
               <span className="dot" />
               {t}
               <span className="count">{overview.tiers[t] ?? 0}</span>
@@ -215,10 +313,18 @@ export function Leaderboard({ providers, overview, selected, onSelect, aspectFil
         </div>
         <label className="search">
           <span className="sr-only">Search provider code</span>
-          <input placeholder="Search Provider_…" value={q} onChange={(e) => setQ(e.target.value)} />
+          <input
+            placeholder="Search Provider_…"
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+          />
         </label>
         {aspectFilter && (
-          <button className="pill on" onClick={onClearAspect} title="Clear aspect filter">
+          <button
+            className="pill on"
+            onClick={onClearAspect}
+            title="Clear aspect filter"
+          >
             {shortAspect(aspectFilter)} ✕
           </button>
         )}
@@ -243,15 +349,23 @@ export function Leaderboard({ providers, overview, selected, onSelect, aspectFil
             rank={rankOf.get(p.code) ?? 0}
             open={selected === p.code}
             onToggle={() => onSelect(selected === p.code ? null : p.code)}
-            groupMedian={groupOf.get(p.service_group)?.median_recent_risk ?? null}
+            groupMedian={
+              groupOf.get(p.service_group)?.median_recent_risk ?? null
+            }
             groupScore={groupOf.get(p.service_group)?.median_risk_score ?? null}
           />
         ))}
-        {rows.length === 0 && <li className="lb-empty">No providers match these filters.</li>}
+        {rows.length === 0 && (
+          <li className="lb-empty">No providers match these filters.</li>
+        )}
         {rows.length > limit && (
           <li className="lb-more">
-            <button className="btn ghost" onClick={() => setLimit((l) => l + 40)}>
-              Show {Math.min(40, rows.length - limit)} more · {rows.length - limit} remaining
+            <button
+              className="btn ghost"
+              onClick={() => setLimit((l) => l + 25)}
+            >
+              Show {Math.min(25, rows.length - limit)} more ·{" "}
+              {rows.length - limit} remaining
             </button>
           </li>
         )}

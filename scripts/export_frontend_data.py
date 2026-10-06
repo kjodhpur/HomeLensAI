@@ -26,6 +26,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from app import risk_logic as rl  # noqa: E402
+from app.config import NOTEBOOK_FACTS  # noqa: E402
 
 ARTIFACTS = ROOT / "artifacts"
 OUT = ROOT / "frontend" / "data"
@@ -213,6 +214,7 @@ def build() -> dict[str, str]:
     files = {
         "providers.json": provs, "aspects.json": aspects(provs), "overview.json": overview(provs, meta), "examples.json": EXAMPLES,
         "risk_config.json": risk_config(meta), "tfidf_model.json": tfidf_model(), "golden.json": golden(meta),
+        "facts.json": NOTEBOOK_FACTS,  # validated notebook facts (app/config.py): splits, thresholds, recall floor
     }
     return {name: json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "\n" for name, data in files.items()}
 

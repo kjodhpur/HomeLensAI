@@ -17,7 +17,7 @@ const SIZE = 540;
 const C = SIZE / 2;
 const R0 = 168; // radius of a "full" lobe
 const N = ASPECT_ORDER.length;
-const SAMPLES = 150;
+const SAMPLES = 96;
 const SIGMA = 0.4; // angular softness of a lobe (rad)
 const ANG = (i: number) => -Math.PI / 2 + (i * 2 * Math.PI) / N;
 const angDiff = (a: number, b: number) => {
@@ -75,6 +75,7 @@ export function AspectBlob({ aspects, active, onSelect }: Props) {
   const body = useRef<SVGPathElement>(null);
   const glows = useRef<(SVGPathElement | null)[]>([]);
   const clip = useRef<SVGPathElement>(null);
+  const fig = useRef<HTMLDivElement>(null);
   const beads = useRef<(SVGGElement | null)[]>([]);
   const labels = useRef<(SVGTextElement | null)[]>([]);
   const beadXY = useRef<{ x: number; y: number }[]>(targets.map(() => ({ x: C, y: C })));
@@ -104,11 +105,16 @@ export function AspectBlob({ aspects, active, onSelect }: Props) {
       }
       return r;
     };
+    let lastDraw = 0;
     const frame = (now: number) => {
       raf = requestAnimationFrame(frame);
       const dt = Math.min(0.033, (now - last) / 1000);
       last = now;
       const t = now / 1000;
+      // Idle breathing only needs ~20 fps; full rate while a spring is moving, a wave travels or a bead is focused.
+      const moving = waves.current.length > 0 || focusRef.current >= 0 || vel.current.some((v) => Math.abs(v) > 0.4);
+      if (!moving && now - lastDraw < 48) return;
+      lastDraw = now;
       waves.current = waves.current.filter((w) => t - w.t0 < 2.6);
       const k = reduce ? 400 : 62;
       const c = reduce ? 40 : 8.5;
@@ -146,18 +152,26 @@ export function AspectBlob({ aspects, active, onSelect }: Props) {
         }
       }
     };
-    raf = requestAnimationFrame(frame);
-    const onVis = () => {
+    // Run only while the figure is on screen and the tab is visible.
+    let onScreen = true;
+    const start = () => {
       cancelAnimationFrame(raf);
-      if (!document.hidden) {
+      if (onScreen && !document.hidden) {
         last = performance.now();
         raf = requestAnimationFrame(frame);
       }
     };
-    document.addEventListener("visibilitychange", onVis);
+    const io = new IntersectionObserver(([e]) => {
+      onScreen = e.isIntersecting;
+      start();
+    });
+    if (fig.current) io.observe(fig.current);
+    document.addEventListener("visibilitychange", start);
+    start();
     return () => {
       cancelAnimationFrame(raf);
-      document.removeEventListener("visibilitychange", onVis);
+      io.disconnect();
+      document.removeEventListener("visibilitychange", start);
     };
   }, []);
 
@@ -180,18 +194,6 @@ export function AspectBlob({ aspects, active, onSelect }: Props) {
     setBubble(null);
   };
 
-  // tilt the whole figure toward the pointer for a little depth
-  const fig = useRef<HTMLDivElement>(null);
-  const tilt = (e: React.PointerEvent) => {
-    const r = fig.current?.getBoundingClientRect();
-    if (!r || !fig.current) return;
-    fig.current.style.setProperty("--tx", String(((e.clientX - r.left) / r.width) * 2 - 1));
-    fig.current.style.setProperty("--ty", String(((e.clientY - r.top) / r.height) * 2 - 1));
-  };
-  const untilt = () => {
-    fig.current?.style.setProperty("--tx", "0");
-    fig.current?.style.setProperty("--ty", "0");
-  };
 
   const shown = hover != null ? ordered[hover] : null;
   const bubbleStyle = bubble
@@ -203,7 +205,7 @@ export function AspectBlob({ aspects, active, onSelect }: Props) {
     : undefined;
 
   return (
-    <Glass as="section" id="aspects" className="card blob-card" aria-label="Complaint aspect radar">
+    <Glass as="section" id="aspects" className="panel blob-card" aria-label="Complaint aspect radar">
       <header className="card-head">
         <div>
           <div className="kicker">Complaint signals</div>
@@ -219,7 +221,7 @@ export function AspectBlob({ aspects, active, onSelect }: Props) {
         </div>
       </header>
 
-      <div className="blob-stage" onPointerMove={tilt} onPointerLeave={untilt}>
+      <div className="blob-stage">
         <div className="blob-fig" ref={fig}>
           <svg viewBox={`0 0 ${SIZE} ${SIZE}`} width="100%" role="group" aria-label="Aspect radar blob">
             <defs>
@@ -265,7 +267,7 @@ export function AspectBlob({ aspects, active, onSelect }: Props) {
             {/* the liquid body */}
             {/* soft glow: stacked wide strokes stand in for a blur (SVG blur filters are CPU-bound when animated) */}
             <g transform="translate(0 20)">
-              {[46, 30, 16].map((w, i) => (
+              {[34].map((w, i) => (
                 <path key={w} d="" ref={(el) => { glows.current[i] = el; }} fill="rgba(245,120,15,.14)" stroke="rgba(255,154,60,.12)" strokeWidth={w} strokeLinejoin="round" />
               ))}
             </g>

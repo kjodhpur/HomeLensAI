@@ -28,9 +28,6 @@ next-env.d.ts
 !.env.example
 .vercel/
 
-# ---- Real (non-sample) artifacts copied into the backend by scripts/sync_artifacts.py ----
-backend/app/data/*.json
-
 # ---- scratch notebooks ----
 notebooks/_*.ipynb
 .DS_Store

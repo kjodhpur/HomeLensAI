@@ -16,46 +16,45 @@ Reviews are customer allegations, so every output is a **"complaint signal detec
 ## What is in this repo
 
 ```
-notebooks/HomeLensAI_Final_Project.ipynb   ← course notebook: full analysis, runs top-to-bottom (also FinalProject_HomeLensAI.ipynb, EDA notebooks)
-artifacts/                                 ← anonymized results of the real Yelp run (CSV tables, metadata, TF-IDF model files) — the app's single data source
-app/ · views/ · streamlit_app.py           ← risk logic (app/risk_logic.py) + the Streamlit command center
-backend/                                   ← FastAPI service over artifacts/ + risk_logic (serves the web app)                    → Vercel project #1
-frontend/                                  ← Next.js "liquid glass" dashboard (TypeScript, no UI library)                          → Vercel project #2
+artifacts/                                 ← Rithik's anonymized results from the real Yelp run (CSV tables, metadata, TF-IDF model files)
+app/ · views/ · streamlit_app.py           ← Rithik's risk logic (app/risk_logic.py) + the Streamlit command center
+frontend/                                  ← the Next.js "liquid glass" dashboard — ONE self-contained app, no separate backend    → Vercel
+notebooks/                                 ← analysis notebooks (final project notebook, EDA)
 data/                                      ← how to get the Yelp data (not committed) + a synthetic sample for the notebook
-scripts/                                   ← build_artifacts.py, sync_artifacts.py, make_sample_data.py
-docs/                                      ← TEAM_GUIDE · DATA_CONTRACT (API) · DEPLOYMENT · SUBMISSION
+scripts/                                   ← build_artifacts.py, export_frontend_data.py, make_sample_data.py
+docs/                                      ← TEAM_GUIDE · DATA_CONTRACT · DEPLOYMENT · SUBMISSION
 ```
 
 ```
- Yelp data ──► scripts/build_artifacts.py ──► artifacts/*.csv, *.joblib, metadata.json
+ Yelp data ──► scripts/build_artifacts.py ──► artifacts/*.csv, *.joblib, metadata.json   (+ app/risk_logic.py)
                                                 │
-                       ┌────────────────────────┴───────────────┐
-                       ▼                                        ▼  scripts/sync_artifacts.py (vendors risk_logic.py + artifacts/)
-          Streamlit app (streamlit_app.py)           backend/  FastAPI  (/api/overview, /api/providers, /api/aspects, /api/analyze …)
-                                                                 │
-                                                                 ▼
-                                                    frontend/  Next.js liquid-glass dashboard  ── browser
+                       ┌────────────────────────┴────────────────────────┐
+                       ▼                                                 ▼   scripts/export_frontend_data.py
+          Streamlit app (streamlit_app.py)                  frontend/data/*.json  (providers, KPIs, aspects, TF-IDF model, phrase patterns)
+                                                                         │
+                                                                         ▼   imported by the Next.js app
+                                                   frontend/  — pages read the JSON; POST /api/analyze (a Next.js route handler)
+                                                                runs a TypeScript port of Rithik's masking + phrase dictionary + TF-IDF model
 ```
 
-The heavy NLP never runs on Vercel (size and time limits). The API serves precomputed tables and scores single reviews with the small TF-IDF model; DistilBERT stays in the notebook / Streamlit app.
-Providers are always shown as anonymized `Provider_XXXX` codes.
+There is **no separate API or backend**. The web app is one Vercel project (root directory `frontend/`) that ships Rithik's data and runs his review analysis itself.
+A parity test (`npm test`) checks that the TypeScript port reproduces his Python model's probabilities and complaint aspects. Providers are always anonymized `Provider_XXXX` codes.
 
 ## Quick start
 
-> Requires Python 3.10+ and Node 20+. `make help` lists shortcuts.
+> Requires Node 20+ (Python only if you re-export the data). `make help` lists shortcuts.
 
-**1. Run the API + the liquid-glass web app (uses `artifacts/` — no Yelp data needed; start here if you are on the front/back end):**
+**1. Run the liquid-glass web app (no Yelp data, no backend, no env vars):**
 ```bash
-# terminal 1 — backend on http://localhost:8000  (interactive docs at /docs)
-cd backend && python -m venv .venv && source .venv/bin/activate
-pip install -r requirements-dev.txt
-uvicorn app.main:app --reload --port 8000
-pytest -q                      # 19 tests
-
-# terminal 2 — frontend on http://localhost:3000
-cd frontend && cp .env.example .env.local && npm install && npm run dev
+cd frontend && npm install && npm run dev      # http://localhost:3000
+npm test                                       # parity tests vs Rithik's Python model
+npm run typecheck && npm run build
 ```
-After changing `app/risk_logic.py` or rebuilding `artifacts/`, run `python scripts/sync_artifacts.py` (the backend deploys with `backend/` as its root, so it carries vendored copies; a test fails if they drift).
+After rebuilding `artifacts/` (or editing `app/risk_logic.py`), regenerate the app's data and commit it:
+```bash
+pip install "scikit-learn==1.8.0" joblib
+python scripts/export_frontend_data.py         # artifacts/ + app/risk_logic.py → frontend/data/*.json
+```
 
 **1b. The Streamlit command center:** `pip install -r requirements.txt && streamlit run streamlit_app.py`
 
@@ -72,7 +71,7 @@ Without any data in `data/raw/` the notebook runs on the synthetic sample in DEM
 **3. Refresh the web app after rebuilding the artifacts:**
 ```bash
 python scripts/build_artifacts.py    # from the raw Yelp CSV (git-ignored) → artifacts/
-python scripts/sync_artifacts.py     # artifacts/ + app/risk_logic.py → backend/
+python scripts/export_frontend_data.py   # artifacts/ + app/risk_logic.py → frontend/data/
 ```
 
 ## Streamlit command center (`streamlit_app.py`)
@@ -94,22 +93,22 @@ pytest tests -q                       # 27 tests (risk logic + artifacts)
 * **Code:** `streamlit_app.py` (navigation), `app/` (risk logic, model loader, charts, UI components), `views/` (one module per page), `tests/`.
 
 ## Deploying to Vercel
-Two Vercel projects from this one repo (**root directory** `frontend/` and `backend/`). Step-by-step, environment variables and the data-licence note are in [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
+One Vercel project, **Root Directory = `frontend`**, framework Next.js, no environment variables. Steps and troubleshooting: [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
 ## For teammates
 * **[`docs/TEAM_GUIDE.md`](docs/TEAM_GUIDE.md)** — who builds what, the backlog, branch/PR workflow, definition of done.
-* **[`docs/DATA_CONTRACT.md`](docs/DATA_CONTRACT.md)** — the exact JSON schema the backend and frontend share.
+* **[`docs/DATA_CONTRACT.md`](docs/DATA_CONTRACT.md)** — what the web app ships (`frontend/data/`), the analysis route and how it is tested.
 * **[`docs/SUBMISSION.md`](docs/SUBMISSION.md)** — rubric → notebook map and the pre-submission checklist.
 
 ## Status
 | Piece | State |
 |---|---|
 | Notebook (all 3 layers, EDA, dashboard, export) | ✅ complete; verified end-to-end on the synthetic sample and on two package-version sets (pandas 2.2 / 3.0). **Needs one run on the real Yelp data** (see `docs/SUBMISSION.md`) |
-| Backend API | ✅ FastAPI over the real artifacts (overview, providers, aspects, review analysis) + 19 tests |
+| Web app engine | ✅ Rithik's masking, phrase dictionary and TF-IDF model ported to TypeScript inside the Next.js app; 14 parity tests against his Python outputs |
 | Frontend | ✅ liquid-glass dashboard: KPI pods, risk leaderboard, aspect radar blob, evidence feed, action-triage dock |
 | Streamlit app | ✅ five pages, TF-IDF fallback live; DistilBERT activates once the model is on Hugging Face |
-| CI | ✅ GitHub Actions: backend tests, frontend build, notebook smoke run |
-| Vercel | ⏳ **not connected yet** — the two projects must be imported once in the Vercel dashboard (≈5 min, steps in `docs/DEPLOYMENT.md`); the repo is already configured for it |
+| CI | ✅ GitHub Actions: frontend typecheck + parity tests + build, data-export freshness check, notebook smoke run |
+| Vercel | one project (root `frontend`) — see `docs/DEPLOYMENT.md` |
 
 ## Data & ethics
 The Yelp Open Dataset may be used for academic purposes but **not redistributed** — the repo contains only a synthetic sample. Reviews are unverified allegations; keep the disclaimer visible in every UI and slide.

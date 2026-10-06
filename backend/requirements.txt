@@ -1,6 +1,0 @@
-# Runtime dependencies (Vercel installs this file when deploying the backend project).
-fastapi>=0.115
-uvicorn>=0.30
-# Pinned: must match the version that created the TF-IDF joblib files (see ../scripts/build_artifacts.py).
-scikit-learn==1.8.0
-joblib>=1.4

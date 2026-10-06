@@ -1,4 +1,0 @@
-model,operating_threshold,accuracy,macro_f1,negative_precision,negative_recall,negative_f1,average_precision,roc_auc
-Fine-tuned DistilBERT,0.95,0.976,0.973,0.972,0.955,0.963,0.993,0.996
-TF–IDF Logistic Regression,0.62,0.957,0.951,0.95,0.917,0.933,0.984,0.991
-TextBlob,0.405,0.793,0.785,0.63,0.909,0.744,0.848,0.911

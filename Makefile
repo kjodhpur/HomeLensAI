@@ -17,17 +17,13 @@ notebook:       ## open JupyterLab on the final-project notebook
 run-notebook:   ## execute the notebook headlessly (uses the sample data if the real data is absent)
 	cd notebooks && $(PY) -m jupyter nbconvert --to notebook --execute HomeLensAI_Final_Project.ipynb --output /tmp/HomeLensAI_executed.ipynb
 
-sync:           ## copy notebook outputs into backend/app/data
-	$(PY) scripts/sync_artifacts.py
-
-backend:        ## run the API on :8000
-	cd backend && $(PY) -m pip install -q -r requirements-dev.txt && $(PY) -m uvicorn app.main:app --reload --port 8000
+export:        ## regenerate frontend/data from artifacts/ (run after build_artifacts.py)
+	$(PY) scripts/export_frontend_data.py
 
 frontend:       ## run the web app on :3000
 	cd frontend && npm install && npm run dev
 
-test:           ## backend tests + frontend typecheck
-	cd backend && $(PY) -m pytest -q
-	cd frontend && npm run typecheck
+test:           ## frontend typecheck + parity tests
+	cd frontend && npm run typecheck && npm test
 
-.PHONY: help setup-notebook sample notebook run-notebook sync backend frontend test
+.PHONY: help setup-notebook sample notebook run-notebook export frontend test

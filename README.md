@@ -82,7 +82,7 @@ Two Vercel projects from this one repo (**root directory** `frontend/` and `back
 | Backend API | ✅ scaffold with 6 endpoints + tests; ready to extend |
 | Frontend | ✅ scaffold (dashboard, provider detail, live review analyzer); charts and polish are open tasks |
 | CI | ✅ GitHub Actions: backend tests, frontend build, notebook smoke run |
-| Vercel | see `docs/DEPLOYMENT.md` |
+| Vercel | ⏳ **not connected yet** — the two projects must be imported once in the Vercel dashboard (≈5 min, steps in `docs/DEPLOYMENT.md`); the repo is already configured for it |
 
 ## Data & ethics
 The Yelp Open Dataset may be used for academic purposes but **not redistributed** — the repo contains only a synthetic sample. Reviews are unverified allegations; keep the disclaimer visible in every UI and slide.

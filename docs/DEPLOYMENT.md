@@ -9,9 +9,10 @@ One GitHub repo → **two Vercel projects**, because the repo is a monorepo with
 
 The notebook is **not** deployed — it is the offline analytics pipeline. Its three JSON outputs are the only thing the API needs.
 
-## 1. Connect (already done if you can see the projects in Vercel)
+## 1. Connect (one-time, in the Vercel dashboard — projects are NOT imported yet)
 In Vercel → *Add New… → Project → Import* the GitHub repo `kjodhpur/HomeLensAI`, **twice**, setting *Root Directory* to `backend` the first time and `frontend` the second.
-Leave build/install commands on their defaults. (The Vercel Git integration then builds every push: `main` → Production, every other branch and PR → a Preview URL.)
+Suggested names: `homelensai-api` and `homelensai-web`. Leave build/install commands on their defaults. Grant the Vercel GitHub app access to the repo if prompted.
+Until `main` contains the code, preview-deploy this branch (it builds on every push); production deploys start once the work is merged to `main`. (The Vercel Git integration then builds every push: `main` → Production, every other branch and PR → a Preview URL.)
 
 ## 2. Environment variables
 | Project | Variable | Value | Notes |

@@ -26,7 +26,7 @@ that depends on numbers is computed at run time. So:
 6. [ ] Use the "unexplained flagged reviews" phrases in §6.8 to add missing cues — then re-run (the cache invalidates itself when the lexicon changes).
 7. [ ] **Kernel → Restart & Run All** must finish with no errors. Then *download the executed notebook* (File → Download → .ipynb) and commit it over `notebooks/HomeLensAI_Final_Project.ipynb` so the graders see outputs
        (or submit the GitHub link *and* an HTML export: `jupyter nbconvert --to html`).
-8. [ ] `python scripts/sync_artifacts.py` and restart the web app for the live demo. Keep the DEMO/SAMPLE banner off only when it is the real data.
+8. [ ] For the live demo run the API + web app (`artifacts/` holds the real anonymized results). Re-run `python scripts/sync_artifacts.py` if you changed `app/risk_logic.py`.
 9. [ ] Make sure no data, keys or `.env` files are committed (`git status`, `.gitignore`).
 
 ## Slide outline (12–15 min)

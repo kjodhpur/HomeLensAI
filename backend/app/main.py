@@ -1,4 +1,4 @@
-"""HomeLens AI API (FastAPI).
+"""HomeLens AI API (FastAPI) — an HTTP layer over the anonymized artifacts and the review-risk logic.
 
 Run locally:   uvicorn app.main:app --reload --port 8000      (from the backend/ folder)
 Docs (auto):   http://localhost:8000/docs
@@ -11,19 +11,20 @@ from typing import Any, Literal
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
-from . import analyzer, config, store
+from . import artifacts, config, scoring
+from .examples import EXAMPLES
 
 app = FastAPI(
     title="HomeLens AI API",
-    version="0.1.0",
+    version="0.2.0",
     description=(
-        "Serves provider-level risk intelligence derived from customer reviews. "
-        "All outputs are *complaint signals detected in reviews* — unverified allegations, not findings of wrongdoing."
+        "Review-based risk signals for home-service providers. Providers are anonymized (`Provider_XXXX`); all outputs are "
+        "signals for human investigation, not findings about any business."
     ),
 )
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=config.CORS_ORIGINS,
@@ -33,106 +34,80 @@ app.add_middleware(
 )
 
 
-@app.exception_handler(store.DataNotFoundError)
-async def _data_missing(_, exc: store.DataNotFoundError):  # pragma: no cover - exercised only when artifacts are absent
-    from fastapi.responses import JSONResponse
-
+@app.exception_handler(artifacts.ArtifactError)
+async def _artifact_missing(_, exc: artifacts.ArtifactError):  # pragma: no cover - only when artifacts are absent
     return JSONResponse(status_code=503, content={"detail": str(exc)})
 
 
-# ---------------------------------------------------------------------------------------------------------------------
-# helpers
-# ---------------------------------------------------------------------------------------------------------------------
-LIST_FIELDS = (
-    "business_id", "name", "trade", "city", "state", "eligible", "n_reviews", "avg_stars", "neg_rate", "risk_score", "risk_tier", "rank",
-    "safety_escalation",
-)
-
-
-def _list_item(p: dict[str, Any]) -> dict[str, Any]:
-    """Light-weight projection used by the list endpoint (no evidence sentences / history → small payload)."""
-    item = {k: p[k] for k in LIST_FIELDS}
-    item["trend"] = p["trend"]["direction"]
-    item["recent_neg_rate"] = p["recent"]["neg_rate"]
-    item["prior_neg_rate"] = p["prior"]["neg_rate"]
-    item["top_issues"] = [{"aspect": i["aspect"], "label": i["label"], "n_reviews": i["n_reviews"], "recurring": i["recurring"]} for i in p["issues"][:3]]
-    return item
-
-
-# ---------------------------------------------------------------------------------------------------------------------
-# routes
-# ---------------------------------------------------------------------------------------------------------------------
 @app.get("/api/health", tags=["meta"])
 def health() -> dict[str, Any]:
-    meta = store.provider_risk()["meta"]
-    return {"status": "ok", "data_mode": meta["data_mode"], "generated_at": meta["generated_at"], "providers": meta["n_providers_total"]}
+    model = scoring.load_model()
+    return {"status": "ok", "providers": len(artifacts.providers()), "model": model.name if model else None,
+            "model_available": model is not None, "market": artifacts.metadata().get("market")}
 
 
-@app.get("/api/summary", tags=["meta"])
-def summary() -> dict[str, Any]:
-    """Dataset facts, model metrics, tier counts, aspect prevalence and trade breakdown for the dashboard header."""
-    return store.summary()
+@app.get("/api/overview", tags=["portfolio"])
+def overview() -> dict[str, Any]:
+    """KPI pods (with sparkline series), tier counts, service-group benchmark, model comparison, corpus timeline."""
+    return artifacts.overview()
 
 
-@app.get("/api/aspects", tags=["meta"])
+@app.get("/api/aspects", tags=["portfolio"])
 def aspects() -> list[dict[str, Any]]:
-    """The 8-aspect taxonomy (label, severity, description) — handy for filter chips and legends."""
-    return [
-        {"key": k, "label": v["label"], "severity": v["severity"], "description": v["description"]}
-        for k, v in store.lexicon()["aspects"].items()
-    ]
+    """The 8 complaint aspects with corpus statistics, keyword cluster (phrase dictionary) and recommended action."""
+    return artifacts.aspects()
 
 
 @app.get("/api/providers", tags=["providers"])
 def list_providers(
-    q: str | None = Query(None, description="case-insensitive substring of the provider name"),
-    trade: str | None = None,
-    tier: Literal["High", "Medium", "Low", "Insufficient data"] | None = None,
-    trend: Literal["worsening", "improving", "stable", "insufficient data"] | None = None,
-    aspect: str | None = Query(None, description="only providers with a recurring issue of this aspect, e.g. 'safety'"),
-    eligible_only: bool = True,
-    sort: Literal["rank", "risk_score", "n_reviews", "neg_rate", "avg_stars", "name"] = "rank",
-    order: Literal["asc", "desc"] | None = None,
-    limit: int = Query(50, ge=1, le=200),
+    tier: Literal["Stable", "Watch", "Elevated", "High concern"] | None = None,
+    service_group: str | None = None,
+    aspect: str | None = Query(None, description="top complaint aspect, e.g. 'Reliability / No-show'"),
+    trend: Literal["Rising", "Steady", "Improving", "Insufficient data"] | None = None,
+    min_reviews: int = Query(20, ge=20),
+    q: str | None = Query(None, description="substring of the anonymized provider code"),
+    sort: Literal["risk_score", "reviews", "recent_risk", "trend_delta"] = "risk_score",
+    limit: int = Query(500, ge=1, le=500),
     offset: int = Query(0, ge=0),
 ) -> dict[str, Any]:
-    items = store.provider_risk()["providers"]
-    if eligible_only:
-        items = [p for p in items if p["eligible"]]
-    if q:
-        items = [p for p in items if q.lower() in p["name"].lower()]
-    if trade:
-        items = [p for p in items if p["trade"] == trade]
+    """Anonymized providers with at least 20 reviews, each with its yearly risk history."""
+    items = [p for p in artifacts.providers() if p["reviews"] >= min_reviews]
     if tier:
         items = [p for p in items if p["risk_tier"] == tier]
-    if trend:
-        items = [p for p in items if p["trend"]["direction"] == trend]
+    if service_group:
+        items = [p for p in items if p["service_group"] == service_group]
     if aspect:
-        items = [p for p in items if any(i["aspect"] == aspect and i["recurring"] for i in p["issues"])]
-
-    default_desc = sort in {"risk_score", "n_reviews", "neg_rate"}
-    desc = (order == "desc") if order else default_desc
-    key = (lambda p: p["name"].lower()) if sort == "name" else (lambda p: (p[sort] is None, p[sort]))
-    items = sorted(items, key=key, reverse=desc)
-    if desc:  # keep providers with a missing value (None) at the end regardless of direction
-        items = [p for p in items if p.get(sort) is not None] + [p for p in items if p.get(sort) is None]
-    return {"total": len(items), "limit": limit, "offset": offset, "items": [_list_item(p) for p in items[offset : offset + limit]]}
+        items = [p for p in items if p["top_aspect"] == aspect]
+    if trend:
+        items = [p for p in items if p["trend"] == trend]
+    if q:
+        items = [p for p in items if q.lower() in p["code"].lower()]
+    items = sorted(items, key=lambda p: (p[sort] is None, -(p[sort] or 0)))
+    return {"total": len(items), "limit": limit, "offset": offset, "items": items[offset : offset + limit]}
 
 
-@app.get("/api/providers/{business_id}", tags=["providers"])
-def get_provider(business_id: str) -> dict[str, Any]:
-    """Full provider profile including recurring issues with evidence sentences, trend, actions and yearly history."""
-    provider = store.providers_by_id().get(business_id)
-    if provider is None:
-        raise HTTPException(status_code=404, detail=f"Unknown provider {business_id!r}")
-    return provider
+@app.get("/api/providers/{code}", tags=["providers"])
+def get_provider(code: str) -> dict[str, Any]:
+    p = artifacts.provider(code)
+    if p is None:
+        raise HTTPException(status_code=404, detail=f"Unknown provider {code!r}")
+    peers = [x for x in artifacts.services() if x["service_group"] == p["service_group"]]
+    return {**p, "service_benchmark": peers[0] if peers else None}
+
+
+@app.get("/api/examples", tags=["review analysis"])
+def examples() -> list[dict[str, str]]:
+    return EXAMPLES
 
 
 class AnalyzeRequest(BaseModel):
-    text: str = Field(..., min_length=3, max_length=config.MAX_ANALYZE_CHARS, examples=["They never called back and charged $600 more than quoted."])
+    text: str = Field(..., min_length=3, max_length=config.MAX_ANALYZE_CHARS, examples=[EXAMPLES[0]["text"]])
 
 
-@app.post("/api/analyze", tags=["live demo"])
+@app.post("/api/analyze", tags=["review analysis"])
 def analyze(req: AnalyzeRequest) -> dict[str, Any]:
-    """Paste a review, get aspect complaint signals with evidence sentences (LITE port of the notebook's Layer 2)."""
-    return analyzer.analyze(req.text)
+    """Score a review: probability vs threshold, complaint aspects, per-sentence breakdown, evidence sentence, token weights."""
+    try:
+        return scoring.analyze(req.text)
+    except ValueError as err:
+        raise HTTPException(status_code=422, detail=str(err)) from err

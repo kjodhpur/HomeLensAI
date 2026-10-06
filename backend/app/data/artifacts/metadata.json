@@ -1,0 +1,19 @@
+{
+  "market": "Tucson, AZ",
+  "core_reviews": 17943,
+  "providers": 1054,
+  "unique_reviewers": 12384,
+  "date_start": "2006-11-26",
+  "date_end": "2022-01-19",
+  "monitored_providers": 254,
+  "min_reviews_for_monitoring": 20,
+  "test_reviews": 3480,
+  "test_businesses": 213,
+  "train_reviews": 10469,
+  "validation_reviews": 3484,
+  "tfidf_threshold": 0.585,
+  "tfidf_best_c": 4.0,
+  "distilbert_threshold": 0.95,
+  "tfidf_rebuild_test_macro_f1": 0.959,
+  "provider_scores_model": "TF\u2013IDF Logistic Regression (local rebuild)"
+}

@@ -16,41 +16,48 @@ Reviews are customer allegations, so every output is a **"complaint signal detec
 ## What is in this repo
 
 ```
-notebooks/HomeLensAI_Final_Project.ipynb   ← THE course deliverable: full analysis, runs top-to-bottom
-data/                                      ← how to get the Yelp data (not committed) + a synthetic sample
-backend/                                   ← FastAPI service that serves the notebook's JSON outputs      → Vercel project #1
-frontend/                                  ← Next.js (App Router, TypeScript) dashboard                   → Vercel project #2
-scripts/                                   ← make_sample_data.py, sync_artifacts.py
-docs/                                      ← TEAM_GUIDE · DATA_CONTRACT · DEPLOYMENT · SUBMISSION
+notebooks/HomeLensAI_Final_Project.ipynb   ← course notebook: full analysis, runs top-to-bottom (also FinalProject_HomeLensAI.ipynb, EDA notebooks)
+artifacts/                                 ← anonymized results of the real Yelp run (CSV tables, metadata, TF-IDF model files) — the app's single data source
+app/ · views/ · streamlit_app.py           ← risk logic (app/risk_logic.py) + the Streamlit command center
+backend/                                   ← FastAPI service over artifacts/ + risk_logic (serves the web app)                    → Vercel project #1
+frontend/                                  ← Next.js "liquid glass" dashboard (TypeScript, no UI library)                          → Vercel project #2
+data/                                      ← how to get the Yelp data (not committed) + a synthetic sample for the notebook
+scripts/                                   ← build_artifacts.py, sync_artifacts.py, make_sample_data.py
+docs/                                      ← TEAM_GUIDE · DATA_CONTRACT (API) · DEPLOYMENT · SUBMISSION
 ```
 
 ```
- Yelp data ──► notebook (offline analytics: spaCy, scikit-learn, DistilBERT)
-                  │  Section 9 writes 3 JSON files  (docs/DATA_CONTRACT.md)
-                  ▼
-   scripts/sync_artifacts.py ──► backend/app/data/*.json
-                                       │  FastAPI  (/api/providers, /api/providers/{id}, /api/summary, /api/analyze …)
-                                       ▼
-                                 frontend (Next.js)  ── browser
+ Yelp data ──► scripts/build_artifacts.py ──► artifacts/*.csv, *.joblib, metadata.json
+                                                │
+                       ┌────────────────────────┴───────────────┐
+                       ▼                                        ▼  scripts/sync_artifacts.py (vendors risk_logic.py + artifacts/)
+          Streamlit app (streamlit_app.py)           backend/  FastAPI  (/api/overview, /api/providers, /api/aspects, /api/analyze …)
+                                                                 │
+                                                                 ▼
+                                                    frontend/  Next.js liquid-glass dashboard  ── browser
 ```
 
-The heavy NLP never runs on Vercel (size and time limits): the notebook is the **offline pipeline**, the API is a thin **serving layer** over its outputs.
+The heavy NLP never runs on Vercel (size and time limits). The API serves precomputed tables and scores single reviews with the small TF-IDF model; DistilBERT stays in the notebook / Streamlit app.
+Providers are always shown as anonymized `Provider_XXXX` codes.
 
 ## Quick start
 
 > Requires Python 3.10+ and Node 20+. `make help` lists shortcuts.
 
-**1. Run the API + web app on the sample data (no Yelp data needed — start here if you are on the front/back end):**
+**1. Run the API + the liquid-glass web app (uses `artifacts/` — no Yelp data needed; start here if you are on the front/back end):**
 ```bash
 # terminal 1 — backend on http://localhost:8000  (interactive docs at /docs)
 cd backend && python -m venv .venv && source .venv/bin/activate
 pip install -r requirements-dev.txt
 uvicorn app.main:app --reload --port 8000
-pytest -q                      # 13 tests
+pytest -q                      # 19 tests
 
 # terminal 2 — frontend on http://localhost:3000
 cd frontend && cp .env.example .env.local && npm install && npm run dev
 ```
+After changing `app/risk_logic.py` or rebuilding `artifacts/`, run `python scripts/sync_artifacts.py` (the backend deploys with `backend/` as its root, so it carries vendored copies; a test fails if they drift).
+
+**1b. The Streamlit command center:** `pip install -r requirements.txt && streamlit run streamlit_app.py`
 
 **2. Run the notebook (analytics) on the real Yelp data:**
 ```bash
@@ -62,9 +69,10 @@ jupyter lab notebooks/HomeLensAI_Final_Project.ipynb        # Kernel → Restart
 Without any data in `data/raw/` the notebook runs on the synthetic sample in DEMO MODE. DistilBERT needs a GPU (NVIDIA CUDA or Apple-silicon MPS) and is skipped automatically otherwise
 (`HOMELENS_RUN_DISTILBERT=1` forces it on CPU — slow).
 
-**3. Refresh the web app after a real notebook run:**
+**3. Refresh the web app after rebuilding the artifacts:**
 ```bash
-python scripts/sync_artifacts.py     # data/processed/*.json → backend/app/data/
+python scripts/build_artifacts.py    # from the raw Yelp CSV (git-ignored) → artifacts/
+python scripts/sync_artifacts.py     # artifacts/ + app/risk_logic.py → backend/
 ```
 
 ## Streamlit command center (`streamlit_app.py`)
@@ -97,8 +105,8 @@ Two Vercel projects from this one repo (**root directory** `frontend/` and `back
 | Piece | State |
 |---|---|
 | Notebook (all 3 layers, EDA, dashboard, export) | ✅ complete; verified end-to-end on the synthetic sample and on two package-version sets (pandas 2.2 / 3.0). **Needs one run on the real Yelp data** (see `docs/SUBMISSION.md`) |
-| Backend API | ✅ scaffold with 6 endpoints + tests; ready to extend |
-| Frontend | ✅ scaffold (dashboard, provider detail, live review analyzer); charts and polish are open tasks |
+| Backend API | ✅ FastAPI over the real artifacts (overview, providers, aspects, review analysis) + 19 tests |
+| Frontend | ✅ liquid-glass dashboard: KPI pods, risk leaderboard, aspect radar blob, evidence feed, action-triage dock |
 | Streamlit app | ✅ five pages, TF-IDF fallback live; DistilBERT activates once the model is on Hugging Face |
 | CI | ✅ GitHub Actions: backend tests, frontend build, notebook smoke run |
 | Vercel | ⏳ **not connected yet** — the two projects must be imported once in the Vercel dashboard (≈5 min, steps in `docs/DEPLOYMENT.md`); the repo is already configured for it |

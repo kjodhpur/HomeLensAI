@@ -1,11 +1,11 @@
 # Backend (FastAPI)
 
-Serves the JSON artifacts produced by the analytics notebook. See [`../docs/DATA_CONTRACT.md`](../docs/DATA_CONTRACT.md) for the endpoints and schemas.
+An HTTP layer over the anonymized `artifacts/` and the review-risk logic. Endpoints and schemas: [`../docs/DATA_CONTRACT.md`](../docs/DATA_CONTRACT.md).
 
 ```bash
 python -m venv .venv && source .venv/bin/activate
-pip install -r requirements-dev.txt
-uvicorn app.main:app --reload --port 8000      # docs at http://localhost:8000/docs
+pip install -r requirements-dev.txt        # scikit-learn is pinned to 1.8.0 (matches the joblib files)
+uvicorn app.main:app --reload --port 8000  # docs at http://localhost:8000/docs
 pytest -q
 ruff check ..
 ```
@@ -13,10 +13,10 @@ ruff check ..
 | File | Purpose |
 |---|---|
 | `app/main.py` | FastAPI app and routes (`app` is the Vercel entrypoint) |
-| `app/store.py` | loads + caches the JSON files (`data/<file>` wins over `data/sample/<file>`) |
-| `app/analyzer.py` | lite live analyzer behind `POST /api/analyze` |
-| `app/config.py` | env-var configuration (`HOMELENS_DATA_DIR`, `CORS_ORIGINS`) |
-| `app/data/sample/` | committed synthetic artifacts (used by tests and when no real data is present) |
-| `tests/` | pytest suite — add a test with every route |
+| `app/artifacts.py` | reads the CSV/JSON artifacts, builds providers, aspects and the overview/KPI series |
+| `app/scoring.py` | TF-IDF scoring: per-sentence probabilities, evidence sentence, token weights; dictionary-only fallback |
+| `app/risk_logic.py` | **vendored copy** of `../app/risk_logic.py` (aspect dictionary, masking, recommendations) — do not edit here |
+| `app/data/artifacts/` | **vendored copy** of `../artifacts/` — do not edit here |
+| `tests/` | pytest suite (includes a drift check on the vendored files) |
 
-Environment variables: see [`.env.example`](.env.example). Deployment: [`../docs/DEPLOYMENT.md`](../docs/DEPLOYMENT.md).
+Refresh the vendored files with `python ../scripts/sync_artifacts.py`. Environment variables: [`.env.example`](.env.example). Deployment: [`../docs/DEPLOYMENT.md`](../docs/DEPLOYMENT.md).

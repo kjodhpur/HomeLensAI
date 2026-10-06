@@ -1,124 +1,134 @@
-// TypeScript mirror of docs/DATA_CONTRACT.md. Keep in sync with the notebook's Section 9 export.
+// TypeScript mirror of the FastAPI responses (see docs/DATA_CONTRACT.md). Keep in sync with backend/app/artifacts.py and scoring.py.
 
-export type Tier = "High" | "Medium" | "Low" | "Insufficient data";
-export type TrendDirection = "worsening" | "improving" | "stable" | "insufficient data";
+export type Tier = "Stable" | "Watch" | "Elevated" | "High concern";
+export type Trend = "Rising" | "Steady" | "Improving" | "Insufficient data";
 
-export interface TopIssue {
-  aspect: string;
-  label: string;
-  n_reviews: number;
-  recurring: boolean;
+export interface HistoryPoint {
+  year: number;
+  reviews: number;
+  risk: number;
 }
 
-/** One row of GET /api/providers */
-export interface ProviderListItem {
-  business_id: string;
-  name: string;
-  trade: string;
-  city: string | null;
-  state: string | null;
-  eligible: boolean;
-  n_reviews: number;
-  avg_stars: number;
-  neg_rate: number;
-  risk_score: number | null;
-  risk_tier: Tier;
-  rank: number | null;
-  safety_escalation: boolean;
-  trend: TrendDirection;
-  recent_neg_rate: number | null;
-  prior_neg_rate: number | null;
-  top_issues: TopIssue[];
-}
-
-export interface ProviderList {
-  total: number;
-  limit: number;
-  offset: number;
-  items: ProviderListItem[];
-}
-
-export interface Evidence {
-  review_id: string;
-  date: string;
-  stars: number;
-  cue: string;
-  sentence: string;
-}
-
-export interface Issue {
-  aspect: string;
-  label: string;
-  severity: number;
-  n_reviews: number;
-  share_of_flagged: number;
-  recurring: boolean;
-  evidence: Evidence[];
-}
-
-/** GET /api/providers/{id} */
 export interface Provider {
-  business_id: string;
-  name: string;
-  trade: string;
-  city: string | null;
-  state: string | null;
-  categories: string[];
-  eligible: boolean;
-  n_reviews: number;
-  n_flagged: number;
-  avg_stars: number;
-  yelp_stars: number | null;
-  neg_rate: number;
-  recent: { n: number; neg_rate: number | null };
-  prior: { n: number; neg_rate: number | null };
-  trend: { direction: TrendDirection; delta: number | null; p_value: number | null };
-  risk_score: number | null;
+  code: string; // anonymized: Provider_XXXX
+  service_group: string;
+  reviews: number;
+  observed_negative_rate: number;
+  mean_risk: number;
+  recent_risk: number | null;
+  trend_delta: number | null;
+  trend: Trend;
+  high_severity_rate: number;
+  top_aspect: string;
+  risk_score: number;
   risk_tier: Tier;
-  rank: number | null;
-  safety_escalation: boolean;
-  issues: Issue[];
-  action_manager: string;
-  action_homeowner: string;
-  history: { year: number; n: number; neg_rate: number; avg_stars: number }[];
+  recommended_action: string;
+  recent_reviews: number;
+  previous_reviews: number;
+  latest_review: string | null;
+  history: HistoryPoint[];
 }
 
-export interface Summary {
+export interface SeriesPoint {
+  x: number;
+  y: number;
+}
+
+export interface ServiceSummary {
+  service_group: string;
+  monitored_providers: number;
+  median_risk_score: number;
+  high_concern_providers: number;
+  median_recent_risk: number;
+}
+
+export interface Overview {
   meta: {
-    data_mode: "sample" | "yelp";
-    generated_at: string;
-    reference_date: string;
-    recent_months: number;
+    market: string;
+    date_start: string;
+    date_end: string;
+    core_reviews: number;
+    providers: number;
+    monitored_providers: number;
     min_reviews: number;
-    n_reviews: number;
-    n_providers_total: number;
-    n_providers_eligible: number;
-    disclaimer: string;
+    provider_scores_model: string | null;
   };
-  dataset: { n_reviews: number; n_providers: number; date_min: string; date_max: string; star_distribution: Record<string, number> };
-  tiers: Record<string, number>;
-  trend_counts: Record<string, number>;
-  models: Record<string, string | number | null>[];
-  aspects: { key: string; label: string; severity: number; description: string; share_in_risk_reviews: number; share_in_satisfied_reviews: number; flagged_reviews: number }[];
-  trades: { trade: string; providers: number; reviews: number; risk_rate: number }[];
+  kpis: {
+    reviews_analyzed: { value: number; series: SeriesPoint[]; providers: number; unique_reviewers: number };
+    sentiment_shift: {
+      shift: { from_year: number; to_year: number; from_rate: number; to_rate: number; delta_pts: number } | null;
+      series: SeriesPoint[];
+    };
+    escalations: { value: number; elevated: number; monitored: number; series: SeriesPoint[]; codes: string[] };
+  };
+  tiers: Record<Tier, number>;
+  tier_rules: Record<Tier, string>;
+  services: ServiceSummary[];
+  models: { model: string; operating_threshold: number; macro_f1: number; negative_recall: number; negative_precision: number }[];
 }
 
-export interface AnalyzeSignal {
+export interface Aspect {
   aspect: string;
+  reviews_with_signal: number;
+  share_of_corpus: number;
+  negative_reviews_with_signal: number;
+  negative_rate_when_mentioned: number;
+  lift: number;
+  high_severity: boolean;
+  keywords: string[];
+  recommended_action: string;
+  providers_led: number;
+}
+
+export interface Example {
+  id: string;
   label: string;
-  tier: string;
-  cue: string;
-  sentence: string;
-  sentence_compound: number;
-  complaint: boolean;
+  kind: "complaint" | "positive";
+  text: string;
+}
+
+export interface SentenceResult {
+  index: number;
+  start: number;
+  end: number;
+  text: string;
+  risk_probability: number | null;
+  flagged: boolean;
+  aspects: string[];
+  matched_phrases: Record<string, string[]>;
 }
 
 export interface AnalyzeResult {
-  text_compound: number;
-  negative_sentiment: boolean;
-  aspects: string[];
-  signals: AnalyzeSignal[];
-  mode: string;
-  note: string;
+  model: { name: string; threshold: number | null; available: boolean; is_primary: boolean; note: string };
+  risk_probability: number | null;
+  operating_threshold: number | null;
+  management_attention: boolean | null;
+  primary_aspect: string;
+  detected_aspects: string[];
+  matched_phrases: Record<string, string[]>;
+  recommended_action: string;
+  sentences: SentenceResult[];
+  evidence: {
+    index: number;
+    sentence: string;
+    aspect: string;
+    matched_phrases: Record<string, string[]>;
+    risk_probability: number | null;
+    has_dictionary_match: boolean;
+  } | null;
+  weights: {
+    bias: number;
+    logit: number;
+    terms: { term: string; label: string; weight: number }[];
+    explained_positive: number;
+    explained_negative: number;
+  } | null;
+  masking_applied: boolean;
   disclaimer: string;
 }
+
+/** What the action-triage dock is currently about. */
+export type TriageContext =
+  | { kind: "provider"; provider: Provider }
+  | { kind: "aspect"; aspect: Aspect }
+  | { kind: "review"; result: AnalyzeResult };

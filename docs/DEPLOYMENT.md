@@ -7,7 +7,7 @@ One GitHub repo → **two Vercel projects**, because the repo is a monorepo with
 | `homelensai-api` | `backend` | FastAPI (Python, auto-detected from `app/main.py`) | the REST API |
 | `homelensai-web` | `frontend` | Next.js (auto-detected) | the dashboard |
 
-The notebook is **not** deployed — it is the offline analytics pipeline. Its three JSON outputs are the only thing the API needs.
+The notebook and the Streamlit app are **not** deployed here. The API only needs the vendored `artifacts/` and `risk_logic.py`.
 
 ## 1. Connect (one-time, in the Vercel dashboard — projects are NOT imported yet)
 In Vercel → *Add New… → Project → Import* the GitHub repo `kjodhpur/HomeLensAI`, **twice**, setting *Root Directory* to `backend` the first time and `frontend` the second.
@@ -19,7 +19,8 @@ Until `main` contains the code, preview-deploy this branch (it builds on every p
 |---|---|---|---|
 | web | `API_BASE_URL` | `https://<api-project-domain>` (no trailing slash) | used by server components **and** the `/api/*` rewrite; set for Production *and* Preview |
 | api | `CORS_ORIGINS` | `https://<web-project-domain>` | only needed if browsers call the API directly; the web app proxies `/api/*` itself |
-| api | `HOMELENS_DATA_DIR` | *(optional)* | only if the JSON files live outside `backend/app/data/` |
+| api | `HOMELENS_ARTIFACTS_DIR` | *(optional)* | only if the artifacts live outside `backend/app/data/artifacts/` |
+| api | `HOMELENS_DISABLE_MODEL` | *(optional)* `1` | serve dictionary-only analysis (no scikit-learn) |
 
 After changing a variable, **redeploy** (Deployments → ⋯ → Redeploy) — Vercel reads env vars at build time.
 Locally the same names go in `frontend/.env.local` and `backend/.env`.
@@ -33,17 +34,14 @@ open https://<web-project-domain>                        # dashboard with the SA
 If the dashboard shows "Could not load data", `API_BASE_URL` is missing or points at the wrong project. Preview deployments of a branch use *Preview* env vars — make sure they are set too.
 If a preview of the API returns 401, **Vercel Deployment Protection** is on for previews: either use the production URL for `API_BASE_URL`, or turn protection off for the API project (Settings → Deployment Protection).
 
-## 4. Putting the real data online — read the licence note first
-`backend/app/data/*.json` (real results) is **git-ignored on purpose**. The files contain review sentences from the Yelp Open Dataset, whose licence does not allow redistributing the data.
-Options, safest first:
-1. **Demo with the synthetic sample** (default — it is committed and deployed automatically). Show real numbers in the notebook/slides only.
-2. Deploy the real JSON from a **private** repository / private Vercel project only, after checking the Yelp terms (academic use is generally fine; public redistribution is not). To do so remove the `backend/app/data/*.json` line from `.gitignore`, run `python scripts/sync_artifacts.py`, and commit.
-3. Strip the `evidence[].sentence` text from the export (keep counts, scores and trends) and serve only the aggregates.
+## 4. Data on Vercel
+The deployed API ships `backend/app/data/artifacts/` — **anonymized aggregates** (provider codes, scores, yearly risk) and the small TF-IDF model; it contains no raw Yelp reviews, names or business ids.
+The `/api/analyze` endpoint scores text the *visitor* pastes; the bundled example reviews are synthetic. Update flow: `python scripts/build_artifacts.py` → `python scripts/sync_artifacts.py` → commit → push, and Vercel redeploys.
 
-## 5. Updating the deployed data
-`notebook → python scripts/sync_artifacts.py → git commit → push`. Vercel redeploys the API automatically with the new files.
+## 5. Size and runtime
+The API needs `scikit-learn==1.8.0` (+ numpy/scipy) to score reviews — roughly 200–250 MB unpacked, inside Vercel's Python function limit. If a build ever exceeds it, set
+`HOMELENS_DISABLE_MODEL=1` (the API then serves dictionary-only analysis) or move scoring to a separate service. `backend/requirements.txt` pins scikit-learn to the version that wrote the joblib files.
 
 ## Notes
-* Vercel Python functions have a **~250 MB** size limit and short execution limits — the reason spaCy/DistilBERT stay in the notebook and the API only depends on `fastapi` and `vaderSentiment`.
-* `POST /api/analyze` is a *lite* analyzer for demos; for production-grade scoring run the notebook pipeline offline.
+* DistilBERT stays out of the API (size/time limits); the web UI always labels the model that produced a score.
 * Rollbacks: Vercel → Deployments → *Promote to Production* on an earlier deployment.

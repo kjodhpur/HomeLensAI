@@ -1,36 +1,41 @@
-"""Copy the JSON artifacts written by the notebook (Section 9) into the backend.
+"""Vendor the teammate-built data layer into the API project (backend/).
 
-    python scripts/sync_artifacts.py              # real data  : data/processed/*.json  -> backend/app/data/
-    python scripts/sync_artifacts.py --sample     # sample data: data/sample/outputs/*.json -> backend/app/data/sample/
+The API is deployed on Vercel with Root Directory = ``backend/``, so it cannot see files outside that folder. This script copies
+the single sources of truth into it:
 
-The backend prefers backend/app/data/<file> and falls back to backend/app/data/sample/<file>.
-Real-data files are git-ignored on purpose (they contain review sentences from the Yelp Open Dataset) — see docs/DEPLOYMENT.md.
+    app/risk_logic.py      ->  backend/app/risk_logic.py        (aspect dictionary, masking, recommendations)
+    artifacts/*            ->  backend/app/data/artifacts/*     (CSV tables, metadata.json, TF-IDF joblib files)
+
+Run it after ``python scripts/build_artifacts.py`` (or after editing ``app/risk_logic.py``) and commit the result.
+``backend/tests/test_api.py::test_vendored_files_match_sources`` fails if the copies drift.
+
+    python scripts/sync_artifacts.py
 """
 
 from __future__ import annotations
 
-import argparse
 import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-FILES = ("provider_risk.json", "summary.json", "aspect_lexicon.json")
+DEST = ROOT / "backend" / "app"
+ARTIFACT_SUFFIXES = {".csv", ".json", ".joblib"}
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--sample", action="store_true", help="sync the synthetic sample outputs instead of the real ones")
-    args = ap.parse_args()
-
-    src = ROOT / "data" / ("sample/outputs" if args.sample else "processed")
-    dst = ROOT / "backend" / "app" / "data" / ("sample" if args.sample else "")
-    dst.mkdir(parents=True, exist_ok=True)
-    missing = [f for f in FILES if not (src / f).exists()]
-    if missing:
-        raise SystemExit(f"Missing {missing} in {src}. Run the notebook (Section 9) first.")
-    for f in FILES:
-        shutil.copy2(src / f, dst / f)
-        print(f"copied {(src / f).relative_to(ROOT)} -> {(dst / f).relative_to(ROOT)}")
+    shutil.copy2(ROOT / "app" / "risk_logic.py", DEST / "risk_logic.py")
+    print("copied app/risk_logic.py -> backend/app/risk_logic.py")
+    target = DEST / "data" / "artifacts"
+    target.mkdir(parents=True, exist_ok=True)
+    for stale in target.iterdir():
+        if stale.is_file():
+            stale.unlink()
+    n = 0
+    for src in sorted((ROOT / "artifacts").iterdir()):
+        if src.suffix in ARTIFACT_SUFFIXES:
+            shutil.copy2(src, target / src.name)
+            n += 1
+    print(f"copied {n} artifact files -> backend/app/data/artifacts/")
 
 
 if __name__ == "__main__":

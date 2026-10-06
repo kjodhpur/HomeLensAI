@@ -1,79 +1,57 @@
-# Data contract — notebook → backend → frontend
+# API contract — artifacts → backend → frontend
 
-The notebook (Section 9) writes three JSON files. `scripts/sync_artifacts.py` copies them into `backend/app/data/`; the backend serves them; the frontend's TypeScript types live in
-`frontend/lib/types.ts`. **If you change a field, change all three places (notebook export, backend, `types.ts`) in the same PR.**
-Committed examples (synthetic data) are in `backend/app/data/sample/`.
+The single source of data is the repo-level `artifacts/` folder (written by `scripts/build_artifacts.py` from the real Yelp run). `scripts/sync_artifacts.py` vendors it, together with
+`app/risk_logic.py`, into `backend/` (Vercel deploys that folder on its own). The backend exposes it over HTTP; the frontend's TypeScript types are in `frontend/lib/types.ts`.
+**If you change a field, change the backend (`app/artifacts.py` / `scoring.py`), `frontend/lib/types.ts`, the tests and this file in the same commit.**
 
-All rates are fractions in **0–1**, not percentages. Dates are ISO `YYYY-MM-DD`. `null` means "not computable" (e.g. too few reviews).
+Rules inherited from the project (`CLAUDE.md`): providers are **anonymized** (`Provider_XXXX`, never names or business ids); monitoring needs **≥ 20 reviews**; use the wording *review-based risk signal,
+management attention, relative concern tier, human investigation* and never claim fraud, liability, verified misconduct or bankruptcy prediction.
+Rates are fractions in 0–1. Interactive docs: `http://localhost:8000/docs`.
 
-## `provider_risk.json`
-```jsonc
-{
-  "meta": {
-    "generated_at": "2026-10-06T06:07:34Z",
-    "data_mode": "sample" | "yelp",
-    "reference_date": "2022-01-17",      // latest review date: "today" for this dataset
-    "recent_months": 24,                 // recent window; the prior window is the 24 months before it
-    "min_reviews": 20,                   // providers below this are eligible=false
-    "recurrence_min": 3,                 // an issue is "recurring" at >= 3 distinct flagged reviews
-    "risk_threshold": 0.7276,            // P(risk) at/above which a review is "flagged" (Layer 1)
-    "scorer": "tfidf_logreg_oof",
-    "score_weights": { "neg_rate_lb": 0.35, "recent_neg_rate": 0.25, "severity": 0.25, "recurrence": 0.15 },
-    "n_reviews": 1166, "n_providers_total": 40, "n_providers_eligible": 26,
-    "disclaimer": "Complaint signals detected …"      // show this in the UI
-  },
-  "providers": [ Provider, … ]           // eligible providers first, sorted by rank
-}
-```
+## Artifacts (`artifacts/`)
+| File | Content |
+|---|---|
+| `provider_risk_dashboard.csv` | one row per monitored provider: `provider_code, service_group, reviews, observed_negative_rate, mean_risk_probability, recent_risk_probability, trend_delta, high_severity_rate, top_aspect, risk_score, risk_tier, recommended_action, recent_reviews, previous_reviews, latest_review` |
+| `provider_yearly_risk.csv` | `provider_code, review_year, reviews, mean_risk_probability` |
+| `aspect_summary.csv` | per complaint aspect: reviews with signal, share of corpus, negative rate when mentioned, lift vs corpus |
+| `service_risk_summary.csv`, `service_group_eda.csv`, `corpus_timeline.csv`, `model_comparison.csv`, `tfidf_signal_terms.csv`, `metadata.json` | benchmark tables, yearly corpus stats, validated model metrics, model terms, run metadata (incl. the TF-IDF threshold) |
+| `homelens_tfidf_*.joblib` | the TF-IDF vectorizer and logistic-regression model (scikit-learn **1.8.0**) |
 
-### `Provider`
-| Field | Type | Notes |
-|---|---|---|
-| `business_id` | string | Yelp business id (stable key; used in URLs) |
-| `name`, `trade`, `city`, `state` | string | `trade` is one of the 9 trade groups from the notebook's `TRADE_RULES` |
-| `categories` | string[] | raw Yelp categories |
-| `eligible` | bool | `n_reviews >= min_reviews`; when false `risk_score`, `rank` are `null`, `risk_tier = "Insufficient data"`, and issues carry no evidence |
-| `n_reviews`, `n_flagged` | int | all reviews / reviews flagged as a risk signal |
-| `avg_stars`, `yelp_stars` | number | mean of this dataset's review stars / Yelp's own business rating (may be `null`) |
-| `neg_rate` | number | `n_flagged / n_reviews` |
-| `recent`, `prior` | `{n, neg_rate}` | window counts; `neg_rate` is `null` when `n < 5` |
-| `trend` | `{direction, delta, p_value}` | `direction ∈ worsening \| improving \| stable \| insufficient data`; `delta = recent − prior`; Fisher exact p |
-| `risk_score` | number 0–100 \| null | ranking aid, **not** a probability |
-| `risk_tier` | `High \| Medium \| Low \| Insufficient data` | top 15 % / next 25 % / rest of eligible providers; safety rule can lift a tier |
-| `rank` | int \| null | 1 = highest risk |
-| `safety_escalation` | bool | ≥ 2 reviews with a safety signal |
-| `issues` | `Issue[]` | sorted by count desc; includes non-recurring ones (`recurring=false`) |
-| `action_manager`, `action_homeowner` | string | rule-based recommendation for each audience |
-| `history` | `{year, n, neg_rate, avg_stars}[]` | one row per year with reviews — feeds the trend line chart |
+Tiers (relative, by risk score): **Stable** < 50 · **Watch** 50–75 · **Elevated** 75–90 · **High concern** ≥ 90. Trend: change in mean model risk, 2021+ vs 2020 — **Rising** (> +0.05), **Improving** (< −0.05), **Steady**, **Insufficient data**.
 
-### `Issue`
-| Field | Type | Notes |
-|---|---|---|
-| `aspect` | one of `workmanship, reliability, pricing, communication, timeliness, professionalism, warranty, safety` | |
-| `label`, `severity` | string, number 0–1 | display name; severity weight used in the score |
-| `n_reviews` | int | distinct flagged reviews containing this aspect |
-| `share_of_flagged` | number | `n_reviews / provider.n_flagged` |
-| `recurring` | bool | `n_reviews >= recurrence_min` |
-| `evidence` | `{review_id, date, stars, cue, sentence}[]` | up to 2 most-negative evidence sentences, one per review. **This is review text — see the licence note in `DEPLOYMENT.md`.** |
-
-## `summary.json`
-`meta` (same as above), `dataset {n_reviews, n_providers, date_min, date_max, star_distribution, median_words}`, `tiers {High, Medium, Low: int}`,
-`trend_counts {worsening, improving, stable, insufficient data: int}`, `models[]` (one row per model × operating point: `model`, `operating point`, `macro F1`, `weighted F1`,
-`risk precision`, `risk recall`, `risk F1`, `no-risk precision`, `no-risk recall`, `ROC AUC`, `PR AUC`), `aspects[]` (`key, label, severity, description, share_in_risk_reviews,
-share_in_satisfied_reviews, flagged_reviews`), `trades[]` (`trade, providers, reviews, risk_rate`), `disclaimer`.
-
-## `aspect_lexicon.json`
-The Layer-2 lexicon (`aspects.<key> = {label, severity, description, strong[], weak[], topic[], negation_cancels_topic?}`), `negators[]` and `neg_sent_threshold`. The backend's
-`/api/analyze` uses it for the lite live analyzer; the notebook is the single source of truth — **edit the lexicon in the notebook, not here.**
-
-## HTTP API (backend)
+## Endpoints
 | Method & path | Returns |
 |---|---|
-| `GET /api/health` | `{status, data_mode, generated_at, providers}` |
-| `GET /api/summary` | `summary.json` |
-| `GET /api/aspects` | `[{key, label, severity, description}]` |
-| `GET /api/providers` | `{total, limit, offset, items: ProviderListItem[]}` — query: `q, trade, tier, trend, aspect, eligible_only (default true), sort (rank\|risk_score\|n_reviews\|neg_rate\|avg_stars\|name), order, limit (≤200), offset` |
-| `GET /api/providers/{business_id}` | full `Provider` (404 if unknown) |
-| `POST /api/analyze` `{text}` | lite aspect analysis of a pasted review (`signals[]` with evidence sentences) |
+| `GET /api/health` | `{status, providers, model, model_available, market}` |
+| `GET /api/overview` | `{meta, kpis{reviews_analyzed, sentiment_shift, escalations}, tiers, tier_rules, services[], models[], timeline[], signal_terms}` — each KPI carries a `series` of `{x: year, y}` for its sparkline |
+| `GET /api/aspects` | the 8 aspects: `{aspect, reviews_with_signal, share_of_corpus, negative_reviews_with_signal, negative_rate_when_mentioned, lift, high_severity, keywords[], recommended_action, providers_led}` — `keywords` is the phrase dictionary (the "keyword cluster") |
+| `GET /api/providers` | `{total, limit, offset, items: Provider[]}`; query: `tier, service_group, aspect, trend, min_reviews (≥20), q, sort (risk_score\|reviews\|recent_risk\|trend_delta), limit (≤500), offset` |
+| `GET /api/providers/{code}` | one `Provider` + `service_benchmark` (404 if unknown) |
+| `GET /api/examples` | synthetic example reviews (complaint / positive) |
+| `POST /api/analyze` `{text}` | review analysis, below |
 
-Interactive docs: `http://localhost:8000/docs`.
+### `Provider`
+`code, service_group, reviews, observed_negative_rate, mean_risk, recent_risk | null, trend_delta | null, trend, high_severity_rate, top_aspect, risk_score (0–100), risk_tier, recommended_action,
+recent_reviews, previous_reviews, latest_review | null, history: [{year, reviews, risk}]`
+
+### `POST /api/analyze` response
+```jsonc
+{
+  "model": { "name": "TF–IDF Logistic Regression", "threshold": 0.585, "available": true, "is_primary": false, "note": "…" },
+  "risk_probability": 0.9629, "operating_threshold": 0.585, "management_attention": true,
+  "primary_aspect": "Pricing / Billing", "detected_aspects": ["Pricing / Billing", "Timeliness", "Workmanship"],
+  "matched_phrases": { "Timeliness": ["hours late"] },
+  "recommended_action": "Review estimate accuracy, …",          // "Routine monitoring…" when below threshold
+  "sentences": [ { "index": 0, "start": 0, "end": 112, "text": "…", "risk_probability": 0.96, "flagged": true,
+                   "aspects": ["…"], "matched_phrases": { } } ],  // start/end index into the submitted text
+  "evidence": { "index": 0, "sentence": "…", "aspect": "Pricing / Billing", "matched_phrases": { }, "risk_probability": 0.96, "has_dictionary_match": true },
+  "weights": { "bias": -0.19, "logit": 3.26, "terms": [ { "term": "failed", "label": "failed", "weight": 0.9 } ], "explained_positive": 3.7, "explained_negative": -0.25 },
+  "masking_applied": false, "disclaimer": "…"
+}
+```
+* Text is masked (URLs, emails, phones, dollar amounts, star phrases) before scoring.
+* `sentences[].flagged` = sentence-level model probability ≥ the review-level threshold (an approximation: the model was trained on whole reviews).
+* `evidence` = the sentence carrying a dictionary match (highest risk first); otherwise the riskiest sentence.
+* `weights.terms` are exact logit contributions (tf-idf × coefficient); `logit = bias + Σ all terms`.
+* If scikit-learn / the joblib files are unavailable (or `HOMELENS_DISABLE_MODEL=1`) the API degrades to dictionary-only: `model.available=false`, probabilities `null`.
+* DistilBERT (the notebook's primary model) is **not** served here; the UI shows `model.name` so the numbers are never mislabelled.

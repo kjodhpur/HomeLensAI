@@ -1,5 +1,6 @@
 # Runtime dependencies (Vercel installs this file when deploying the backend project).
-# Deliberately tiny: the heavy NLP (spaCy, DistilBERT) runs OFFLINE in the notebook; the API only serves its JSON outputs.
 fastapi>=0.115
 uvicorn>=0.30
-vaderSentiment>=3.3.2
+# Pinned: must match the version that created the TF-IDF joblib files (see ../scripts/build_artifacts.py).
+scikit-learn==1.8.0
+joblib>=1.4

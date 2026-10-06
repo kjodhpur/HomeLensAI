@@ -1,0 +1,27 @@
+# Local raw data (never committed or deployed)
+data/raw/
+HomeLens_Yelp_HomeServices*.csv
+
+# Secrets
+.streamlit/secrets.toml
+.env
+*.env
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+
+# Large model files (host DistilBERT on Hugging Face instead)
+checkpoints/
+HomeLensAI_DistilBERT/
+*.safetensors
+*.bin
+
+# OS / editor
+desktop.ini
+.DS_Store
+Thumbs.db
+.vscode/

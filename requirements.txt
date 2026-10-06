@@ -1,0 +1,14 @@
+# Core app (Streamlit Community Cloud: choose Python 3.12 or 3.13)
+streamlit>=1.50,<2
+pandas>=2.2
+numpy>=1.26
+plotly>=6.0
+joblib>=1.4
+# Must match the version used to create artifacts/*.joblib (scripts/build_artifacts.py).
+scikit-learn==1.8.0
+
+# Primary model: fine-tuned DistilBERT from Hugging Face (CPU build of PyTorch).
+# If these fail to install or load, the app falls back to TF-IDF automatically.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch>=2.4
+transformers>=4.44

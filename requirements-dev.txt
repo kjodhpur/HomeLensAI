@@ -1,0 +1,3 @@
+-r requirements.txt
+pytest>=8
+spacy>=3.7   # build-time only: exact notebook aspect matching in scripts/build_artifacts.py

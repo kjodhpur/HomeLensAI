@@ -16,12 +16,12 @@ interface Blob {
 }
 
 const BLOBS: Blob[] = [
-  { hue: "112,76,255", x: 0.22, y: 0.28, r: 0.46, fx: 0.11, fy: 0.09, px: 0.4, py: 1.7, follow: 0.55, a: 0.28 },
-  { hue: "60,160,255", x: 0.8, y: 0.2, r: 0.4, fx: 0.08, fy: 0.12, px: 2.1, py: 0.3, follow: 0.28, a: 0.19 },
-  { hue: "255,90,190", x: 0.7, y: 0.78, r: 0.42, fx: 0.1, fy: 0.07, px: 4.2, py: 2.6, follow: 0.4, a: 0.16 },
-  { hue: "70,220,200", x: 0.12, y: 0.84, r: 0.34, fx: 0.07, fy: 0.1, px: 5.1, py: 3.3, follow: 0.18, a: 0.13 },
-  { hue: "150,110,255", x: 0.5, y: 0.5, r: 0.5, fx: 0.06, fy: 0.05, px: 1.1, py: 4.4, follow: 0.7, a: 0.15 },
-  { hue: "255,170,90", x: 0.9, y: 0.55, r: 0.26, fx: 0.09, fy: 0.08, px: 3.3, py: 5.2, follow: 0.1, a: 0.08 },
+  { hue: "255,150,50", x: 0.2, y: 0.26, r: 0.46, fx: 0.11, fy: 0.09, px: 0.4, py: 1.7, follow: 0.55, a: 0.5 }, // sun orange
+  { hue: "176,198,255", x: 0.82, y: 0.2, r: 0.42, fx: 0.08, fy: 0.12, px: 2.1, py: 0.3, follow: 0.28, a: 0.62 }, // periwinkle sky
+  { hue: "255,205,70", x: 0.7, y: 0.8, r: 0.44, fx: 0.1, fy: 0.07, px: 4.2, py: 2.6, follow: 0.4, a: 0.55 }, // sun yellow
+  { hue: "255,196,160", x: 0.1, y: 0.86, r: 0.36, fx: 0.07, fy: 0.1, px: 5.1, py: 3.3, follow: 0.18, a: 0.5 }, // peach
+  { hue: "255,214,120", x: 0.5, y: 0.5, r: 0.5, fx: 0.06, fy: 0.05, px: 1.1, py: 4.4, follow: 0.7, a: 0.3 }, // warm glow that follows the pointer
+  { hue: "206,214,255", x: 0.92, y: 0.6, r: 0.3, fx: 0.09, fy: 0.08, px: 3.3, py: 5.2, follow: 0.1, a: 0.4 },
 ];
 
 /**
@@ -67,9 +67,9 @@ export function LiquidBackground() {
       const t = now / 1000;
 
       ctx.globalCompositeOperation = "source-over";
-      ctx.fillStyle = "#0d0d11";
+      ctx.fillStyle = "#fff4e0";
       ctx.fillRect(0, 0, w, h);
-      ctx.globalCompositeOperation = "lighter";
+      ctx.globalCompositeOperation = "source-over"; // light canvas: blobs layer over the cream instead of adding light
       const side = Math.min(w, h);
       for (const b of BLOBS) {
         const driftX = Math.sin(t * b.fx * 2 * Math.PI * 0.35 + b.px) * 0.16 + Math.sin(t * b.fx * 0.9 + b.py) * 0.06;
@@ -107,6 +107,7 @@ export function LiquidBackground() {
   return (
     <div className="aura" aria-hidden="true">
       <canvas ref={ref} />
+      <div className="aura-rays" />
       <div className="aura-vignette" />
     </div>
   );

@@ -1,10 +1,13 @@
 import type { Overview } from "@/lib/types";
+import { NavPill } from "./NavPill";
 
 export function Header({ overview, modelLabel }: { overview: Overview; modelLabel: string | null }) {
   const { meta } = overview;
   const fmt = (iso: string) => new Date(iso).toLocaleDateString("en-US", { month: "short", year: "numeric", timeZone: "UTC" });
   return (
-    <header className="topbar">
+    <>
+      <NavPill />
+      <header className="topbar">
       <div className="brand">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/logo-mark.svg" alt="" width={40} height={40} />
@@ -26,6 +29,16 @@ export function Header({ overview, modelLabel }: { overview: Overview; modelLabe
           </span>
         )}
       </div>
-    </header>
+      </header>
+      <section className="hero" aria-label="Product summary">
+        <span className="kicker">Review-based risk signals · human investigation</span>
+        <h2>
+          See which providers need <em>management attention</em> before the next complaint lands.
+        </h2>
+        <p>
+          HomeLens AI reads Yelp reviews of {meta.market} home-service providers and turns them into review-level alerts, complaint aspects with the evidence behind them, and recommended next steps. Every signal is a customer allegation, not a verified finding.
+        </p>
+      </section>
+    </>
   );
 }

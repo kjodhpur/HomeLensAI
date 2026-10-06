@@ -203,7 +203,7 @@ export function AspectBlob({ aspects, active, onSelect }: Props) {
     : undefined;
 
   return (
-    <Glass as="section" className="card blob-card" aria-label="Complaint aspect radar">
+    <Glass as="section" id="aspects" className="card blob-card" aria-label="Complaint aspect radar">
       <header className="card-head">
         <div>
           <div className="kicker">Complaint signals</div>
@@ -224,26 +224,26 @@ export function AspectBlob({ aspects, active, onSelect }: Props) {
           <svg viewBox={`0 0 ${SIZE} ${SIZE}`} width="100%" role="group" aria-label="Aspect radar blob">
             <defs>
               <radialGradient id={`bg${uid}`} cx="34%" cy="28%" r="85%">
-                <stop offset="0" stopColor="#ffffff" stopOpacity="0.5" />
-                <stop offset="0.28" stopColor="#b9a8ff" stopOpacity="0.38" />
-                <stop offset="0.65" stopColor="#6a4bff" stopOpacity="0.26" />
-                <stop offset="1" stopColor="#1b1450" stopOpacity="0.5" />
+                <stop offset="0" stopColor="#ffffff" stopOpacity="0.85" />
+                <stop offset="0.28" stopColor="#ffe08a" stopOpacity="0.62" />
+                <stop offset="0.65" stopColor="#ff9a3c" stopOpacity="0.4" />
+                <stop offset="1" stopColor="#a8420a" stopOpacity="0.42" />
               </radialGradient>
               <radialGradient id={`in${uid}`} cx="62%" cy="68%" r="70%">
-                <stop offset="0" stopColor="#6fd6ff" stopOpacity="0.38" />
-                <stop offset="0.6" stopColor="#ff7acb" stopOpacity="0.12" />
-                <stop offset="1" stopColor="#8b6cff" stopOpacity="0" />
+                <stop offset="0" stopColor="#bcd0ff" stopOpacity="0.7" />
+                <stop offset="0.6" stopColor="#ffd9b0" stopOpacity="0.25" />
+                <stop offset="1" stopColor="#ffc933" stopOpacity="0" />
               </radialGradient>
               <linearGradient id={`ed${uid}`} x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stopColor="#fff" stopOpacity="0.95" />
-                <stop offset="0.35" stopColor="#6fd6ff" stopOpacity="0.55" />
-                <stop offset="0.7" stopColor="#8b6cff" stopOpacity="0.8" />
-                <stop offset="1" stopColor="#ff7acb" stopOpacity="0.6" />
+                <stop offset="0" stopColor="#fff" stopOpacity="1" />
+                <stop offset="0.35" stopColor="#ffc933" stopOpacity="0.85" />
+                <stop offset="0.7" stopColor="#f5780f" stopOpacity="0.9" />
+                <stop offset="1" stopColor="#bcd0ff" stopOpacity="0.9" />
               </linearGradient>
               <radialGradient id={`bd${uid}`} cx="35%" cy="30%" r="75%">
                 <stop offset="0" stopColor="#fff" />
-                <stop offset="0.5" stopColor="#d9d0ff" />
-                <stop offset="1" stopColor="#7f65ff" />
+                <stop offset="0.5" stopColor="#ffd9b0" />
+                <stop offset="1" stopColor="#d4600a" />
               </radialGradient>
               <linearGradient id={`sp${uid}`} x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" stopColor="#fff" stopOpacity="0.75" />
@@ -256,17 +256,17 @@ export function AspectBlob({ aspects, active, onSelect }: Props) {
 
             {/* rings of the radar, barely visible: they only give the blob a scale */}
             {[0.5, 1].map((s) => (
-              <circle key={s} cx={C} cy={C} r={R0 * s} fill="none" stroke="rgba(255,255,255,.07)" strokeDasharray="2 6" />
+              <circle key={s} cx={C} cy={C} r={R0 * s} fill="none" stroke="rgba(86,52,18,.2)" strokeDasharray="2 6" />
             ))}
             {ordered.map((_, i) => (
-              <line key={i} x1={C} y1={C} x2={C + R0 * 1.08 * Math.cos(ANG(i))} y2={C + R0 * 1.08 * Math.sin(ANG(i))} stroke="rgba(255,255,255,.06)" />
+              <line key={i} x1={C} y1={C} x2={C + R0 * 1.08 * Math.cos(ANG(i))} y2={C + R0 * 1.08 * Math.sin(ANG(i))} stroke="rgba(86,52,18,.14)" />
             ))}
 
             {/* the liquid body */}
             {/* soft glow: stacked wide strokes stand in for a blur (SVG blur filters are CPU-bound when animated) */}
             <g transform="translate(0 20)">
               {[46, 30, 16].map((w, i) => (
-                <path key={w} d="" ref={(el) => { glows.current[i] = el; }} fill="rgba(91,63,224,.16)" stroke="rgba(110,80,255,.1)" strokeWidth={w} strokeLinejoin="round" />
+                <path key={w} d="" ref={(el) => { glows.current[i] = el; }} fill="rgba(245,120,15,.14)" stroke="rgba(255,154,60,.12)" strokeWidth={w} strokeLinejoin="round" />
               ))}
             </g>
             <path d="" ref={body} fill={`url(#bg${uid})`} stroke={`url(#ed${uid})`} strokeWidth={1.8} strokeLinejoin="round" />
@@ -274,13 +274,13 @@ export function AspectBlob({ aspects, active, onSelect }: Props) {
               <rect x={0} y={0} width={SIZE} height={SIZE} fill={`url(#in${uid})`} />
               <g className="blob-spec">
                 <ellipse cx={C - 62} cy={C - 78} rx={92} ry={48} fill={`url(#sp${uid})`} opacity={0.5} transform={`rotate(-28 ${C - 62} ${C - 78})`} />
-                <ellipse cx={C + 70} cy={C + 96} rx={64} ry={20} fill="#fff" opacity={0.1} transform={`rotate(-24 ${C + 70} ${C + 96})`} />
+                <ellipse cx={C + 70} cy={C + 96} rx={64} ry={20} fill="#fff" opacity={0.35} transform={`rotate(-24 ${C + 70} ${C + 96})`} />
               </g>
             </g>
 
             {rings.map((r) => (
               <g key={r.id} transform={`translate(${r.x} ${r.y})`}>
-                <circle className="blob-ring" r={10} fill="none" stroke="#fff" strokeWidth={1.6} />
+                <circle className="blob-ring" r={10} fill="none" stroke="#f5780f" strokeWidth={1.6} />
                 <circle className="blob-ring r2" r={10} fill="none" stroke="var(--accent-2)" strokeWidth={1.2} />
               </g>
             ))}
@@ -312,8 +312,8 @@ export function AspectBlob({ aspects, active, onSelect }: Props) {
                   }}
                 >
                   <circle r={24} fill="transparent" />
-                  <circle className="bead-halo" r={12} fill="none" stroke="#fff" strokeOpacity={0.35} />
-                  <circle className="bead-core" r={7} fill={`url(#bd${uid})`} stroke="#fff" strokeOpacity={0.9} strokeWidth={1} />
+                  <circle className="bead-halo" r={12} fill="none" stroke="#b94d06" strokeOpacity={0.4} />
+                  <circle className="bead-core" r={7} fill={`url(#bd${uid})`} stroke="#fff" strokeOpacity={1} strokeWidth={1.2} />
                   {isActive && <circle className="bead-sel" r={21} fill="none" stroke="var(--accent-2)" strokeWidth={1.6} strokeDasharray="3 4" />}
                 </g>
               );

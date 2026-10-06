@@ -185,7 +185,7 @@ export function Leaderboard({ providers, overview, selected, onSelect, aspectFil
     });
 
   return (
-    <Glass as="section" className="card lb" aria-label="Risk leaderboard">
+    <Glass as="section" id="providers" className="card lb" aria-label="Risk leaderboard">
       <header className="card-head">
         <div>
           <div className="kicker">Provider watchlist</div>

@@ -57,19 +57,19 @@ export function MercurySparkline({ points, format, tone = "var(--accent-2)", hei
       <svg viewBox={`0 0 ${W} ${height}`} width="100%" onPointerMove={onMove} onPointerLeave={() => setHover(null)} role="img" aria-label={`Trend: ${points.map((p) => `${p.x} ${format(p.y)}`).join(", ")}`}>
         <defs>
           <linearGradient id={`m${uid}`} x1="0" x2="1">
-            <stop offset="0" stopColor="#8f9bd6" />
-            <stop offset="0.35" stopColor="#ffffff" />
-            <stop offset="0.7" stopColor="#b9c4ff" />
-            <stop offset="1" stopColor="#ffffff" />
+            <stop offset="0" stopColor="#c2570a" />
+            <stop offset="0.4" stopColor="#ff9a3c" />
+            <stop offset="0.75" stopColor="#f5780f" />
+            <stop offset="1" stopColor="#ffb23c" />
           </linearGradient>
           <linearGradient id={`a${uid}`} x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0" stopColor="#b7a6ff" stopOpacity="0.38" />
-            <stop offset="1" stopColor="#b7a6ff" stopOpacity="0" />
+            <stop offset="0" stopColor="#ffb23c" stopOpacity="0.42" />
+            <stop offset="1" stopColor="#ffb23c" stopOpacity="0" />
           </linearGradient>
           <radialGradient id={`d${uid}`} cx="35%" cy="30%" r="75%">
             <stop offset="0" stopColor="#fff" />
-            <stop offset="0.5" stopColor="#cfd6ff" />
-            <stop offset="1" stopColor="#7d87d6" />
+            <stop offset="0.5" stopColor="#ffd9b0" />
+            <stop offset="1" stopColor="#c2570a" />
           </radialGradient>
         </defs>
         <path d={geo.area} fill={`url(#a${uid})`} className="spark-area" />
@@ -77,11 +77,11 @@ export function MercurySparkline({ points, format, tone = "var(--accent-2)", hei
         <path d={geo.line} className="spark-sheen" pathLength={1} fill="none" stroke="#fff" strokeWidth={3.4} strokeLinecap="round" />
         <g className="spark-drop" transform={`translate(${last.x} ${last.y})`}>
           <circle className="spark-halo" r={5} fill="none" stroke="var(--tone)" strokeWidth={1.2} />
-          <circle r={4.6} fill={`url(#d${uid})`} stroke="rgba(255,255,255,.8)" strokeWidth={0.8} />
+          <circle r={4.6} fill={`url(#d${uid})`} stroke="rgba(255,255,255,.95)" strokeWidth={0.8} />
         </g>
         {hi && (
           <g className="spark-hover" transform={`translate(${hi.x} ${hi.y})`}>
-            <line y1={-hi.y} y2={height - hi.y} stroke="rgba(255,255,255,.25)" strokeDasharray="2 3" />
+            <line y1={-hi.y} y2={height - hi.y} stroke="rgba(86,52,18,.28)" strokeDasharray="2 3" />
             <circle r={6.5} fill={`url(#d${uid})`} stroke="#fff" strokeWidth={1} />
           </g>
         )}

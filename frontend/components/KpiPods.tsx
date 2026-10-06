@@ -46,7 +46,7 @@ export function KpiPods({ overview, onSelectProvider }: { overview: Overview; on
   const peak = ra.series.reduce((a, b) => (b.y > a.y ? b : a), ra.series[0]);
 
   return (
-    <section className="pods" aria-label="Key metrics">
+    <section className="pods" id="overview" aria-label="Key metrics">
       <Pod
         index={0}
         label="Total Reviews Analyzed"

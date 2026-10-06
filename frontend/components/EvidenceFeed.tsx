@@ -94,7 +94,7 @@ export function EvidenceFeed({ examples, initialText, initialResult, flagged, on
   const att = result?.management_attention;
 
   return (
-    <Glass as="section" className="card deck" aria-label="Explainable NLP evidence feed">
+    <Glass as="section" id="evidence" className="card deck" aria-label="Explainable NLP evidence feed">
       <header className="card-head">
         <div>
           <div className="kicker">Explainable NLP ground truth</div>

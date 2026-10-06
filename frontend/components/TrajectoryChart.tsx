@@ -63,7 +63,7 @@ export function TrajectoryChart({ history, color, groupMedian, groupLabel }: Pro
         </defs>
         {[0, 0.5, 1].map((v) => (
           <g key={v}>
-            <line x1={M.l} x2={W - M.r} y1={g.py(v)} y2={g.py(v)} stroke="rgba(255,255,255,.1)" strokeDasharray={v === 0 ? "" : "2 5"} />
+            <line x1={M.l} x2={W - M.r} y1={g.py(v)} y2={g.py(v)} stroke="rgba(86,52,18,.16)" strokeDasharray={v === 0 ? "" : "2 5"} />
             <text x={M.l - 8} y={g.py(v) + 4} textAnchor="end" className="axis">
               {v.toFixed(1)}
             </text>
@@ -83,9 +83,9 @@ export function TrajectoryChart({ history, color, groupMedian, groupLabel }: Pro
           </g>
         )}
         {area && <path d={area} fill={`url(#ta${uid})`} className="traj-area" />}
-        {history.length > 1 && <path d={g.line} fill="none" stroke={color} strokeWidth={3} strokeLinecap="round" className="traj-line" pathLength={1} style={{ filter: `drop-shadow(0 0 8px ${color})` }} />}
+        {history.length > 1 && <path d={g.line} fill="none" stroke={color} strokeWidth={3} strokeLinecap="round" className="traj-line" pathLength={1} style={{ filter: `drop-shadow(0 3px 6px color-mix(in oklab, ${color} 55%, transparent))` }} />}
         {g.pts.map((p, i) => (
-          <circle key={history[i].year} cx={p.x} cy={p.y} r={4 + 6 * Math.sqrt(history[i].reviews / g.maxN)} fill={`url(#tb${uid})`} stroke="rgba(255,255,255,.7)" strokeWidth={0.8} className="traj-bead" style={{ animationDelay: `${i * 70}ms`, transformOrigin: `${p.x}px ${p.y}px` }} opacity={hover == null || hover === i ? 1 : 0.5} />
+          <circle key={history[i].year} cx={p.x} cy={p.y} r={4 + 6 * Math.sqrt(history[i].reviews / g.maxN)} fill={`url(#tb${uid})`} stroke="rgba(255,255,255,.95)" strokeWidth={1} className="traj-bead" style={{ animationDelay: `${i * 70}ms`, transformOrigin: `${p.x}px ${p.y}px` }} opacity={hover == null || hover === i ? 1 : 0.5} />
         ))}
       </svg>
       {hp && hover != null && (

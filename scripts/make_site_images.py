@@ -89,7 +89,7 @@ def ridge(w: int, h: int, y0: float, amp: float, freq: float, seed_shift: float)
         + amp * h * (0.6 * math.sin(x * freq + seed_shift) + 0.3 * math.sin(x * freq * 2.3 + seed_shift * 1.7) + 0.1 * math.sin(x * freq * 5.1 + seed_shift * 0.4))
         for x in xs
     ]
-    d.polygon([(0, h)] + list(zip(xs.tolist(), ys)) + [(w, h)], fill=255)
+    d.polygon([(0, h)] + list(zip(xs.tolist(), ys, strict=True)) + [(w, h)], fill=255)
     return im
 
 
@@ -128,7 +128,7 @@ def houses(w: int, h: int, baseline: float, scale: float, count: int, seed: int)
         ph = h * 0.16 * scale
         d.rectangle([px, y - ph, px + 3 * scale, y + 2], fill=255)
         d.rectangle([px - 14 * scale, y - ph, px + 17 * scale, y - ph + 3 * scale], fill=255)
-    for a, b in zip(pole_x, pole_x[1:]):
+    for a, b in zip(pole_x, pole_x[1:], strict=False):
         for off in (0, 7, 14):
             pts = []
             for i in range(0, 41):

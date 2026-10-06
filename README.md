@@ -52,15 +52,15 @@ pytest -q                      # 13 tests
 cd frontend && cp .env.example .env.local && npm install && npm run dev
 ```
 
-**2. Run the notebook (analytics):**
+**2. Run the notebook (analytics) on the real Yelp data:**
 ```bash
-python -m venv .venv && source .venv/bin/activate
+python -m venv .venv && source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt && python -m spacy download en_core_web_sm
-# put HomeLens_Yelp_HomeServices.csv in data/raw/   (see data/README.md) — otherwise it runs on the synthetic sample in DEMO MODE
-jupyter lab notebooks/HomeLensAI_Final_Project.ipynb
+# Drop the Yelp download into data/raw/ — the .zip files exactly as downloaded, NO unzipping needed (see data/README.md)
+jupyter lab notebooks/HomeLensAI_Final_Project.ipynb        # Kernel → Restart & Run All
 ```
-On **Google Colab**: `!git clone https://github.com/kjodhpur/HomeLensAI.git`, open the notebook, upload the CSV to `HomeLensAI/data/raw/`, switch to a **T4 GPU runtime** for DistilBERT
-(skipped automatically without a GPU), and uncomment the install cell at the top.
+Without any data in `data/raw/` the notebook runs on the synthetic sample in DEMO MODE. DistilBERT needs a GPU (NVIDIA CUDA or Apple-silicon MPS) and is skipped automatically otherwise
+(`HOMELENS_RUN_DISTILBERT=1` forces it on CPU — slow).
 
 **3. Refresh the web app after a real notebook run:**
 ```bash

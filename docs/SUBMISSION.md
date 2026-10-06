@@ -17,10 +17,10 @@ Presentation: ~12–15 minutes.
 The notebook in this repo was developed and verified on a **synthetic sample** (no access to the Yelp files). It runs end-to-end, but the committed copy has **no outputs**, and its commentary
 that depends on numbers is computed at run time. So:
 
-1. [ ] Put `HomeLens_Yelp_HomeServices.csv` in `data/raw/` (see `data/README.md`). Confirm the first cell prints **data mode: extract** and *no* DEMO banner.
+1. [ ] Put the Yelp zip files (or `HomeLens_Yelp_HomeServices.csv`) in `data/raw/` (see `data/README.md`). Confirm the data cell prints **data mode: raw_json** (or *extract*) and *no* DEMO banner.
 2. [ ] **Check the provider filter** (§3). The proposal expects ≈16,000 reviews from ≈926 true providers after narrowing 23,685 reviews / 1,403 businesses. Compare the cleaning log; if the counts differ a lot, look at the
        "most common categories on EXCLUDED businesses" table and adjust `TRADE_RULES` / `NON_PROVIDER_TOKENS`.
-3. [ ] Run on a **Colab T4 GPU** (Runtime → Change runtime type) so DistilBERT trains (≈10 min). Without a GPU it is skipped and the comparison has two models, not three.
+3. [ ] Run on a machine with a **GPU** (NVIDIA CUDA or Apple-silicon) so DistilBERT trains (≈10–20 min). Without a GPU it is skipped and the comparison has two models, not three. If nobody has one, run it once on a lab/cloud GPU box — the predictions are cached in `data/cache/`.
 4. [ ] Read every auto-generated *Takeaway* / *Reading the table* paragraph against the real numbers; add a short markdown cell wherever a result surprises you. Check the "Layer 1 gates" and "Success criteria" claims in §1.5 (targets: risk recall ≥ 0.90, audit precision ≥ 0.80).
 5. [ ] **Label the aspect audit** (`data/annotation/aspect_audit.csv`, ~120 rows, two people independently), re-run §6.9. If an aspect scores < 80 %, fix its cues and add `RULE_TESTS` rows (§6.5).
 6. [ ] Use the "unexplained flagged reviews" phrases in §6.8 to add missing cues — then re-run (the cache invalidates itself when the lexicon changes).

@@ -33,7 +33,7 @@ Pick a track, open an issue per item, tick them off. Items are ordered by value 
 - [ ] Keep the disclaimer visible on every page (it is in the footer — do not remove it).
 
 ### Notebook / data (owner: whoever holds the Yelp data)
-- [ ] Run the notebook on the real extract (Colab T4 for DistilBERT) and review every computed takeaway (see `SUBMISSION.md`).
+- [ ] Run the notebook on the real extract (a GPU machine for DistilBERT) and review every computed takeaway (see `SUBMISSION.md`).
 - [ ] Label the aspect-audit CSV (two people, independently) and re-run Section 6.9.
 - [ ] `python scripts/sync_artifacts.py`, commit nothing from `data/processed/` (see licence note in `DEPLOYMENT.md`).
 

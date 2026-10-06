@@ -129,15 +129,13 @@ export function SunsetCards({ label, title, lead, cards }: { label: string; titl
   );
 }
 
-/** Periwinkle band with a navy serif headline and a photo carrying a blue plan-view rectangle. */
+/** Periwinkle band with a navy serif headline beside a sunset photo. */
 export function SkyBand({ label, title, left, right }: { label: string; title: ReactNode; left: { title: string; items: string[] }; right: { title: string; items: string[] } }) {
   return (
     <section className="band-sky">
       <div className="sky-grid">
         <div className="sky-photo" aria-hidden="true">
           <Image src="/img/sunset.webp" alt="" fill sizes="(max-width: 960px) 100vw, 45vw" quality={60} style={{ objectPosition: "60% 50%" }} />
-          <div className="plan-grid" />
-          <div className="plan-rect" />
         </div>
         <div className="sky-copy">
           <div>

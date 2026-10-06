@@ -1362,20 +1362,6 @@ table.t tr.best td:last-child {
   height: 100%;
   object-fit: cover;
 }
-.sky-photo .plan-rect {
-  position: absolute;
-  left: 14%;
-  top: 26%;
-  width: 46%;
-  height: 22%;
-  background: rgba(70, 112, 235, 0.88);
-}
-.sky-photo .plan-grid {
-  position: absolute;
-  inset: 0;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.35) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.35) 1px, transparent 1px);
-  background-size: 12.5% 11.1%;
-}
 .sky-copy {
   display: flex;
   flex-direction: column;

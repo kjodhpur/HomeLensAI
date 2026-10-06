@@ -35,7 +35,7 @@ export function DemoBar({ overview, modelLabel }: { overview: Overview; modelLab
         </div>
       </div>
       <div className="dm-meta">
-        <h1>Business Risk Command Center</h1>
+        <h1>Business Risk <em>Command Center</em></h1>
         <div className="dm-pills">
           <span className="pill static">{meta.market}</span>
           <span className="pill static">

@@ -234,7 +234,7 @@ export function EvidenceFeed({ examples, initialText, initialResult, flagged, on
               <div className="pool-head">
                 <span className="kicker">What moved the score</span>
                 <span className="tiny">
-                  Top terms by logit contribution in the served {result.model.name} model (TF-IDF value × coefficient; the total uses every term). Red pills raise risk; teal pills lower it.
+                  Top terms by logit contribution in the served {result.model.name} model (TF-IDF value × coefficient; the total uses every term). Red pills raise risk; blue pills lower it.
                   DistilBERT is not deployed in this API.
                 </span>
               </div>

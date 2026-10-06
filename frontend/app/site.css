@@ -23,16 +23,17 @@
   max-width: var(--maxw);
   height: var(--nav-h);
   margin: 0 auto;
-  padding: 0 14px 0 18px;
-  border-radius: 999px;
+  padding: 0 10px 0 18px;
+  border-radius: 18px;
 }
 .logo {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-weight: 650;
-  font-size: 16.5px;
-  letter-spacing: -0.02em;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 24px;
+  letter-spacing: -0.01em;
   text-decoration: none;
 }
 .logo img {
@@ -46,7 +47,7 @@
 }
 .site-nav a {
   padding: 8px 14px;
-  border-radius: 999px;
+  border-radius: 10px;
   font-size: 14px;
   font-weight: 500;
   color: var(--ink-2);
@@ -61,8 +62,7 @@
 }
 .site-nav a[aria-current="page"] {
   color: var(--ink);
-  background: #fff;
-  box-shadow: 0 0 0 1px var(--line);
+  background: rgba(255, 201, 51, 0.38);
 }
 .site-actions {
   display: flex;
@@ -87,7 +87,7 @@
   margin: 10px auto 0;
   max-width: var(--maxw);
   padding: 12px;
-  border-radius: var(--r-lg);
+  border-radius: 18px;
 }
 .mobile-menu a:not(.btn) {
   padding: 12px 14px;
@@ -118,20 +118,29 @@
 
 /* --- typography + layout primitives ------------------------------------------ */
 .h1 {
-  font-size: clamp(40px, 6.2vw, 74px);
-  line-height: 1.02;
-  letter-spacing: -0.042em;
-  font-weight: 650;
+  font-size: clamp(46px, 7vw, 96px);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  font-weight: 400;
   text-wrap: balance;
 }
 .h2 {
-  font-size: clamp(30px, 4vw, 46px);
-  line-height: 1.06;
-  letter-spacing: -0.036em;
+  font-size: clamp(36px, 4.6vw, 62px);
+  line-height: 1;
+  letter-spacing: -0.02em;
   text-wrap: balance;
 }
+.h1 em,
+.h2 em {
+  font-style: italic;
+  color: var(--accent-ink);
+}
+.on-dark .h1 em,
+.on-dark .h2 em {
+  color: #ffb870;
+}
 .lead {
-  font-size: clamp(17px, 1.5vw, 20px);
+  font-size: clamp(17px, 1.5vw, 19.5px);
   line-height: 1.55;
   color: var(--ink-2);
   max-width: 640px;
@@ -142,8 +151,12 @@
   align-items: center;
   gap: 8px;
   padding: 7px 14px;
-  font-size: 13px;
-  font-weight: 600;
+  border-radius: 8px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--ink-2);
 }
 .hero-actions {
@@ -225,9 +238,8 @@
   gap: 10px;
 }
 .card h3 {
-  font-size: 20px;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+  font-size: 27px;
+  line-height: 1.08;
 }
 .card-body {
   color: var(--ink-2);
@@ -239,10 +251,12 @@
 }
 .card-tag {
   align-self: flex-start;
-  padding: 3px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--accent-ink);
   background: var(--accent-soft);
 }
@@ -278,9 +292,10 @@
   border-left: 1px solid var(--line);
 }
 .stat b {
-  font-size: clamp(30px, 3.6vw, 44px);
-  font-weight: 650;
-  letter-spacing: -0.04em;
+  font-family: var(--serif);
+  font-size: clamp(38px, 4.4vw, 58px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
   line-height: 1;
   font-variant-numeric: tabular-nums;
 }
@@ -373,9 +388,10 @@
   align-items: center;
   gap: 16px;
   padding: 18px 0;
-  font-size: 17px;
-  font-weight: 600;
-  letter-spacing: -0.015em;
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.005em;
   cursor: pointer;
   list-style: none;
 }
@@ -408,13 +424,12 @@
 }
 .prose h2 {
   margin: 44px 0 12px;
-  font-size: 24px;
-  letter-spacing: -0.025em;
+  font-size: 34px;
   color: var(--ink);
 }
 .prose h3 {
   margin: 28px 0 8px;
-  font-size: 18px;
+  font-size: 24px;
   color: var(--ink);
 }
 .prose p,
@@ -478,17 +493,18 @@
     0 0 0 1px var(--line);
 }
 .hp-pane h3 {
-  font-size: 14px;
-  letter-spacing: 0;
-  font-weight: 600;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  font-weight: 500;
   color: var(--ink-3);
   text-transform: uppercase;
   margin-bottom: 14px;
 }
 .hp-review {
-  font-size: 18px;
-  line-height: 1.7;
-  letter-spacing: -0.01em;
+  font-family: var(--serif);
+  font-size: 25px;
+  line-height: 1.45;
 }
 .hp-meta {
   display: grid;
@@ -543,11 +559,11 @@
 }
 .chip {
   padding: 3px 10px;
-  border-radius: 999px;
+  border-radius: 8px;
   font-size: 12.5px;
   font-weight: 550;
-  color: var(--accent-ink);
-  background: var(--accent-soft);
+  color: #6b3a00;
+  background: rgba(255, 201, 51, 0.36);
 }
 mark.flag {
   background: color-mix(in oklab, var(--t-high) 14%, transparent);
@@ -557,7 +573,7 @@ mark.flag {
   border-radius: 4px;
 }
 mark.hit {
-  background: none;
+  background: linear-gradient(transparent 62%, rgba(255, 201, 51, 0.7) 62%);
   color: inherit;
   font-weight: 650;
   text-decoration: underline;
@@ -750,7 +766,7 @@ mark.hit {
 }
 .step h3 {
   margin: 10px 0 8px;
-  font-size: 20px;
+  font-size: 27px;
 }
 .step p {
   color: var(--ink-2);
@@ -847,8 +863,7 @@ mark.hit {
   gap: 12px;
 }
 .aspect-card h3 {
-  font-size: 17px;
-  letter-spacing: -0.015em;
+  font-size: 26px;
 }
 .aspect-stats {
   display: flex;
@@ -858,10 +873,12 @@ mark.hit {
 }
 .aspect-stats b {
   display: block;
-  font-size: 19px;
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1;
   color: var(--ink);
   font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
 }
 
 /* --- tables, code, pricing, team, timeline ----------------------------------------------------------- */
@@ -949,12 +966,11 @@ table.t tr.best td:last-child {
   margin-bottom: 56px;
 }
 .docs-body h2 {
-  font-size: 28px;
-  letter-spacing: -0.03em;
+  font-size: 40px;
   margin-bottom: 14px;
 }
 .docs-body h3 {
-  font-size: 17px;
+  font-size: 24px;
   margin: 24px 0 8px;
 }
 .docs-body p {
@@ -981,18 +997,22 @@ table.t tr.best td:last-child {
   gap: 14px;
 }
 .plan.featured {
+  background: linear-gradient(180deg, #ffd868, #ffc933);
   box-shadow:
-    inset 0 1px 0 #fff,
-    0 0 0 2px var(--accent),
-    0 30px 60px -28px rgba(51, 88, 228, 0.5);
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 30px 60px -28px rgba(200, 120, 0, 0.6);
+}
+.plan.featured .checklist.yes li span {
+  background: rgba(27, 21, 17, 0.12);
+  color: var(--ink);
 }
 .plan h3 {
-  font-size: 22px;
+  font-size: 32px;
 }
 .plan .price {
-  font-size: 34px;
-  font-weight: 650;
-  letter-spacing: -0.04em;
+  font-family: var(--serif);
+  font-size: 46px;
+  line-height: 1;
 }
 .plan .price small {
   font-size: 14px;
@@ -1037,15 +1057,17 @@ table.t tr.best td:last-child {
   font-weight: 650;
   letter-spacing: 0.02em;
   color: var(--accent-ink);
-  background: linear-gradient(180deg, #fff, rgba(190, 205, 255, 0.7));
+  background: linear-gradient(180deg, #fff, rgba(255, 201, 51, 0.5));
   box-shadow:
     inset 0 1px 0 #fff,
     0 0 0 1px var(--line);
 }
 .person b {
   display: block;
-  font-size: 17px;
-  letter-spacing: -0.015em;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.1;
 }
 .person span {
   font-size: 14px;
@@ -1088,8 +1110,7 @@ table.t tr.best td:last-child {
 }
 .release h2 {
   margin: 4px 0 10px;
-  font-size: 22px;
-  letter-spacing: -0.025em;
+  font-size: 32px;
 }
 .release ul {
   margin: 0;
@@ -1169,8 +1190,298 @@ table.t tr.best td:last-child {
   padding: 80px 24px;
 }
 .notfound b {
-  font-size: clamp(72px, 14vw, 140px);
-  letter-spacing: -0.06em;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(88px, 16vw, 180px);
+  letter-spacing: -0.03em;
   line-height: 1;
   color: var(--ink-3);
+}
+
+/* ==========================================================================
+   Daylight-style bands: dark photographic hero, sunset steps on yellow cards,
+   periwinkle/navy band, dark photo CTA. Mono numbered labels throughout.
+   ========================================================================== */
+.mono-label {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.on-dark {
+  color: #fff4e0;
+  --ink: #fff4e0;
+  --ink-2: rgba(255, 244, 224, 0.82);
+  --ink-3: rgba(255, 244, 224, 0.62);
+}
+
+.photo-hero {
+  position: relative;
+  isolation: isolate;
+  min-height: min(100svh, 920px);
+  margin-top: calc(-1 * (var(--nav-h) + 12px));
+  padding: calc(var(--nav-h) + 96px) 0 0;
+  background: #1c2124;
+}
+.photo-hero > img,
+.band-bg {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.photo-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(20, 16, 12, 0.55), rgba(20, 16, 12, 0.1) 45%, rgba(20, 16, 12, 0.35));
+}
+.photo-hero .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.photo-hero .mono-label {
+  color: rgba(255, 244, 224, 0.75);
+}
+.photo-hero .h1 {
+  margin: 18px 0 20px;
+  max-width: 12em;
+}
+.photo-hero .lead {
+  margin: 0 auto;
+  color: rgba(255, 244, 224, 0.85);
+}
+.photo-hero .hero-actions {
+  justify-content: center;
+}
+.photo-hero .hero-preview {
+  margin-bottom: -56px;
+  position: relative;
+  z-index: 2;
+}
+.after-photo {
+  padding-top: 96px;
+}
+
+/* yellow step cards over a sunset */
+.band-sunset {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 96px 0 72px;
+  background: #5b2a14;
+}
+.band-sunset::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(60, 28, 12, 0.4), rgba(60, 28, 12, 0) 40%);
+}
+.band-sunset .section-head {
+  max-width: 760px;
+}
+.ycards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  align-items: stretch;
+  margin-top: 56px;
+}
+.ycard {
+  position: relative;
+  padding: 24px 24px 26px;
+  border-radius: 14px;
+  color: #2a1a00;
+  background: linear-gradient(180deg, #ffd45a, #ffc933);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 24px 44px -22px rgba(60, 20, 0, 0.7);
+}
+.ycard .mono-label {
+  display: block;
+  margin-bottom: 18px;
+  color: rgba(42, 26, 0, 0.7);
+}
+.ycard h3 {
+  margin-bottom: 8px;
+  font-size: 30px;
+  line-height: 1.05;
+}
+.ycard p {
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgba(42, 26, 0, 0.82);
+}
+.ycard p + p {
+  margin-top: 8px;
+}
+@media (max-width: 900px) {
+  .ycards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* periwinkle band with a navy headline (and a photo with a blue plan-view rectangle) */
+.band-sky {
+  background: var(--sky);
+  color: var(--navy);
+  --ink: var(--navy);
+  --ink-2: rgba(28, 58, 143, 0.84);
+  --ink-3: rgba(28, 58, 143, 0.66);
+  --line: rgba(28, 58, 143, 0.16);
+}
+.band-sky .h2,
+.band-sky h3 {
+  color: var(--navy);
+}
+.band-sky .h2 em {
+  color: var(--navy);
+}
+.sky-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  min-height: 560px;
+}
+.sky-photo {
+  position: relative;
+  overflow: hidden;
+  min-height: 360px;
+}
+.sky-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.sky-photo .plan-rect {
+  position: absolute;
+  left: 14%;
+  top: 26%;
+  width: 46%;
+  height: 22%;
+  background: rgba(70, 112, 235, 0.88);
+}
+.sky-photo .plan-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.35) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.35) 1px, transparent 1px);
+  background-size: 12.5% 11.1%;
+}
+.sky-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 64px max(24px, calc((100vw - var(--maxw)) / 2 + 24px)) 56px 56px;
+}
+.sky-copy .mono-label {
+  color: var(--ink-3);
+}
+.sky-copy .h2 {
+  margin: 12px 0 0;
+  max-width: 11em;
+}
+.sky-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+.sky-cols h3 {
+  margin-bottom: 10px;
+  font-size: 26px;
+}
+.sky-cols .checklist li {
+  font-size: 14.5px;
+}
+.band-sky .checklist.yes li span,
+.band-sky .checklist.no li span {
+  background: rgba(28, 58, 143, 0.12);
+  color: var(--navy);
+}
+@media (max-width: 960px) {
+  .sky-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .sky-copy {
+    padding: 48px 24px;
+  }
+  .sky-cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* dark photo CTA */
+.cta-photo {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 20px;
+  padding: 88px 28px;
+  text-align: center;
+  background: #1c2124;
+}
+.cta-photo .h2 {
+  max-width: 14em;
+  margin: 0 auto;
+}
+.cta-photo .lead {
+  margin: 16px auto 0;
+  color: rgba(255, 244, 224, 0.85);
+}
+.cta-photo .hero-actions {
+  justify-content: center;
+}
+.cta-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(20, 16, 12, 0.5), rgba(20, 16, 12, 0.15));
+}
+
+/* brand-style intro on cream: giant sun mark + mono tag (about / inner pages) */
+.sun-mark {
+  position: absolute;
+  right: max(-80px, calc((100vw - var(--maxw)) / 2 - 60px));
+  top: -40px;
+  width: min(440px, 52vw);
+  opacity: 0.32;
+  pointer-events: none;
+  z-index: -1;
+}
+.page-hero {
+  position: relative;
+}
+.page-hero .eyebrow {
+  background: rgba(255, 255, 255, 0.55);
+}
+.page-hero {
+  isolation: isolate;
+  overflow: clip;
+}
+.hero-preview {
+  --ink: #1b1511;
+  --ink-2: rgba(27, 21, 17, 0.76);
+  --ink-3: rgba(27, 21, 17, 0.56);
+  --line: rgba(86, 52, 18, 0.12);
+  color: var(--ink);
+}
+.hero-preview.glass {
+  background: linear-gradient(180deg, rgba(255, 253, 248, 0.92), rgba(255, 247, 232, 0.8));
+}
+
+.site-bar {
+  background: linear-gradient(180deg, rgba(255, 253, 248, 0.92), rgba(255, 248, 236, 0.86));
+}
+.plan .price small {
+  font-family: var(--font);
 }

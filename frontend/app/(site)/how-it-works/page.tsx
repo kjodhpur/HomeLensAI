@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Icon } from "@/components/site/Icon";
-import { Card, CtaBand, PageHero, Section } from "@/components/site/ui";
+import { Card, CtaBand, PageHero, Section, SunsetCards } from "@/components/site/ui";
 import { facts, overview } from "@/lib/data";
 import { fmtInt } from "@/lib/format";
 
@@ -37,20 +37,15 @@ export default function HowItWorksPage() {
         </div>
       </Section>
 
-      <Section eyebrow="Three layers" title="What happens to a review.">
-        <div className="grid c3">
-          <Card tag="Layer 1" title="Is this review a risk signal?">
-            <p>One- and two-star reviews are the risk class, four- and five-star the comparison class; three-star reviews are held out. A fine-tuned DistilBERT model is the primary scorer. A TF–IDF logistic regression is the fallback and powers this website’s demo.</p>
-            <p>Thresholds are chosen to keep negative-class recall at or above {Math.round(facts.recall_floor * 100)}%.</p>
-          </Card>
-          <Card tag="Layer 2" title="What exactly went wrong?">
-            <p>A curated phrase dictionary over eight aspects finds the complaint language in each sentence and picks the evidence sentence. High-risk reviews with no match go to manual review.</p>
-          </Card>
-          <Card tag="Layer 3" title="Does it keep happening?">
-            <p>Reviews roll up to providers with at least {overview.meta.min_reviews} reviews. A score blends mean risk, recent risk and high-severity rate as percentiles, then maps to a relative tier.</p>
-          </Card>
-        </div>
-      </Section>
+      <SunsetCards
+        label="Three layers"
+        title={<>What happens to a <em>review</em>.</>}
+        cards={[
+          { label: "01 — Layer 1", title: "Is this review a risk signal?", body: ["One- and two-star reviews are the risk class, four- and five-star the comparison class; three-star reviews are held out.", "A fine-tuned DistilBERT model is the primary scorer. A TF–IDF logistic regression is the fallback and powers this website’s demo.", `Thresholds keep negative-class recall at or above ${Math.round(facts.recall_floor * 100)}%.`] },
+          { label: "02 — Layer 2", title: "What exactly went wrong?", body: ["A curated phrase dictionary over eight aspects finds the complaint language in each sentence and picks the evidence sentence.", "High-risk reviews with no match go to manual review."] },
+          { label: "03 — Layer 3", title: "Does it keep happening?", body: [`Reviews roll up to providers with at least ${overview.meta.min_reviews} reviews.`, "A score blends mean risk, recent risk and high-severity rate as percentiles, then maps to a relative tier."] },
+        ]}
+      />
 
       <Section eyebrow="Results" title="Validated on businesses the model never saw." lead="The split holds out whole businesses, so test scores are not inflated by a provider appearing in both training and test data.">
         <div className="table-wrap glass">

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Card, Checklist, CtaBand, PageHero, Section } from "@/components/site/ui";
+import { Card, CtaBand, PageHero, Section, SkyBand } from "@/components/site/ui";
 import { Icon } from "@/components/site/Icon";
 import { facts } from "@/lib/data";
 
@@ -16,18 +16,9 @@ export default function SecurityPage() {
     <>
       <PageHero eyebrow="Responsible AI" title="Signals for people, not verdicts." lead="HomeLens AI surfaces patterns in customer language so managers know where to look. Every alert is a starting point for human judgment." />
 
-      <Section eyebrow="Language guardrails" title="How we describe outputs.">
-        <div className="grid c2">
-          <Card icon="check" title="We say">
-            <Checklist items={SAY} />
-          </Card>
-          <Card icon="shield" title="We never claim">
-            <Checklist items={NEVER} positive={false} />
-          </Card>
-        </div>
-      </Section>
+      <SkyBand label="Language guardrails" title={<>How we describe <em>outputs</em>.</>} left={{ title: "We say", items: SAY }} right={{ title: "We never claim", items: NEVER }} />
 
-      <Section eyebrow="Known limitations" title="What the data can and cannot tell you.">
+      <Section eyebrow="01 — Known limitations" title={<>What the data can and <em>cannot</em> tell you.</>}>
         <div className="grid c3">
           <Card icon="pin" title="One market" tag="Scope">
             <p>Reviews come from {facts.market} only. Patterns may not transfer to other markets.</p>

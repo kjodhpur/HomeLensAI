@@ -26,9 +26,9 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  height: 56px;
-  padding: 0 12px 0 18px;
-  border-radius: 999px;
+  height: 60px;
+  padding: 0 10px 0 18px;
+  border-radius: 18px;
 }
 .dm-sep {
   width: 1px;
@@ -41,7 +41,7 @@
 }
 .dm-nav a {
   padding: 7px 13px;
-  border-radius: 999px;
+  border-radius: 10px;
   font-size: 13.5px;
   font-weight: 500;
   color: var(--ink-2);
@@ -52,7 +52,7 @@
 }
 .dm-nav a:hover {
   color: var(--ink);
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 201, 51, 0.38);
 }
 .dm-end {
   margin-left: auto;
@@ -66,8 +66,12 @@
   padding: 6px 4px 0;
 }
 .dm-meta h1 {
-  font-size: clamp(28px, 3.4vw, 40px);
-  letter-spacing: -0.035em;
+  font-size: clamp(36px, 4.4vw, 58px);
+  line-height: 1;
+}
+.dm-meta h1 em {
+  font-style: italic;
+  color: var(--accent-ink);
 }
 .dm-pills {
   display: flex;
@@ -112,8 +116,8 @@
 }
 .card-head h2 {
   margin: 4px 0 4px;
-  font-size: 24px;
-  letter-spacing: -0.03em;
+  font-size: 36px;
+  line-height: 1;
 }
 .sub {
   margin: 0;
@@ -194,10 +198,11 @@ dd {
 }
 .pod-value {
   margin: 10px 0 2px;
-  font-size: clamp(38px, 4vw, 52px);
-  font-weight: 650;
-  letter-spacing: -0.045em;
-  line-height: 1;
+  font-family: var(--serif);
+  font-size: clamp(52px, 5vw, 72px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
   font-variant-numeric: tabular-nums;
 }
 .pod-value small {
@@ -221,7 +226,7 @@ dd {
   z-index: 40;
   padding: 16px 20px 16px;
   border-radius: var(--r-md);
-  background: linear-gradient(180deg, rgba(34, 36, 48, 0.94), rgba(20, 21, 30, 0.94));
+  background: linear-gradient(180deg, rgba(42, 31, 22, 0.95), rgba(27, 20, 14, 0.95));
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.12),
     0 24px 44px -18px rgba(10, 12, 30, 0.6);
@@ -309,7 +314,7 @@ dd {
   pointer-events: none;
   display: flex;
   gap: 8px;
-  background: linear-gradient(180deg, rgba(34, 36, 48, 0.94), rgba(20, 21, 30, 0.94));
+  background: linear-gradient(180deg, rgba(42, 31, 22, 0.95), rgba(27, 20, 14, 0.95));
   box-shadow: 0 10px 24px -10px rgba(10, 12, 30, 0.6);
 }
 .spark-tip span {
@@ -660,7 +665,7 @@ dd {
   font-size: 12px;
   white-space: nowrap;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(34, 36, 48, 0.94), rgba(20, 21, 30, 0.94));
+  background: linear-gradient(180deg, rgba(42, 31, 22, 0.95), rgba(27, 20, 14, 0.95));
   box-shadow: 0 10px 24px -10px rgba(10, 12, 30, 0.6);
 }
 
@@ -759,7 +764,7 @@ dd {
   width: 300px;
   padding: 16px 18px 14px;
   border-radius: var(--r-md);
-  background: linear-gradient(180deg, rgba(34, 36, 48, 0.95), rgba(20, 21, 30, 0.95));
+  background: linear-gradient(180deg, rgba(42, 31, 22, 0.96), rgba(27, 20, 14, 0.96));
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.12),
     0 24px 44px -16px rgba(10, 12, 30, 0.6);
@@ -871,7 +876,9 @@ dd {
   margin-bottom: 12px;
 }
 .pane-title b {
-  font-size: 16px;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 26px;
 }
 .dm-examples {
   display: flex;
@@ -935,7 +942,7 @@ dd {
 .jelly.on {
   box-shadow:
     0 0 0 2px var(--accent),
-    0 6px 16px -8px rgba(51, 88, 228, 0.6);
+    0 6px 16px -8px rgba(245, 120, 15, 0.7);
 }
 .jelly-tag {
   margin-left: 6px;
@@ -948,7 +955,7 @@ dd {
   color: #fff;
 }
 mark.phrase {
-  background: none;
+  background: linear-gradient(transparent 62%, rgba(255, 201, 51, 0.55) 62%);
   color: inherit;
   font-weight: 650;
   text-decoration: underline;
@@ -992,7 +999,7 @@ mark.phrase {
 /* terminal: dark ink glass (tokens flip via .terminal in base.css) */
 .terminal {
   font-family: var(--mono);
-  background: linear-gradient(180deg, rgba(34, 36, 48, 0.94), rgba(20, 21, 30, 0.94));
+  background: linear-gradient(180deg, rgba(42, 31, 22, 0.95), rgba(27, 20, 14, 0.95));
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.12),
     0 0 0 1px rgba(255, 255, 255, 0.05),
@@ -1079,7 +1086,7 @@ em.calm-text {
   bottom: 14px;
   width: 4px;
   border-radius: 99px;
-  background: linear-gradient(180deg, #b9c7ff, #6c86f5);
+  background: linear-gradient(180deg, #ffd49a, #f5780f);
 }
 .dm-evidence {
   margin: 0;
@@ -1103,13 +1110,6 @@ em.calm-text {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-}
-.terminal .btn:not(.ghost) {
-  color: #14141a;
-  background: linear-gradient(180deg, #ffffff, #e4e8f8);
-  box-shadow:
-    inset 0 1px 0 #fff,
-    0 8px 20px -10px rgba(0, 0, 0, 0.6);
 }
 .dm-rec {
   margin: 14px 0 0;
@@ -1184,10 +1184,10 @@ em.calm-text {
   --pc: #8a8478;
 }
 .wpill.total {
-  --pc: #14141a;
-  color: #fff;
-  background: linear-gradient(180deg, #2b2d3a, #14141a);
-  box-shadow: 0 8px 18px -8px rgba(20, 20, 40, 0.6);
+  --pc: #1b1511;
+  color: #fff4e0;
+  background: linear-gradient(180deg, #3a2a1d, #1b1511);
+  box-shadow: 0 8px 18px -8px rgba(27, 21, 17, 0.6);
 }
 @keyframes fall {
   from {
@@ -1228,8 +1228,7 @@ em.calm-text {
 }
 .dock-head h3 {
   margin: 3px 0 8px;
-  font-size: 20px;
-  letter-spacing: -0.025em;
+  font-size: 32px;
 }
 .dock-tag {
   display: inline-block;

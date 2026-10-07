@@ -1,6 +1,8 @@
 # Submission guide — Final Project Deliverables & Grading Rubric
 
-Deliverables: **(1) presentation slides** and **(2) the Python notebook(s) or a GitHub link** — this repository, notebook `notebooks/HomeLensAI_Final_Project.ipynb`.
+Deliverables: **(1) presentation slides** and **(2) the Python notebook(s) or a GitHub link** — this repository.
+
+> **Two final notebooks exist.** `notebooks/FinalProject_HomeLensAI.ipynb` is the **executed** notebook (outputs visible) whose results appear throughout the repo and the website. `notebooks/HomeLensAI_Final_Project.ipynb` is an extended local-run pipeline committed **without outputs**; the table and checklist below describe that second notebook. Decide with the team which one is graded, and say so in the README's Section 6 note.
 Presentation: ~12–15 minutes.
 
 ## Rubric → where it is addressed in the notebook

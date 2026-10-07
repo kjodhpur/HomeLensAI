@@ -14,12 +14,12 @@ No data download, no env vars, no second service. The app shows the **real anony
 
 ## Backlog (frontend)
 - [ ] More views from `overview.json`: tier distribution, service-group benchmark, model-comparison table.
-- [ ] Deep-link a provider (`/?provider=Provider_0545`); export the filtered watchlist as CSV.
+- [ ] Deep-link a provider (`/demo?provider=Provider_0545`); export the filtered watchlist as CSV.
 - [ ] Persist leaderboard filters in the URL; keyboard navigation (arrow keys) in the leaderboard.
-- [ ] Mobile layout (the design targets desktop), loading skeletons, an accessibility pass (tiers always carry a text label — keep it that way).
+- [ ] Loading skeletons and a deeper accessibility pass (tiers always carry a text label: keep it that way). The site already works on phone widths.
 - [ ] Per-keyword frequencies in the aspect bubble — needs `scripts/build_artifacts.py` to export per-phrase counts (today it shows cluster totals).
 - [ ] DistilBERT scoring: would need a hosted inference endpoint (e.g. Hugging Face); the route handler could call it and fall back to the bundled TF-IDF model.
-- [ ] Keep the allegation disclaimer visible (`components/DisclaimerEtch.tsx`) — do not remove it.
+- [ ] Keep the allegation disclaimer visible (`components/DemoFooter.tsx`, site footer) — do not remove it.
 
 ## Working agreement
 * **Branches:** `feat/<short-name>`; small PRs; every PR gets a Vercel preview URL (add a screenshot for UI changes). Merging to `main` deploys to production.

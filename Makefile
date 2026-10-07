@@ -26,4 +26,7 @@ frontend:       ## run the web app on :3000
 test:           ## frontend typecheck + parity tests
 	cd frontend && npm run typecheck && npm test
 
-.PHONY: help setup-notebook sample notebook run-notebook export frontend test
+test-py:        ## Python tests (risk logic, masking, artifacts)
+	$(PY) -m pytest -q
+
+.PHONY: help setup-notebook sample notebook run-notebook export frontend test test-py

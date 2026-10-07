@@ -1,114 +1,213 @@
-# HomeLens AI — NLP-based risk intelligence for home-service providers
+# HomeLens AI
 
-**CIS 509 · Analytics for Unstructured Data · Final course project**
+**Turning customer reviews of home-service providers into early-warning signals a manager can act on.**
+
+CIS 509 · Analytics for Unstructured Data · Final course project
 Team: Rithik Roy Thati · Kanha Jodhpurkar · Sankalp Sharma Madgula · Dev Bhattacharyya
 
-HomeLens AI reads free-form Yelp reviews of home-service providers (plumbers, electricians, HVAC, roofers, movers, contractors …) and turns them into
-**structured risk intelligence**: *is this review a risk signal? what exactly went wrong (with the evidence sentence)? does it keep happening at this provider, and what should be done?*
-Reviews are customer allegations, so every output is a **"complaint signal detected"**, never a finding of wrongdoing.
+**Live demo: <https://homelensai.vercel.app>** (public, no sign-up; try the analyzer on the home page, then open the full command center at `/demo`)
 
-| Layer | Question | Method |
+![HomeLens AI command center](frontend/public/img/overview.webp)
+
+---
+
+## 1. Start here (a 5-minute tour for a reviewer)
+
+| If you want to… | Open this | Time |
 |---|---|---|
-| 1 · Sentiment | Is this review a risk signal? | VADER baseline → TF-IDF + Logistic Regression → fine-tuned DistilBERT (1–2★ vs 4–5★; 3★ held out) |
-| 2 · Aspects | *What* went wrong — and show the proof | spaCy `PhraseMatcher` + `Matcher` + `EntityRuler` over 8 aspects (workmanship, reliability, pricing, communication, timeliness, professionalism, warranty, safety) |
-| 3 · Providers | Does it keep happening? What now? | recurrence, recent-vs-prior trend (Fisher test), severity-weighted score, tier, recommended action; temporal backtest |
+| See the finished product | **<https://homelensai.vercel.app>**, then click *Open the live demo* | 2 min |
+| Read the analysis, methods and results | [`notebooks/FinalProject_HomeLensAI.ipynb`](notebooks/FinalProject_HomeLensAI.ipynb) (executed, outputs visible) | 15 min |
+| See the exploratory data analysis (Milestone 2) | [`notebooks/ProjectEDA_HomeLensAI.ipynb`](notebooks/ProjectEDA_HomeLensAI.ipynb) or the HTML export next to it | 10 min |
+| Understand how the pieces connect | Section 4 below, then [`docs/DATA_CONTRACT.md`](docs/DATA_CONTRACT.md) | 5 min |
+| Check the code is tested | `make test-py` (27 Python tests) and `make test` (14 website tests), also run automatically by GitHub Actions on every push | 1 min |
+| See where each grading criterion is addressed | Section 9 below | 2 min |
 
-## What is in this repo
+---
+
+## 2. The problem, in plain English
+
+A star rating tells you a customer was unhappy. It does **not** tell you *why*, *whether it keeps happening*, or *what to do about it*. A plumbing or HVAC company with a handful of one-star reviews might have a real operational problem (no-shows, surprise fees, repeat repairs) or just a few bad days. Managers cannot read thousands of reviews to find out.
+
+**HomeLens AI reads the review text and answers three questions:**
+
+| # | Question | How we answer it |
+|---|---|---|
+| 1 | **Is this review a risk signal?** | A model scores each review. We tested three: a word-list baseline (TextBlob), TF-IDF + logistic regression, and a fine-tuned DistilBERT transformer. |
+| 2 | **What exactly went wrong, and what is the proof?** | A phrase dictionary over **8 complaint aspects** (workmanship, reliability/no-show, pricing, communication, timeliness, professionalism, warranty, safety) finds the complaint and highlights the **evidence sentence**. |
+| 3 | **Does it keep happening at this provider, and what should the manager do?** | Reviews roll up to provider-level scores, yearly trends and four **relative concern tiers** (Stable, Watch, Elevated, High concern), each with a recommended action. |
+
+### A real example (output of the running system)
+
+> *"The technician was three hours late, charged more than the quote, and the repair failed again two days later."*
+
+| Output | Value |
+|---|---|
+| Risk score | **0.96** (the alert threshold is 0.585) → **Management attention** |
+| Complaint aspects found | Pricing, Timeliness, Workmanship |
+| Evidence phrases highlighted | "hours late", "charged more", "repair failed" |
+| Recommended action | "Review estimate accuracy, change-order approvals, and fee disclosure." |
+
+You can reproduce this yourself on the home page of the live demo.
+
+### Important: signals, not verdicts
+Reviews are unverified customer **allegations**. The system produces *review-based risk signals for human investigation*. It never claims fraud, legal liability, verified misconduct, verified safety violations, or bankruptcy/financial-failure prediction. See [Section 8](#8-responsible-ai-and-limits).
+
+---
+
+## 3. What the product looks like
+
+| Provider monitoring | Explainable evidence |
+|---|---|
+| ![Risk leaderboard](frontend/public/img/leaderboard.webp) | ![Evidence feed](frontend/public/img/evidence.webp) |
+| 254 anonymized providers ranked by relative risk, with tier, trend and a yearly trajectory per provider. | The flagged sentence, the matched phrases and the words that moved the score. |
+
+The same analysis is available in two interfaces built on the same data:
+* **The website + live demo** (`frontend/`, Next.js on Vercel): marketing pages (product, methodology, pricing notes, Responsible AI, docs, FAQ, legal) and the full command center at `/demo`.
+* **The Streamlit app** (`streamlit_app.py`): five analyst pages (Executive Overview, Review Analyzer, Provider Monitor, Model Performance, Responsible AI).
+
+---
+
+## 4. How everything fits together
+
+```mermaid
+flowchart LR
+    A[Yelp Open Dataset<br/>reviews of home-service providers<br/>Tucson, AZ] --> B[Notebook<br/>cleaning, EDA, model training]
+    B --> C[scripts/build_artifacts.py<br/>builds anonymized result tables]
+    C --> D[(artifacts/<br/>CSV tables, metadata,<br/>TF-IDF model files)]
+    D --> E[app/ + streamlit_app.py<br/>Streamlit command center]
+    D --> F[scripts/export_frontend_data.py]
+    F --> G[(frontend/data/*.json)]
+    G --> H[frontend/<br/>Next.js website + demo<br/>+ /api/analyze]
+    H --> I[Vercel<br/>homelensai.vercel.app]
+```
+
+In words:
+1. **Data → notebook.** The notebook filters Yelp reviews to home-service providers, explores them, masks leakage (phone numbers, dollar amounts, star phrases), trains and compares the models, extracts aspects and scores providers.
+2. **Notebook → `artifacts/`.** `scripts/build_artifacts.py` writes **anonymized** result tables and the TF-IDF model. This is the only data the apps read. The raw Yelp data is never committed or deployed.
+3. **`artifacts/` → two apps.** The Streamlit app reads `artifacts/` directly. A small export script converts them to JSON for the website.
+4. **No separate backend.** The website's `/api/analyze` endpoint is a route inside the same Next.js app. It runs a **TypeScript port** of the Python masking rules, phrase dictionary and TF-IDF model. A parity test checks the port reproduces the Python outputs, and CI re-checks the exported data is up to date.
+
+---
+
+## 5. Results
+
+All numbers come from the executed final notebook, on **held-out businesses** (no business appears in both training and test data) and are stored in [`artifacts/model_comparison.csv`](artifacts/model_comparison.csv).
+
+| Model | Alert threshold | Accuracy | Macro-F1 | Negative precision | Negative recall | ROC-AUC |
+|---|---|---|---|---|---|---|
+| **Fine-tuned DistilBERT** | 0.950 | 0.976 | **0.973** | 0.972 | 0.955 | 0.996 |
+| TF-IDF + Logistic Regression | 0.620 | 0.957 | 0.951 | 0.950 | 0.917 | 0.991 |
+| TextBlob (word-list baseline) | 0.405 | 0.793 | 0.785 | 0.630 | 0.909 | 0.911 |
+
+* The corpus is **17,943 core reviews** from **1,054 providers** (Tucson, AZ, Nov 2006 to Jan 2022), filtered from 23,685 candidate reviews.
+* Thresholds are chosen to keep **negative-class recall at or above 90%**, because missing a serious complaint is worse than a false alarm.
+* **254 providers** have at least 20 reviews and are monitored: 126 Stable, 75 Watch, 47 Elevated, 6 High concern.
+* The transformer is the best model. The **website demo runs the TF-IDF model** because it is small enough to run inside the site; DistilBERT is the primary model in the notebook and the Streamlit app (when the model is configured).
+
+---
+
+## 6. Repository map
 
 ```
-artifacts/                                 ← Rithik's anonymized results from the real Yelp run (CSV tables, metadata, TF-IDF model files)
-app/ · views/ · streamlit_app.py           ← Rithik's risk logic (app/risk_logic.py) + the Streamlit command center
-frontend/                                  ← the Next.js product website + live demo — ONE self-contained app, no separate backend    → Vercel
-notebooks/                                 ← analysis notebooks (final project notebook, EDA)
-data/                                      ← how to get the Yelp data (not committed) + a synthetic sample for the notebook
-scripts/                                   ← build_artifacts.py, export_frontend_data.py, make_sample_data.py
-docs/                                      ← TEAM_GUIDE · DATA_CONTRACT · DEPLOYMENT · SUBMISSION
+HomeLensAI/
+├── notebooks/                     The analysis (start here for methods and results)
+│   ├── FinalProject_HomeLensAI.ipynb    Final executed notebook: problem, EDA, models, aspects, providers, results
+│   ├── ProjectEDA_HomeLensAI.ipynb/.html   Milestone 2 exploratory data analysis
+│   └── HomeLensAI_Final_Project.ipynb   Extended local-run version of the pipeline (outputs not committed; see note below)
+├── artifacts/                     Anonymized results from the real Yelp run (the only data the apps read)
+├── scripts/
+│   ├── build_artifacts.py         Raw reviews → artifacts/
+│   ├── export_frontend_data.py    artifacts/ → frontend/data/*.json (CI checks it is not stale)
+│   ├── make_sample_data.py        Generates a synthetic sample so the pipeline runs without Yelp data
+│   └── make_site_images.py        Generates the website's hero imagery
+├── app/  views/  streamlit_app.py The Python risk logic + the Streamlit command center
+├── tests/                         27 Python tests (risk logic, masking, artifacts)
+├── frontend/                      The website + live demo (Next.js, TypeScript)
+│   ├── app/                       Pages: home, product, how-it-works, pricing, security, docs, about, faq, contact, changelog, privacy, terms, /demo, /api/analyze
+│   ├── components/                UI pieces (leaderboard, aspect radar, evidence feed, triage dock, site chrome)
+│   ├── lib/engine/                TypeScript port of the Python analysis
+│   ├── data/                      Generated JSON (never edited by hand)
+│   └── tests/                     14 parity tests against the Python model
+├── data/                          How to obtain the Yelp data (not committed) + a small synthetic sample
+├── docs/                          DATA_CONTRACT, DEPLOYMENT, TEAM_GUIDE, SUBMISSION
+├── .github/workflows/ci.yml       Automated checks on every push
+└── CLAUDE.md                      Project rules (terminology, data rules, UI conventions)
 ```
 
-```
- Yelp data ──► scripts/build_artifacts.py ──► artifacts/*.csv, *.joblib, metadata.json   (+ app/risk_logic.py)
-                                                │
-                       ┌────────────────────────┴────────────────────────┐
-                       ▼                                                 ▼   scripts/export_frontend_data.py
-          Streamlit app (streamlit_app.py)                  frontend/data/*.json  (providers, KPIs, aspects, TF-IDF model, phrase patterns)
-                                                                         │
-                                                                         ▼   imported by the Next.js app
-                                                   frontend/  — pages read the JSON; POST /api/analyze (a Next.js route handler)
-                                                                runs a TypeScript port of Rithik's masking + phrase dictionary + TF-IDF model
-```
+> **About the two final notebooks.** `FinalProject_HomeLensAI.ipynb` is the executed notebook whose results appear everywhere in this repository. `HomeLensAI_Final_Project.ipynb` is an extended version of the pipeline that reads the Yelp archives directly and adds a temporal backtest and an aspect-audit step. It is committed without outputs and runs on the synthetic sample when the Yelp files are absent, so none of the reported numbers come from it.
 
-There is **no separate API or backend**. The web app is one Vercel project (root directory `frontend/`) that ships Rithik's data and runs his review analysis itself.
-A parity test (`npm test`) checks that the TypeScript port reproduces his Python model's probabilities and complaint aspects. Providers are always anonymized `Provider_XXXX` codes.
+---
 
-## Quick start
+## 7. Run it yourself
 
-> Requires Node 20+ (Python only if you re-export the data). `make help` lists shortcuts.
+You do **not** need the Yelp data to run either app, because the anonymized results are included.
 
-**1. Run the website and live demo (no Yelp data, no backend, no env vars):**
+**Website and live demo** (needs Node 20+):
 ```bash
-cd frontend && npm install && npm run dev      # http://localhost:3000
-npm test                                       # parity tests vs Rithik's Python model
+cd frontend
+npm install
+npm run dev            # open http://localhost:3000   (demo at /demo)
+npm test               # 14 tests: the TypeScript analysis matches the Python model
 npm run typecheck && npm run build
 ```
-After rebuilding `artifacts/` (or editing `app/risk_logic.py`), regenerate the app's data and commit it:
+
+**Streamlit command center** (needs Python 3.12):
 ```bash
-pip install "scikit-learn==1.8.0" joblib
-python scripts/export_frontend_data.py         # artifacts/ + app/risk_logic.py → frontend/data/*.json
-```
-
-**1b. The Streamlit command center:** `pip install -r requirements.txt && streamlit run streamlit_app.py`
-
-**2. Run the notebook (analytics) on the real Yelp data:**
-```bash
-python -m venv .venv && source .venv/bin/activate          # Windows: .venv\Scripts\activate
-pip install -r requirements.txt && python -m spacy download en_core_web_sm
-# Drop the Yelp download into data/raw/ — the .zip files exactly as downloaded, NO unzipping needed (see data/README.md)
-jupyter lab notebooks/HomeLensAI_Final_Project.ipynb        # Kernel → Restart & Run All
-```
-Without any data in `data/raw/` the notebook runs on the synthetic sample in DEMO MODE. DistilBERT needs a GPU (NVIDIA CUDA or Apple-silicon MPS) and is skipped automatically otherwise
-(`HOMELENS_RUN_DISTILBERT=1` forces it on CPU — slow).
-
-**3. Refresh the web app after rebuilding the artifacts:**
-```bash
-python scripts/build_artifacts.py    # from the raw Yelp CSV (git-ignored) → artifacts/
-python scripts/export_frontend_data.py   # artifacts/ + app/risk_logic.py → frontend/data/
-```
-
-## Streamlit command center (`streamlit_app.py`)
-A self-contained Streamlit product built on the final notebook's validated results: **Executive Overview**, **Review Analyzer**,
-**Provider Monitor**, **Model Performance** and **Responsible AI** pages, with a custom design system (animated metrics and risk gauge,
-insight carousel, page transitions). It reads only the anonymized tables in `artifacts/`.
-
-```bash
+python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-streamlit run streamlit_app.py        # http://localhost:8501
-pytest tests -q                       # 27 tests (risk logic + artifacts)
+streamlit run streamlit_app.py       # open http://localhost:8501
+pytest                               # 27 tests
 ```
 
-* **Models:** fine-tuned DistilBERT from Hugging Face when `HF_MODEL_ID` is set in `.streamlit/secrets.toml` (template:
-  `.streamlit/secrets.toml.example`, also needs `pip install -r requirements-bert.txt`); otherwise it falls back automatically to the
-  TF-IDF model in `artifacts/`. The sidebar shows which model is live.
-* **Artifacts:** `python scripts/build_artifacts.py` rebuilds `artifacts/` from `data/raw/HomeLens_Yelp_HomeServices.csv`.
-* **Deploy:** Streamlit Community Cloud, select repository → branch `main` → main file `streamlit_app.py`, Python 3.12, and paste secrets.
-* **Code:** `streamlit_app.py` (navigation), `app/` (risk logic, model loader, charts, UI components), `views/` (one module per page), `tests/`.
+**Rebuild everything from raw data** (needs the Yelp files, see [`data/README.md`](data/README.md)):
+```bash
+python scripts/build_artifacts.py            # raw reviews → artifacts/
+python scripts/export_frontend_data.py       # artifacts/ → frontend/data/
+```
 
-## Deploying to Vercel
-One Vercel project, **Root Directory = `frontend`**, framework Next.js, no environment variables. Steps and troubleshooting: [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
+**Automated checks.** [`ci.yml`](.github/workflows/ci.yml) runs on every push: frontend type-check, tests and production build; a check that `frontend/data/` matches what `artifacts/` produce; and the Python linter.
 
-## For teammates
-* **[`docs/TEAM_GUIDE.md`](docs/TEAM_GUIDE.md)** — who builds what, the backlog, branch/PR workflow, definition of done.
-* **[`docs/DATA_CONTRACT.md`](docs/DATA_CONTRACT.md)** — what the web app ships (`frontend/data/`), the analysis route and how it is tested.
-* **[`docs/SUBMISSION.md`](docs/SUBMISSION.md)** — rubric → notebook map and the pre-submission checklist.
+---
 
-## Status
-| Piece | State |
+## 8. Responsible AI and limits
+
+* **Language guardrails.** Outputs are called "review-based risk signal", "management attention", "operational concern", "relative concern tier" and "human investigation". We never claim fraud, legal liability, verified misconduct, verified safety violations or bankruptcy prediction.
+* **Privacy.** Providers appear only as codes such as `Provider_0235`. Phone numbers, emails, links, dollar amounts and star phrases are masked before any model sees the text. Providers need at least 20 reviews to be monitored. Text typed into the demo is processed in memory and not stored. The raw Yelp data is never committed (its licence forbids redistribution).
+* **Known limits.** One market (Tucson, AZ); historical data ending January 2022; Yelp reviewers are a self-selected sample; star ratings are an imperfect label for operational risk; tiers are relative rankings, not probabilities.
+* **Human in the loop.** Every Elevated or High-concern signal is meant to be read and investigated by a person before any action.
+
+The website explains this in more detail at `/security` (Responsible AI & privacy) and `/how-it-works` (methodology).
+
+---
+
+## 9. Where each grading criterion is addressed
+
+| Criterion | Where to look |
 |---|---|
-| Notebook (all 3 layers, EDA, dashboard, export) | ✅ complete; verified end-to-end on the synthetic sample and on two package-version sets (pandas 2.2 / 3.0). **Needs one run on the real Yelp data** (see `docs/SUBMISSION.md`) |
-| Web app engine | ✅ Rithik's masking, phrase dictionary and TF-IDF model ported to TypeScript inside the Next.js app; 14 parity tests against his Python outputs |
-| Frontend | ✅ product website (home, product, methodology, pricing, Responsible AI, docs, about, FAQ, contact, changelog, legal) plus the live demo at `/demo`: KPI cards, risk leaderboard, aspect radar, evidence feed, triage dock |
-| Streamlit app | ✅ five pages, TF-IDF fallback live; DistilBERT activates once the model is on Hugging Face |
-| CI | ✅ GitHub Actions: frontend typecheck + parity tests + build, data-export freshness check, notebook smoke run |
-| Vercel | one project (root `frontend`) — see `docs/DEPLOYMENT.md` |
+| **Business problem** | Notebook sections 1 to 2 (business question, stakeholders, scope); Section 2 above; the website's `/product` page |
+| **EDA** | Notebook section 3 and `notebooks/ProjectEDA_HomeLensAI.ipynb` (corpus, review length, time trends, provider long tail, text patterns) |
+| **NLP methodology** | Notebook sections 4 to 11: leakage masking, held-out-business splits, three sentiment models, DistilBERT fine-tuning, spaCy aspect extraction, topic discovery; website `/how-it-works` |
+| **Results and business insights** | Notebook sections 9, 12 and 14 (model comparison, provider intelligence, findings); Section 5 above; the live demo |
+| **Presentation** | Slides (separate file) and the live demo |
+| **Code clarity and quality** | Modular Python (`app/`, `scripts/`), typed TypeScript, 27 + 14 automated tests, CI, documented data contract, project rules in `CLAUDE.md` |
 
-## Data & ethics
-The Yelp Open Dataset may be used for academic purposes but **not redistributed** — the repo contains only a synthetic sample. Reviews are unverified allegations; keep the disclaimer visible in every UI and slide.
+---
+
+## 10. Documentation index
+
+| File | What it explains |
+|---|---|
+| [`docs/DATA_CONTRACT.md`](docs/DATA_CONTRACT.md) | Which file feeds which part of the website, and how the analysis endpoint is tested |
+| [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) | How the site is deployed on Vercel and troubleshooting |
+| [`docs/TEAM_GUIDE.md`](docs/TEAM_GUIDE.md) | Working agreement and where things live, for contributors |
+| [`docs/SUBMISSION.md`](docs/SUBMISSION.md) | Submission checklist |
+| [`data/README.md`](data/README.md) | How to obtain the Yelp data and what the sample data is |
+| [`frontend/README.md`](frontend/README.md) | Website routes, code map and performance notes |
+
+---
+
+## 11. Team and credits
+
+* **Team:** Rithik Roy Thati, Kanha Jodhpurkar, Sankalp Sharma Madgula, Dev Bhattacharyya.
+* **Data:** [Yelp Open Dataset](https://business.yelp.com/data/resources/open-dataset/), used for academic purposes under its terms and not redistributed.
+* **Generative AI use.** The notebook discloses AI assistance in its "Generative AI use" section. The website, the Streamlit-to-web data export and the documentation were also developed with the help of Claude Code (Anthropic), and reviewed and run by the team.

@@ -201,6 +201,7 @@ The website explains this in more detail at `/security` (Responsible AI & privac
 | [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) | How the site is deployed on Vercel and troubleshooting |
 | [`docs/TEAM_GUIDE.md`](docs/TEAM_GUIDE.md) | Working agreement and where things live, for contributors |
 | [`docs/SUBMISSION.md`](docs/SUBMISSION.md) | Submission checklist |
+| [`docs/UI_DESIGN_PROMPT.md`](docs/UI_DESIGN_PROMPT.md) | The original UI design brief and a prompt describing the current site design |
 | [`data/README.md`](data/README.md) | How to obtain the Yelp data and what the sample data is |
 | [`frontend/README.md`](frontend/README.md) | Website routes, code map and performance notes |
 
